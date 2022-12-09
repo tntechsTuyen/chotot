@@ -1,0 +1,15 @@
+th[rowspan]
+,td[rowspan]{
+	vertical-align : middle;
+	text-align:center;
+}
+
+img.center-crop{
+	object-fit: none;
+	object-position: center;
+	width: 100%;
+}
+
+.badge{
+	font-size: .8rem;
+}

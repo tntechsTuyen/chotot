@@ -1,0 +1,32 @@
+# port
+server:
+  port: 1996
+  servlet:
+    context-path: /
+# db
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  jackson:
+    time-zone: Asia/Ho_Chi_Minh
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    serialization:
+      write-dates-as-timestamps: true
+
+# uploading
+data:
+  path: F:/res/travel/
+
+# logging
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+
+jwt:
+  secret: travel-blog

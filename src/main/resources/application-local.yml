@@ -1,0 +1,49 @@
+# port
+server:
+  port: 1997
+  servlet:
+    context-path: /
+    session:
+      persistent: true
+# db
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  jackson:
+    time-zone: Asia/Ho_Chi_Minh
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    serialization:
+      write-dates-as-timestamps: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: tuyen.cntt.k13a@gmail.com
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# uploading
+data:
+  path: F:/res/travel/
+
+# logging
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+
+session:
+  login: USER_LOGIN
