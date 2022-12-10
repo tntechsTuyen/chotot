@@ -16,12 +16,12 @@ public class CategoryMeta {
     @Column(name = "id_category")
     private Integer idCategory;
 
-    @Column(name = "key", length = 50)
+    @Column(name = "meta_key", length = 50)
     private String key;
 
-    @Column(name = "value", length = 100)
+    @Column(name = "meta_value")
     private String value;
 
-    @Column(name = "description", length = 254)
+    @Column(name = "description")
     private String description;
 }

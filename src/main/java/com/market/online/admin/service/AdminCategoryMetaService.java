@@ -17,4 +17,8 @@ public class AdminCategoryMetaService {
     public List<CategoryMeta> getList(CategoryMetaDTO search){
         return categoryMetaRepository.getList(search);
     }
+
+    public void save(CategoryMeta categoryMeta){
+        categoryMetaRepository.save(categoryMeta);
+    }
 }

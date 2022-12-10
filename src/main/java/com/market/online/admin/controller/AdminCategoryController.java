@@ -37,19 +37,21 @@ public class AdminCategoryController {
 
     @GetMapping("/add")
     public String goAdd(Model model){
+        model.addAttribute("categoryForm", new Category());
         return "admin/component/category/add";
     }
 
     @PostMapping("/add")
     public String doAdd(HttpServletRequest request, Category category){
         categoryService.addData(category);
-        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+        return "redirect: update/"+category.getId();
     }
 
     @GetMapping("/update/{id}")
     public String goUpdate(Model model, @PathVariable("id") Integer id){
         model.addAttribute("categoryForm", categoryService.getOne(id));
         model.addAttribute("metaData", categoryMetaService.getList(new CategoryMetaDTO(id)));
+        model.addAttribute("metaForm", new CategoryMetaDTO());
         return "admin/component/category/update";
     }
 
@@ -60,9 +62,10 @@ public class AdminCategoryController {
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 
-    @PostMapping("/meta/update")
-    public String doMetaUpdate(HttpServletRequest request, CategoryMeta meta){
-
+    @PostMapping("/{idCate}/meta/update")
+    public String doMetaUpdate(HttpServletRequest request, @PathVariable("idCate") Integer idCate, CategoryMeta meta){
+        meta.setIdCategory(idCate);
+        categoryMetaService.save(meta);
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 }

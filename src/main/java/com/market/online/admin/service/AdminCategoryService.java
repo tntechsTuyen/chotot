@@ -21,7 +21,7 @@ public class AdminCategoryService {
     private CategoryMetaRepository categoryMetaRepository;
 
     public Category getOne(Integer id){
-       return categoryRepository.getOne(id);
+       return categoryRepository.findById(id).get();
     }
 
     public Page<Category> getData(CategoryDTO search){

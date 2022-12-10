@@ -19,9 +19,9 @@ public class PostMeta {
     @Column(name = "key", length = 50)
     private String key;
 
-    @Column(name = "value", length = 100)
+    @Column(name = "meta_value")
     private String value;
 
-    @Column(name = "description", length = 254)
+    @Column(name = "description")
     private String description;
 }
