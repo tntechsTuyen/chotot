@@ -1,8 +1,10 @@
 package com.market.online.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -16,6 +18,9 @@ public class Product {
     @Column(name = "id_category")
     private Integer idCategory;
 
+    @Column(name = "id_user")
+    private Integer idUser;
+
     @Column(name = "id_confirmer")
     private Integer idConfirmer;
 
@@ -27,5 +32,12 @@ public class Product {
 
     @Column(name = "price_verify")
     private Integer priceVerify;
+
+    @Column(name = "id_status")
+    private Integer idStatus;
+
+    @CreationTimestamp
+    @Column(name = "created_date", updatable = false)
+    private Date createdDate;
 
 }

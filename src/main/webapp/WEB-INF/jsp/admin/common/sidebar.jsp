@@ -75,6 +75,40 @@
       </div>
       <!-- * Category Management -->
 
+      <!-- User Management -->
+      <div class="menu-item has-sub">
+        <a href="javascript:;" class="menu-link">
+          <div class="menu-icon">
+            <i class="fa fa-sitemap"></i>
+          </div>
+          <div class="menu-text">Quản lý tài khoản</div>
+          <div class="menu-caret"></div>
+        </a>
+        <div class="menu-submenu">
+          <div class="menu-item">
+            <a href="/admin/user" class="menu-link"><div class="menu-text">Danh sách</div></a>
+          </div>
+        </div>
+      </div>
+      <!-- * User Management -->
+
+      <!-- Product Management -->
+      <div class="menu-item has-sub">
+        <a href="javascript:;" class="menu-link">
+          <div class="menu-icon">
+            <i class="fa fa-sitemap"></i>
+          </div>
+          <div class="menu-text">Quản lý sản phẩm</div>
+          <div class="menu-caret"></div>
+        </a>
+        <div class="menu-submenu">
+          <div class="menu-item">
+            <a href="/admin/product" class="menu-link"><div class="menu-text">Danh sách</div></a>
+          </div>
+        </div>
+      </div>
+      <!-- * Product Management -->
+
       <div class="menu-item d-flex">
         <a href="javascript:;" class="app-sidebar-minify-btn ms-auto d-flex align-items-center text-decoration-none" data-toggle="app-sidebar-minify" ><i class="fa fa-angle-double-left"></i></a>
       </div>

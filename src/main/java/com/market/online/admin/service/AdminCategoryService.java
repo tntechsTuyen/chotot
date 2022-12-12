@@ -24,7 +24,7 @@ public class AdminCategoryService {
        return categoryRepository.findById(id).get();
     }
 
-    public Page<Category> getData(CategoryDTO search){
+    public Page<Category> getDataPage(CategoryDTO search){
         return categoryRepository.getDataPage(search, search.pageable());
     }
 

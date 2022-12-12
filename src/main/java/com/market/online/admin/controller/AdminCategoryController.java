@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin/category")
@@ -31,7 +30,7 @@ public class AdminCategoryController {
     @GetMapping({"", "/list"})
     public String goList(Model model, CategoryDTO search){
         model.addAttribute("search", search);
-        model.addAttribute("data", categoryService.getData(search));
+        model.addAttribute("data", categoryService.getDataPage(search));
         return "admin/component/category/list";
     }
 
