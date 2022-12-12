@@ -83,3 +83,4 @@
 
 <!-- Template Javascript -->
 <script src="${_ctx}/static/js/main.js"></script>
+<script src="${_ctx}/static/js/common.js"></script>

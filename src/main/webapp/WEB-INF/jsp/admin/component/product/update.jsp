@@ -73,7 +73,29 @@
 						</div>
 					</div>
 				</div>
-			</div>	
+				<div class="col-6">
+					<div class="panel panel-inverse">
+						<div class="panel-heading">
+					    	<h4 class="panel-title">Media</h4>
+						    <div class="panel-heading-btn">
+						    	<a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand" ><i class="fa fa-expand"></i></a>
+						    	<a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload" ><i class="fa fa-redo"></i></a>
+						    	<a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse" ><i class="fa fa-minus"></i></a>
+						    	<a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove" ><i class="fa fa-times"></i></a>
+						    </div>
+						</div>
+						<div class="panel-body">
+							<div id="gallery" class="gallery-v2">
+								<div class="gallery">
+									<a href="javascript:;" class="ratio ratio-4x3" data-pswp-src="${_ctx}/static/dist/product-1.jpg" data-pswp-width="1200" data-pswp-height="800">
+										<div class="bg-size-cover bg-position-center" style="background-image: url(${_ctx}/static/dist/product-1.jpg);"></div>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- * Content -->
 

@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "post_meta")
 public class PostMeta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -16,8 +17,11 @@ public class PostMeta {
     @Column(name = "id_post")
     private Integer idPost;
 
-    @Column(name = "key", length = 50)
+    @Column(name = "meta_key")
     private String key;
+
+    @Column(name = "meta_name")
+    private String name;
 
     @Column(name = "meta_value")
     private String value;

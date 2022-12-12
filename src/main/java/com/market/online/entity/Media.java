@@ -18,4 +18,11 @@ public class Media {
 
     @Column(name = "type", length = 10)
     private String type;
+
+    public Media(){}
+
+    public Media(String url, String type) {
+        this.url = url;
+        this.type = type;
+    }
 }

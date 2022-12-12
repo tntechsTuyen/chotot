@@ -1,5 +1,6 @@
 package com.market.online.entity;
 
+import com.market.online.dto.ProductDTO;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -40,4 +41,10 @@ public class Product {
     @Column(name = "created_date", updatable = false)
     private Date createdDate;
 
+    public Product(){}
+
+    public Product(ProductDTO productDTO){
+        this.name = productDTO.getName();
+        this.price = productDTO.getPrice();
+    }
 }

@@ -15,4 +15,5 @@ public interface CategoryMetaRepository extends JpaRepository<CategoryMeta, Inte
             " (:#{#search.idCategory} = 0 OR cm.idCategory = :#{#search.idCategory}) " +
             " AND (:#{#search.key} = '' OR cm.key = :#{#search.key}) ")
     List<CategoryMeta> getList(@Param("search") CategoryMetaDTO search);
+
 }
