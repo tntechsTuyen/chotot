@@ -2,6 +2,8 @@ package com.market.online.user.controller;
 
 import com.market.online.common.utils.UrlUtils;
 import com.market.online.entity.User;
+import com.market.online.user.service.CategoryService;
+import com.market.online.user.service.ProductService;
 import com.market.online.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +23,17 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private ProductService productService;
+
     @GetMapping({"/", "/home"})
-    public String goIndex(){
+    public String goIndex(Model model){
+        model.addAttribute("categoryData", categoryService.getAll());
+        model.addAttribute("productFeature", productService.getFeaturedProducts());
+        model.addAttribute("productViewed");
         return "user/component/home";
     }
 

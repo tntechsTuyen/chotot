@@ -19,9 +19,12 @@ public class PostMedia {
     @Column(name = "id_media")
     private Integer idMedia;
 
+    @Column(name = "id_type")
+    private Integer idType;
+
     public PostMedia(){}
 
-    public PostMedia(Integer idPost, Integer idMedia) {
+    public PostMedia(Integer idPost, Integer idMedia, Integer idType) {
         this.idPost = idPost;
         this.idMedia = idMedia;
     }

@@ -1,16 +1,14 @@
 package com.market.online.user.service;
 
 import com.market.online.dto.ProductDTO;
-import com.market.online.entity.Media;
-import com.market.online.entity.Post;
-import com.market.online.entity.PostMedia;
-import com.market.online.entity.Product;
+import com.market.online.entity.*;
 import com.market.online.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -47,16 +45,22 @@ public class ProductService {
         List<String> urls = new ArrayList<>();
         if(productDTO.getMedia().length > 0){
             urls = fileService.updloadFiles(productDTO.getMedia());
-            urls.forEach((el) -> {
-                Media m = new Media(el, "IMG");
+            for(int i = 0; i < urls.size(); i++){
+                Media m = new Media(urls.get(i), "IMG");
                 mediaRepository.save(m);
-                postMediaRepository.save(new PostMedia(post.getId(), m.getId()));
-            });
+                postMediaRepository.save(new PostMedia(post.getId(), m.getId(), (i==0) ? 3 : 4));
+            }
         }
         //Create Post Meta
         if(productDTO.getMetaKey().size() > 0){
-            
+            for(int i = 0; i < productDTO.getMetaKey().size(); i++){
+                postMetaRepository.save(new PostMeta(post.getId(), productDTO.getMetaKey().get(i), productDTO.getMetaName().get(i), productDTO.getMetaValue().get(i)));
+            }
         }
         return product;
+    }
+
+    public List<Map<String, Object>> getFeaturedProducts(){
+        return productRepository.getDataFeaturedProducts();
     }
 }

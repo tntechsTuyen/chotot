@@ -76,10 +76,24 @@
             <div class="col-lg-4">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Hình ảnh</span></h5>
                 <div class="bg-light p-30 mb-5">
-                    <div class="text-center btn-default cursor-pointer border rounded" class="badge btn-indigo" data-bs-placement="top" data-bs-toggle="popover" data-bs-trigger="hover focus" title="Cập nhật ảnh">
-                        <img id="img-avatar-product" src="${_ctx}/static/dist/no-image.jpg" class="img-fluid" style="max-height: 300px;">
-                        <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
-                    </div>
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <td rowspan="2">
+                                <img src="${_ctx}/static/dist/no-image.jpg" class="img-fluid product-image" style="max-height: 300px;">
+                                <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
+                            </td>
+                            <td>
+                                <img src="${_ctx}/static/dist/no-image.jpg" class="img-fluid product-image" style="max-height: 150px;">
+                                <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="${_ctx}/static/dist/no-image.jpg" class="img-fluid product-image" style="max-height: 150px;">
+                                <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="mb-2">
                     <div class="bg-light">
@@ -100,13 +114,14 @@
             location.href = changeSearchParam({idCategory: obj.value})
         }
         
-        $("#img-avatar-product").click(function(){
-            $('#media').click()
+        $(".product-image").click(function(){
+            $(this).parent().find("[name='media']").click()
         })
 
-        $('#media').change(function(){
+        $("[name='media']").change(function(){
             var file = $(this).prop("files")[0];
-            image.render("#img-avatar-product", file);
+            var index = $(this).index("[name='media']")
+            image.render(`.product-image:eq(`+index+`)`, file);
         })
 
     </script>

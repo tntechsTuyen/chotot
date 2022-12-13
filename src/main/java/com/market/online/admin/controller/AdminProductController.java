@@ -1,8 +1,10 @@
 package com.market.online.admin.controller;
 
+import com.market.online.admin.service.AdminPostService;
 import com.market.online.admin.service.AdminProductService;
 import com.market.online.common.utils.UrlUtils;
 import com.market.online.dto.ProductDTO;
+import com.market.online.entity.Post;
 import com.market.online.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class AdminProductController {
     @Autowired
     private AdminProductService adminProductService;
 
+    @Autowired
+    private AdminPostService adminPostService;
+
     @GetMapping({"", "/list"})
     public String goList(Model model, ProductDTO search){
         model.addAttribute("search", search);
@@ -27,7 +32,11 @@ public class AdminProductController {
 
     @GetMapping("/update/{id}")
     public String goUpdate(Model model, @PathVariable("id") Integer id){
-        model.addAttribute("productForm", adminProductService.getOne(id));
+        Product productInfo = adminProductService.getOne(id);
+        Post postInfo = adminPostService.getByProduct(id);
+        model.addAttribute("productForm", productInfo);
+        model.addAttribute("mediaData", adminPostService.getMediaByIdPost(postInfo.getId()));
+        model.addAttribute("metaData", adminPostService.getMetaByIdPost(postInfo.getId()));
         return "admin/component/product/update";
     }
 

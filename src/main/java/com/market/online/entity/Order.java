@@ -1,9 +1,12 @@
 package com.market.online.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Entity
@@ -35,10 +38,12 @@ public class Order {
     @Column(name = "price")
     private Integer price;
 
+    @CreationTimestamp
     @Column(name = "created_date", nullable = false)
-    private Instant createdDate;
+    private Date createdDate;
 
-    @Column(name = "updated_date", nullable = false)
-    private Instant updatedDate;
+    @UpdateTimestamp
+    @Column(name = "updated_date")
+    private Date updatedDate;
 
 }

@@ -17,40 +17,35 @@ import java.util.*;
 @Service
 public class FileService {
 
-    @Value("${data.res}")
-    private String dataRes;
+    @Value("${data.path}")
+    private String dataPath;
 
     public List<String> updloadFiles(MultipartFile[] files) {
         List<String> resultUrl = new ArrayList<>();
-        String subFolder = "media/"+ DataStatic.FILE.SUB_FOLDER(true);
+        String subFolder = DataStatic.DATE.FORMAT("yyyy/mm/dd");
+        int i = 0;
         for (MultipartFile uploadedFile : files) {
             checkSubFolder(subFolder);
-            File file = new File(dataRes + subFolder + uploadedFile.getOriginalFilename());
-
-            log.info("### upload info", uploadedFile.getOriginalFilename());
+            String nameFile = DataStatic.DATE.FORMAT("yyyymmddHHMMss"+i);
+            File file = new File(dataPath + subFolder + "/" + nameFile);
             try {
                 uploadedFile.transferTo(file);
                 boolean isImage = checkTypeFileIsImage(file);
-                String nameFile = uploadedFile.getOriginalFilename();
                 if(!isImage){
                     nameFile += ".jpg";
-                    file = new File(dataRes + subFolder + nameFile);
                 }
-
-                resultUrl.add("ws-data/res/" + subFolder + nameFile);
-                BufferedImage img = ImageIO.read(file);
-//                BufferedImage thumb = Scalr.resize(img, Scalr.Method.QUALITY, Scalr.Mode.AUTOMATIC, 200, 100, Scalr.OP_ANTIALIAS);
-
+                resultUrl.add(subFolder + "/" + nameFile);
             } catch (IOException e) {
                 log.error("### upload error", e);
                 return new ArrayList<>();
             }
+            i++;
         }
         return resultUrl;
     }
 
     private void checkSubFolder(String mSubFolder){
-        File theMedia = new File(dataRes+mSubFolder);
+        File theMedia = new File(dataPath +mSubFolder);
         if (!theMedia.exists()){
             theMedia.mkdirs();
         }

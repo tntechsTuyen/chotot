@@ -28,4 +28,14 @@ public class PostMeta {
 
     @Column(name = "description")
     private String description;
+
+    public PostMeta() {
+    }
+
+    public PostMeta(Integer idPost, String key, String name, String value) {
+        this.idPost = idPost;
+        this.key = key;
+        this.name = name;
+        this.value = value;
+    }
 }

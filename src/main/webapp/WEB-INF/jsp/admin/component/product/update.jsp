@@ -25,7 +25,7 @@
 			  Sản phẩm <small>cập nhật</small>
 			</h1>
 			<div class="row">
-				<div class="col-6">
+				<div class="col-8">
 					<div class="panel panel-inverse">
 						<div class="panel-heading">
 					    	<h4 class="panel-title">Form</h4>
@@ -72,8 +72,9 @@
 							</form:form>
 						</div>
 					</div>
+
 				</div>
-				<div class="col-6">
+				<div class="col-4">
 					<div class="panel panel-inverse">
 						<div class="panel-heading">
 					    	<h4 class="panel-title">Media</h4>
@@ -85,13 +86,48 @@
 						    </div>
 						</div>
 						<div class="panel-body">
-							<div id="gallery" class="gallery-v2">
-								<div class="gallery">
-									<a href="javascript:;" class="ratio ratio-4x3" data-pswp-src="${_ctx}/static/dist/product-1.jpg" data-pswp-width="1200" data-pswp-height="800">
-										<div class="bg-size-cover bg-position-center" style="background-image: url(${_ctx}/static/dist/product-1.jpg);"></div>
-									</a>
-								</div>
-							</div>
+							<c:forEach items="${mediaData}" var="item">
+								<div class="widget-img widget-img-xl rounded float-start me-5px border"><img class="w-100 h-100" src="${_ctx}/static/${item.url}"></div>
+							</c:forEach>
+						</div>
+					</div>
+
+					<div class="panel panel-inverse mt-2">
+						<div class="panel-heading">
+					    	<h4 class="panel-title">Meta data</h4>
+						    <div class="panel-heading-btn">
+						    	<a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand" ><i class="fa fa-expand"></i></a>
+						    	<a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload" ><i class="fa fa-redo"></i></a>
+						    	<a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse" ><i class="fa fa-minus"></i></a>
+						    	<a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove" ><i class="fa fa-times"></i></a>
+						    </div>
+						</div>
+						<div class="panel-body">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Key</th>
+										<th>Name</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${metaData.size() > 0}">
+										<c:forEach items="${metaData}" var="item">
+										<tr>
+											<td>${item.key}</td>
+											<td>${item.name}</td>
+											<td>${item.value}</td>
+										</tr>
+										</c:forEach>
+									</c:if>
+									<c:if test="${metaData.size() == 0}">
+										<tr>
+											<td class="text-center" colspan="4"><i class="fa fa-inbox"></i> Không có dữ liệu</td>
+										</tr>
+									</c:if>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

@@ -21,12 +21,12 @@ public class PostUser {
     @Column(name = "id_user", nullable = false)
     private Integer idUser;
 
-    @Column(name = "had_view")
+    @Column(name = "had_view", columnDefinition = "integer default 0")
     private Boolean hadView;
 
-    @Column(name = "had_like")
+    @Column(name = "had_like", columnDefinition = "integer default 0")
     private Boolean hadLike;
 
-    @Column(name = "had_follow")
+    @Column(name = "had_follow", columnDefinition = "integer default 0")
     private Boolean hadFollow;
 }

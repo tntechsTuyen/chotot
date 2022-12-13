@@ -1,9 +1,12 @@
 package com.market.online.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Entity
@@ -30,22 +33,24 @@ public class Post {
     private String content;
 
     @Column(name = "total_view")
-    private Integer totalView;
+    private Integer totalView = 0;
 
     @Column(name = "total_like")
-    private Integer totalLike;
+    private Integer totalLike = 0;
 
     @Column(name = "total_follow")
-    private Integer totalFollow;
+    private Integer totalFollow = 0;
 
     @Column(name = "total_comment")
-    private Integer totalComment;
+    private Integer totalComment = 0;
 
-    @Column(name = "created_date", nullable = false)
-    private Instant createdDate;
+    @CreationTimestamp
+    @Column(name = "created_date", updatable = false)
+    private Date createdDate;
 
-    @Column(name = "updated_date", nullable = false)
-    private Instant updatedDate;
+    @UpdateTimestamp
+    @Column(name = "updated_date")
+    private Date updatedDate;
 
     public Post() {
     }

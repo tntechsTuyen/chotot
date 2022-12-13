@@ -7,6 +7,7 @@ import com.market.online.dto.ProductDTO;
 import com.market.online.entity.Product;
 import com.market.online.user.service.CategoryMetaService;
 import com.market.online.user.service.CategoryService;
+import com.market.online.user.service.ProductService;
 import com.market.online.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,9 @@ public class ProfileController {
 
     @Autowired
     private CategoryMetaService categoryMetaService;
+
+    @Autowired
+    private ProductService productService;
 
     @GetMapping({"", "/info"})
     public String goInfo(HttpServletRequest request, Model model){
@@ -65,7 +69,7 @@ public class ProfileController {
 
     @PostMapping("/product/add")
     public String doMyProductAdd(Model model, HttpServletRequest request, @ModelAttribute("productForm") ProductDTO productForm){
-        System.out.println("Test");
+        productService.create(productForm);
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 

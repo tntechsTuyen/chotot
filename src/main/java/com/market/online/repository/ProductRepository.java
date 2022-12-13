@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
@@ -19,7 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " , c.id AS categoryId, c.name AS categoryName, s.id AS statusId, s.name AS statusName " +
             " FROM Product p " +
             " INNER JOIN User u1 ON p.idUser = u1.id " +
-            " INNER JOIN User u2 ON p.idConfirmer = u2.id " +
+            " LEFT JOIN User u2 ON p.idConfirmer = u2.id " +
             " INNER JOIN Category c ON p.idCategory = c.id " +
             " INNER JOIN Status s ON p.idStatus = s.id " +
             " WHERE (:#{#search.idStatus} = 0 OR p.idStatus = :#{#search.idStatus}) " +
@@ -29,4 +30,22 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " AND (:#{#search.idCategory} = 0 OR p.idCategory = :#{#search.idCategory}) ")
     Page<Map<String, Object>> getDataPage(@Param("search") ProductDTO search, Pageable pageable);
 
+    @Query("SELECT p.id AS id " +
+            ", p.idCategory AS idCategory " +
+            ", p.idUser AS idUser " +
+            ", p.name AS name" +
+            ", p.price AS price " +
+            ", p.priceVerify AS priceVerify " +
+            ", pt.totalView AS totalView " +
+            ", pt.totalLike AS totalLike " +
+            ", pt.totalFollow AS totalFollow " +
+            ", pt.totalComment AS totalComment " +
+            ", m.url AS thumb " +
+            " FROM Product p " +
+            " INNER JOIN Post pt ON p.id = pt.idProduct " +
+            " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
+            " INNER JOIN Media m ON pm.idMedia = m.id " +
+            " WHERE p.idStatus = 6 " +
+            " ORDER BY pt.totalLike DESC ")
+    List<Map<String, Object>> getDataFeaturedProducts();
 }

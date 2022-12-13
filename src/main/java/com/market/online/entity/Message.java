@@ -1,9 +1,11 @@
 package com.market.online.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Entity
@@ -24,7 +26,8 @@ public class Message {
     @Column(name = "content")
     private String content;
 
+    @CreationTimestamp
     @Column(name = "created_date", nullable = false)
-    private Instant createdDate;
+    private Date createdDate;
 
 }
