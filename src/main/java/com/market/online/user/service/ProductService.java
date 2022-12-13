@@ -63,4 +63,8 @@ public class ProductService {
     public List<Map<String, Object>> getFeaturedProducts(){
         return productRepository.getDataFeaturedProducts();
     }
+
+    public Product getOne(Integer id){
+        return productRepository.findById(id).get();
+    }
 }

@@ -52,6 +52,10 @@
                                         <label>Giá</label>
                                         <form:input path="price" type="number" cssClass="form-control" min="0" />
                                     </div>
+                                    <div class="col-md-12 form-group">
+                                        <label>Mô tả</label>
+                                        <form:input path="content" cssClass="form-control"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
