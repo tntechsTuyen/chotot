@@ -37,7 +37,6 @@ public class ProfileController {
     @GetMapping({"", "/info"})
     public String goInfo(HttpServletRequest request, Model model){
         model.addAttribute("profileForm", userService.getUserLogin(request));
-
         return "user/component/profile/index";
     }
 
@@ -54,8 +53,8 @@ public class ProfileController {
     }
 
     @GetMapping("/product")
-    public String goMyProducts(Model model){
-
+    public String goMyProducts(Model model, HttpServletRequest request){
+        model.addAttribute("productData", productService.getMyData(request));
         return "user/component/profile/product_list";
     }
 
@@ -69,13 +68,12 @@ public class ProfileController {
 
     @PostMapping("/product/add")
     public String doMyProductAdd(Model model, HttpServletRequest request, @ModelAttribute("productForm") ProductDTO productForm){
-        productService.create(productForm);
+        productService.create(request, productForm);
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 
     @GetMapping("/product/{id}")
-    public String goMyProductUpdate(Model model, @PathVariable("id") Integer id){
-
+    public String goMyProductUpdate(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
         return "user/component/profile/product_update";
     }
 }

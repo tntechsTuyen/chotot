@@ -3,14 +3,12 @@ package com.market.online.user.service;
 import com.market.online.entity.Media;
 import com.market.online.entity.Post;
 import com.market.online.entity.PostMeta;
-import com.market.online.repository.MediaRepository;
-import com.market.online.repository.PostMediaRepository;
-import com.market.online.repository.PostMetaRepository;
-import com.market.online.repository.PostRepository;
+import com.market.online.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PostService {
@@ -24,6 +22,9 @@ public class PostService {
     @Autowired
     private MediaRepository mediaRepository;
 
+    @Autowired
+    private CommentRepository commentRepository;
+
     public Post getByProduct(Integer idProduct){
         return postRepository.findByIdProduct(idProduct).get();
     }
@@ -34,5 +35,9 @@ public class PostService {
 
     public List<Media> getMediaByIdPost(Integer idPost){
         return mediaRepository.getByIdPost(idPost);
+    }
+
+    public List<Map<String, Object>> getCommentPost(Integer idPost){
+        return commentRepository.getDataByIdPost(idPost);
     }
 }

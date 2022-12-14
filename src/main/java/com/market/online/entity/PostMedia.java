@@ -27,5 +27,6 @@ public class PostMedia {
     public PostMedia(Integer idPost, Integer idMedia, Integer idType) {
         this.idPost = idPost;
         this.idMedia = idMedia;
+        this.idType = idType;
     }
 }

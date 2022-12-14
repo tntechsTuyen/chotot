@@ -14,8 +14,8 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="${_ctx}/">Home</a>
-                    <span class="breadcrumb-item active">Profile</span>
+                    <a class="breadcrumb-item text-dark" href="${_ctx}/">Trang chủ</a>
+                    <span class="breadcrumb-item active">Hồ sơ</span>
                 </nav>
             </div>
         </div>

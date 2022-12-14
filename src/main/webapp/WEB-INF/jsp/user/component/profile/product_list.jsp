@@ -44,42 +44,30 @@
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <div class="ml-2">
                                 <a href="${_ctx}/profile/product/add" class="btn btn-info btn-sm">Thêm mới</a>
-                                <div class="btn-group ml-2">
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">10</a>
-                                        <a class="dropdown-item" href="#">20</a>
-                                        <a class="dropdown-item" href="#">30</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
+                    <c:forEach items="${productData}" var="item">
                     <div class="col-lg-2 col-md-3 col-sm-3 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="${_ctx}/static/dist/product-1.jpg" alt="">
+                                <img class="img-fluid" style="max-height: 170px; min-height: 170px" src="${_ctx}/static/${item.thumb}" alt="">
                             </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="${_ctx}/product/1">Product Name Goes Here</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                                </div>
+                            <div class="text-center pt-4">
+                                <div class="h6 text-decoration-none text-truncate">${item.name}</div>
+                                <c:if test="${item.idStatus == 5}">
+                                    <a href="${_ctx}/profile/product/${item.id}" class="btn btn-info w-100" style="color: #000;">Update</a>
+                                </c:if>
+                                <c:if test="${item.idStatus != 5}">
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5>${item.priceVerify}</h5>
+                                        <h6 class="text-muted ml-2"><del>${item.price}</del></h6>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-12">
-                        <nav>
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
             <!-- My Product End -->

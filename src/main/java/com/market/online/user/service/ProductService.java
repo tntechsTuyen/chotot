@@ -6,6 +6,7 @@ import com.market.online.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +32,16 @@ public class ProductService {
     @Autowired
     private PostMediaRepository postMediaRepository;
 
-    public Product create(ProductDTO productDTO){
+    @Autowired
+    private UserService userService;
+
+    public Product create(HttpServletRequest request, ProductDTO productDTO){
+        User userInfo = userService.getUserLogin(request);
+        Integer idUser = (userInfo != null) ? userInfo.getId() : 0;
+
         //Create Product
         Product product = new Product(productDTO);
-        product.setIdUser(1);
+        product.setIdUser(idUser);
         product.setIdStatus(5);
         productRepository.save(product);
         //Create Post
@@ -60,11 +67,33 @@ public class ProductService {
         return product;
     }
 
-    public List<Map<String, Object>> getFeaturedProducts(){
-        return productRepository.getDataFeaturedProducts();
+    public List<Map<String, Object>> getFeaturedProducts(HttpServletRequest request){
+        User userInfo = userService.getUserLogin(request);
+        Integer idUser = (userInfo != null) ? userInfo.getId() : 0;
+        return productRepository.getDataFeaturedProducts(idUser);
     }
 
     public Product getOne(Integer id){
         return productRepository.findById(id).get();
+    }
+
+    public List<Map<String, Object>> getDataByIdCategory(HttpServletRequest request, Integer idCategory){
+        User userInfo = userService.getUserLogin(request);
+        Integer idUser = (userInfo != null) ? userInfo.getId() : 0;
+        return productRepository.getDataByIdCategory(idCategory, idUser);
+    }
+
+    public List<Map<String, Object>> getDataViewed(HttpServletRequest request){
+        User userInfo = userService.getUserLogin(request);
+        if(userInfo != null){
+            return productRepository.getDataViewed(userInfo.getId());
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Map<String, Object>> getMyData(HttpServletRequest request){
+        User userInfo = userService.getUserLogin(request);
+        Integer idUser = (userInfo != null) ? userInfo.getId() : 0;
+        return productRepository.getMyData(idUser);
     }
 }
