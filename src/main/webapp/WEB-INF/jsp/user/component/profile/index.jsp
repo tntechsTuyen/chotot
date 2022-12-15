@@ -31,7 +31,8 @@
                 <ul class="list-group">
                     <li class="list-group-item active"><a class="text-white" href="${_ctx}/profile">Hồ sơ</a></li>
                     <li class="list-group-item"><a class="text-dark" href="${_ctx}/profile/product">Sản phẩm</a></li>
-                    <li class="list-group-item"><a class="text-dark" href="${_ctx}/profile/order">Đơn hàng</a></li>
+                    <li class="list-group-item"><a class="text-dark" href="${_ctx}/profile/order/buy">Đơn hàng mua</a></li>
+                    <li class="list-group-item"><a class="text-dark" href="${_ctx}/profile/order/sell">Đơn hàng bán</a></li>
                 </ul>
             </div>
             <!-- Profile End -->

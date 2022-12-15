@@ -96,4 +96,12 @@ public class ProductService {
         Integer idUser = (userInfo != null) ? userInfo.getId() : 0;
         return productRepository.getMyData(idUser);
     }
+
+    public List<Map<String, Object>> getList(HttpServletRequest request, ProductDTO productDTO){
+        User userInfo = userService.getUserLogin(request);
+        if(userInfo != null){
+            productDTO.setIdUser(userInfo.getId());
+        }
+        return productRepository.getList(productDTO);
+    }
 }

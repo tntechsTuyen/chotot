@@ -1,17 +1,15 @@
 package com.market.online.user.controller;
 
+import com.market.online.dto.OrderDTO;
+import com.market.online.dto.ProductDTO;
 import com.market.online.entity.Comment;
 import com.market.online.entity.Post;
 import com.market.online.entity.Product;
-import com.market.online.user.service.PostService;
-import com.market.online.user.service.PostUserService;
-import com.market.online.user.service.ProductService;
+import com.market.online.user.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,9 +26,16 @@ public class ProductController {
     @Autowired
     private PostUserService postUserService;
 
-    @GetMapping({"", "/list"})
-    public String goProducts(Model model){
+    @Autowired
+    private UserService userService;
 
+    @Autowired
+    private OrderService orderService;
+
+    @GetMapping({"", "/list"})
+    public String goProducts(Model model, HttpServletRequest request, ProductDTO search){
+        model.addAttribute("search", search);
+        model.addAttribute("productData", productService.getList(request, search));
         return "user/component/product/list";
     }
 
@@ -50,8 +55,18 @@ public class ProductController {
     }
 
     @GetMapping("/{id}/checkout")
-    public String goCheckOut(){
-
+    public String goCheckOut(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
+        Product product = productService.getOne(id);
+        model.addAttribute("buyerInfo", userService.getUserLogin(request));
+        model.addAttribute("sellerInfo", userService.getOne(product.getIdUser()));
+        model.addAttribute("productInfo", product);
         return "user/component/product/checkout";
+    }
+
+    @PostMapping("/{id}/checkout")
+    public String doCheckOut(Model model, HttpServletRequest request, @PathVariable("id") Integer id, OrderDTO orderDTO){
+        orderDTO.setIdProduct(id);
+        orderService.create(request, orderDTO);
+        return "redirect: ";
     }
 }

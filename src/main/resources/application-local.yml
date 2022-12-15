@@ -8,9 +8,9 @@ server:
 # db
 spring:
   datasource:
-    url:
-    username:
-    password:
+    url: jdbc:mariadb://103.18.6.89:3306/ui14erqj_chotot
+    username: ui14erqj_admin
+    password: $*(6RiXgJx4vH@$(
     driver-class-name: org.mariadb.jdbc.Driver
   mvc:
     view:

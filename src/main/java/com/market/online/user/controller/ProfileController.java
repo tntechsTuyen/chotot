@@ -2,13 +2,13 @@ package com.market.online.user.controller;
 
 import com.market.online.common.utils.UrlUtils;
 import com.market.online.dto.CategoryMetaDTO;
+import com.market.online.dto.OrderDTO;
 import com.market.online.dto.PostMetaDTO;
 import com.market.online.dto.ProductDTO;
+import com.market.online.entity.Order;
 import com.market.online.entity.Product;
-import com.market.online.user.service.CategoryMetaService;
-import com.market.online.user.service.CategoryService;
-import com.market.online.user.service.ProductService;
-import com.market.online.user.service.UserService;
+import com.market.online.entity.User;
+import com.market.online.user.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -34,21 +34,48 @@ public class ProfileController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private OrderService orderService;
+
     @GetMapping({"", "/info"})
     public String goInfo(HttpServletRequest request, Model model){
         model.addAttribute("profileForm", userService.getUserLogin(request));
         return "user/component/profile/index";
     }
 
-    @GetMapping("/order")
-    public String goOrder(Model model){
+    @GetMapping("/order/buy")
+    public String goOrderBuy(Model model, HttpServletRequest request, OrderDTO orderDTO){
+        User userInfo = userService.getUserLogin(request);
+        orderDTO.setIdBuyer(userInfo.getId());
+        model.addAttribute("orderData", orderService.getMyOrder(orderDTO));
+        return "user/component/profile/order_list";
+    }
 
+    @GetMapping("/order/sell")
+    public String goOrderSell(Model model, HttpServletRequest request, OrderDTO orderDTO){
+        User userInfo = userService.getUserLogin(request);
+        orderDTO.setIdSeller(userInfo.getId());
+        model.addAttribute("orderData", orderService.getMyOrder(orderDTO));
         return "user/component/profile/order_list";
     }
 
     @GetMapping("/order/{id}")
-    public String goDetail(Model model){
+    public String goOrderDetail(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
+        Order orderInfo = orderService.getOne(id);
+        model.addAttribute("orderInfo", orderInfo);
+        model.addAttribute("buyerInfo", userService.getOne(orderInfo.getIdBuyer()));
+        model.addAttribute("sellerInfo", userService.getOne(orderInfo.getIdSeller()));
+        model.addAttribute("productInfo", productService.getOne(orderInfo.getIdProduct()));
+        return "user/component/profile/order_detail";
+    }
 
+    @GetMapping("/order/{id}/approve")
+    public String goOrderApprove(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
+        return "user/component/profile/order_detail";
+    }
+
+    @GetMapping("/order/{id}/cancel")
+    public String goOrderCancel(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
         return "user/component/profile/order_detail";
     }
 

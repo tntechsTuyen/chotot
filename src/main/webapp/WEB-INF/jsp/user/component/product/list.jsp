@@ -28,7 +28,7 @@
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-4">
                 <!-- Price Start -->
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Lọc theo danh mục</span></h5>
                 <div class="bg-light p-4 mb-30">
                     <form>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -71,10 +71,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-4 pb-1">
+                    <c:forEach items="${productData}" var="item">
+                    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="${_ctx}/static/dist/product-1.jpg" alt="">
+                                <img class="img-fluid w-100" src="${_ctx}/static/${item.thumb}" style="height: 300px">
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-bookmark"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -82,9 +83,9 @@
                                 </div>
                             </div>
                             <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="${_ctx}/product/1">Product Name Goes Here</a>
+                                <a class="h6 text-decoration-none text-truncate" href="${_ctx}/product/${item.id}">${item.name}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                    <h5>${item.priceVerify}</h5><h6 class="text-muted ml-2"><del>${item.price}</del></h6>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center mb-1">
                                     <small class="fa fa-star text-primary mr-1"></small>
@@ -97,6 +98,7 @@
                             </div>
                         </div>
                     </div>
+                    </c:forEach>
 
                     <div class="col-12">
                         <nav>

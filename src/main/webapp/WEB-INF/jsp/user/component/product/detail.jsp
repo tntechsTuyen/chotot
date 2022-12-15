@@ -49,26 +49,26 @@
                     <h3>${productData.name}</h3>
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-1">
-                            <small class="fas fa-star"></small>
+                            <small class="fas fa-eye"></small>
                         </div>
-                        <small class="pt-1">(99)</small>
+                        <small class="pt-1">(${postData.totalView})</small>
                         <div class="text-primary mr-1 ml-3">
-                            <small class="fas fa-star"></small>
+                            <small class="fas fa-heart"></small>
                         </div>
-                        <small class="pt-1">(99)</small>
+                        <small class="pt-1">(${postData.totalLike})</small>
                         <div class="text-primary mr-1 ml-3">
-                            <small class="fas fa-star"></small>
+                            <small class="fas fa-bookmark"></small>
                         </div>
-                        <small class="pt-1">(99)</small>
+                        <small class="pt-1">(${postData.totalFollow})</small>
                         <div class="text-primary mr-1 ml-3">
-                            <small class="fas fa-star"></small>
+                            <small class="fas fa-comment-alt"></small>
                         </div>
-                        <small class="pt-1">(99)</small>
+                        <small class="pt-1">(${postData.totalComment})</small>
                     </div>
-                    <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
+                    <h3 class="font-weight-semi-bold mb-4">${productData.priceVerify}</h3>
                     <p class="mb-4">${postData.content}</p>
                     <div class="d-flex align-items-center mb-4 pt-2">
-                        <a href="${_ctx}/product/1/checkout" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Mua hàng</a>
+                        <a href="${_ctx}/product/${productData.id}/checkout" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Mua hàng</a>
                     </div>
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Chia sẻ:</strong>

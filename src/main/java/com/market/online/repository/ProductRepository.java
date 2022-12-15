@@ -120,4 +120,28 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " WHERE p.idUser = :id_user " +
             " ORDER BY p.id DESC ")
     List<Map<String, Object>> getMyData(@Param("id_user") Integer idUser);
+
+    @Query("SELECT p.id AS id " +
+            ", p.idCategory AS idCategory " +
+            ", p.idUser AS idUser " +
+            ", p.name AS name" +
+            ", p.price AS price " +
+            ", p.priceVerify AS priceVerify " +
+            ", pt.totalView AS totalView " +
+            ", pt.totalLike AS totalLike " +
+            ", pt.totalFollow AS totalFollow " +
+            ", pt.totalComment AS totalComment " +
+            ", m.url AS thumb " +
+            ", pu.hadView AS hadView " +
+            ", pu.hadLike AS hadLike " +
+            ", pu.hadFollow AS hadFollow " +
+            " FROM Product p " +
+            " INNER JOIN Post pt ON p.id = pt.idProduct " +
+            " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
+            " INNER JOIN Media m ON pm.idMedia = m.id " +
+            " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :#{#search.idUser} " +
+            " WHERE p.idStatus = 6 " +
+            " AND (:#{#search.idUser} = 0 OR p.idUser != :#{#search.idUser}) " +
+            " ORDER BY p.id DESC ")
+    List<Map<String, Object>> getList(@Param("search") ProductDTO search);
 }

@@ -27,13 +27,13 @@ public class Order {
     private Integer idProduct;
 
     @Column(name = "id_status")
-    private Integer idStatus;
+    private Integer idStatus = 1;
 
     @Column(name = "id_type")
     private Integer idType;
 
     @Column(name = "id_redirect")
-    private Integer idRedirect;
+    private Integer idRedirect = 0;
 
     @Column(name = "price")
     private Integer price;

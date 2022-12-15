@@ -39,6 +39,10 @@ public class UserService {
         return (User) request.getSession().getAttribute(SESSION_LOGIN);
     }
 
+    public User getOne(Integer id){
+        return userRepository.findById(id).get();
+    }
+
     public boolean logout(HttpServletRequest request){
         request.getSession().removeAttribute(SESSION_LOGIN);
         return true;
