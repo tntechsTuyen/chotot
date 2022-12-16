@@ -31,7 +31,6 @@ public class IndexController {
 
     @GetMapping({"/", "/home"})
     public String goIndex(Model model, HttpServletRequest request){
-        model.addAttribute("categoryData", categoryService.getAll());
         model.addAttribute("productFeature", productService.getFeaturedProducts(request));
         model.addAttribute("productViewed", productService.getDataViewed(request));
         return "user/component/home";

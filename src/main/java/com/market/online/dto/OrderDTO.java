@@ -11,4 +11,10 @@ public class OrderDTO {
     private Integer idSeller = 0;
     private Integer idType;
     private Integer value = 1; //1: next, 0: cancel
+
+    public OrderDTO(){}
+
+    public OrderDTO(Integer id){
+        this.id = id;
+    }
 }

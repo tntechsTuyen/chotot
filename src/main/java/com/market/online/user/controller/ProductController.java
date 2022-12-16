@@ -39,6 +39,13 @@ public class ProductController {
         return "user/component/product/list";
     }
 
+    @GetMapping("/like")
+    public String goLike(Model model, HttpServletRequest request, ProductDTO search){
+        model.addAttribute("search", search);
+        model.addAttribute("productData", productService.getList(request, search));
+        return "user/component/product/list";
+    }
+
     @GetMapping("/{id}")
     public String goProductDetail(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
         Post post = postService.getByProduct(id);
@@ -60,6 +67,7 @@ public class ProductController {
         model.addAttribute("buyerInfo", userService.getUserLogin(request));
         model.addAttribute("sellerInfo", userService.getOne(product.getIdUser()));
         model.addAttribute("productInfo", product);
+        model.addAttribute("myProductData", productService.getMyData(request));
         return "user/component/product/checkout";
     }
 

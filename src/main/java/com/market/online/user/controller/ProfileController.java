@@ -37,6 +37,9 @@ public class ProfileController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private OrderHistoryService orderHistoryService;
+
     @GetMapping({"", "/info"})
     public String goInfo(HttpServletRequest request, Model model){
         model.addAttribute("profileForm", userService.getUserLogin(request));
@@ -63,6 +66,7 @@ public class ProfileController {
     public String goOrderDetail(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
         Order orderInfo = orderService.getOne(id);
         model.addAttribute("orderInfo", orderInfo);
+        model.addAttribute("orderHistoryInfo", orderHistoryService.getListByIdOrder(id));
         model.addAttribute("buyerInfo", userService.getOne(orderInfo.getIdBuyer()));
         model.addAttribute("sellerInfo", userService.getOne(orderInfo.getIdSeller()));
         model.addAttribute("productInfo", productService.getOne(orderInfo.getIdProduct()));
@@ -70,8 +74,9 @@ public class ProfileController {
     }
 
     @GetMapping("/order/{id}/approve")
-    public String goOrderApprove(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
-        return "user/component/profile/order_detail";
+    public String goOrderApprove(HttpServletRequest request, @PathVariable("id") Integer id){
+        orderService.update(request, new OrderDTO(id));
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 
     @GetMapping("/order/{id}/cancel")

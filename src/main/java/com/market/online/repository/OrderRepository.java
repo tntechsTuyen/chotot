@@ -13,6 +13,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             ", p.title AS name " +
             ", o.price AS price " +
             ", t.name AS type " +
+            ", s.name AS status " +
             ", o.createdDate AS createdDate" +
             ", o.updatedDate AS updatedDate " +
             ", o.idRedirect AS idRedirect " +

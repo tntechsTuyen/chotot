@@ -110,9 +110,9 @@
     <div class="container-fluid pt-5">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Danh mục</span></h2>
         <div class="row px-xl-5 pb-3">
-            <c:forEach items="${categoryData}" var="item">
+            <c:forEach items="${categoryList}" var="item">
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
+                <a class="text-decoration-none" href="${_ctx}/product/list?idCategory=${item.id}">
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
                             <img class="img-fluid" src="static/dist/cat-1.jpg" alt="">
@@ -138,11 +138,27 @@
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="${_ctx}/static/${item.thumb}" style="height: 300px">
+                        <c:if test="${_userInfo != null}">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-bookmark"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="${_ctx}/post/${item.idPost}/follow">
+                                <c:if test="${item.hadFollow == 1}">
+                                    <i class="fas fa-bookmark"></i>
+                                </c:if>
+                                <c:if test="${item.hadFollow == null || item.hadFollow == 0}">
+                                    <i class="far fa-bookmark"></i>
+                                </c:if>
+                            </a>
+                            <a class="btn btn-outline-dark btn-square" href="${_ctx}/post/${item.idPost}/like">
+                                <c:if test="${item.hadLike == 1}">
+                                    <i class="fas fa-heart"></i>
+                                </c:if>
+                                <c:if test="${item.hadLike == null || item.hadLike == 0}">
+                                    <i class="far fa-heart"></i>
+                                </c:if>
+                            </a>
+                            <a class="btn btn-outline-dark btn-square" href="${_ctx}/product/${item.id}/checkout"><i class="fa fa-shopping-cart"></i></a>
                         </div>
+                        </c:if>
                     </div>
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="${_ctx}/product/${item.id}">${item.name}</a>
@@ -150,12 +166,14 @@
                             <h5>${item.priceVerify}</h5><h6 class="text-muted ml-2"><del>${item.price}</del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <small class="fa fa-eye text-primary mr-1"></small>
+                            <small>(${item.totalView})</small>
+                            <small class="fa fa-bookmark text-primary mr-1 ml-3"></small>
+                            <small>(${item.totalFollow})</small>
+                            <small class="fa fa-heart text-primary mr-1 ml-3"></small>
+                            <small>(${item.totalLike})</small>
+                            <small class="fa fa-comment-alt text-primary mr-1 ml-3"></small>
+                            <small>(${item.totalComment})</small>
                         </div>
                     </div>
                 </div>
@@ -175,11 +193,27 @@
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="${_ctx}/static/${item.thumb}" style="min-height: 200px; max-height: 200px">
+                            <c:if test="${_userInfo != null}">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-bookmark"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="${_ctx}/post/${item.idPost}/follow">
+                                    <c:if test="${item.hadFollow == 1}">
+                                        <i class="fas fa-bookmark"></i>
+                                    </c:if>
+                                    <c:if test="${item.hadFollow == null || item.hadFollow == 0}">
+                                        <i class="far fa-bookmark"></i>
+                                    </c:if>
+                                </a>
+                                <a class="btn btn-outline-dark btn-square" href="${_ctx}/post/${item.idPost}/like">
+                                    <c:if test="${item.hadLike == 1}">
+                                        <i class="fas fa-heart"></i>
+                                    </c:if>
+                                    <c:if test="${item.hadLike == null || item.hadLike == 0}">
+                                        <i class="far fa-heart"></i>
+                                    </c:if>
+                                </a>
+                                <a class="btn btn-outline-dark btn-square" href="${_ctx}/product/${item.id}/checkout"><i class="fa fa-shopping-cart"></i></a>
                             </div>
+                            </c:if>
                         </div>
                         <div class="text-center py-4">
                             <a class="h6 text-decoration-none text-truncate" href="">${item.name}</a>
@@ -187,8 +221,14 @@
                                 <h5>${item.priceVerify}</h5><h6 class="text-muted ml-2"><del>${item.price}</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
+                                <small class="fa fa-eye text-primary mr-1"></small>
+                                <small>(${item.totalView})</small>
+                                <small class="fa fa-bookmark text-primary mr-1 ml-3"></small>
+                                <small>(${item.totalFollow})</small>
+                                <small class="fa fa-heart text-primary mr-1 ml-3"></small>
+                                <small>(${item.totalLike})</small>
+                                <small class="fa fa-comment-alt text-primary mr-1 ml-3"></small>
+                                <small>(${item.totalComment})</small>
                             </div>
                         </div>
                     </div>

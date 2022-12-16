@@ -13,7 +13,7 @@ import java.util.Date;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "id_post")
@@ -22,11 +22,10 @@ public class Comment {
     @Column(name = "id_user")
     private Integer idUser;
 
-    @Lob
     @Column(name = "content")
     private String content;
 
     @CreationTimestamp
-    @Column(name = "created_date", nullable = false)
+    @Column(name = "created_date", updatable = false)
     private Date createdDate;
 }

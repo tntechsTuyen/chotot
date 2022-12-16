@@ -18,7 +18,13 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Autowired
+    private PostService postService;
+
+    @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private PostUserService postUserService;
 
     @Autowired
     private PostMetaRepository postMetaRepository;

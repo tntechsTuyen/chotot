@@ -13,8 +13,19 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     Optional<Post> findByIdProduct(Integer idProduct);
 
-
+    @Modifying
+    @Transactional
     @Query(" UPDATE Post " +
-            " SET totalView = (SELECT COUNT(id) FROM PostUser WHERE idPost = :id_post AND hadView = 1) ")
-    void updateData(@Param("id_post") Integer idPost);
+            " SET totalView = (SELECT COUNT(id) FROM PostUser WHERE idPost = :id_post AND hadView = 1) " +
+            " , totalLike = (SELECT COUNT(id) FROM PostUser WHERE idPost = :id_post AND hadLike = 1) "+
+            " , totalFollow = (SELECT COUNT(id) FROM PostUser WHERE idPost = :id_post AND hadFollow = 1) " +
+            " WHERE id = :id_post ")
+    void updateDataPostUser(@Param("id_post") Integer idPost);
+
+    @Modifying
+    @Transactional
+    @Query(" UPDATE Post " +
+            " SET totalComment = (SELECT COUNT(id) FROM Comment WHERE idPost = :id_post) " +
+            " WHERE id = :id_post ")
+    void updateDataComment(@Param("id_post") Integer idPost);
 }

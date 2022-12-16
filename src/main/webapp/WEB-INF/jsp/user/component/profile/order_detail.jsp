@@ -75,7 +75,7 @@
             </div>
             <div class="col-lg-4">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Thông tin đơn hàng</span></h5>
-                <div class="bg-light p-30 mb-5">
+                <div class="bg-light p-30 mb-4">
                     <div class="border-bottom">
                         <h6 class="mb-3">Sản phẩm</h6>
                         <div class="d-flex justify-content-between">
@@ -100,9 +100,29 @@
                         </div>
                     </div>
                 </div>
+
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Trạng thái đơn hàng</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    
+                    <c:forEach items="${orderHistoryInfo}" var="item">
+                    <div class="border-bottom mt-3">
+                        <div class="d-flex justify-content-between">
+                            <p>${item.status}</p>
+                            <p>${item.createdDate}</p>
+                        </div>
+                    </div>
+                    </c:forEach>
+                </div>
                 <div class="mb-5">
-                    <a href="#" class="btn btn-block btn-primary font-weight-bold">Xác nhận đơn</a>
-                    <a href="#" class="btn btn-block btn-danger font-weight-bold">Hủy đơn</a>
+                <c:if test="${_userInfo != null && orderInfo.idStatus != 4 && (_userInfo.id == sellerInfo.id || _userInfo.id == buyerInfo.id)}">
+                    <c:if test="${_userInfo.id == buyerInfo.id && orderInfo.idStatus == 2}">
+                        <a href="${_ctx}/profile/order/${orderInfo.id}/approve" class="btn btn-block btn-primary font-weight-bold">Xác nhận</a>
+                    </c:if>
+                    <c:if test="${_userInfo.id == sellerInfo.id && orderInfo.idStatus != 2}">
+                        <a href="${_ctx}/profile/order/${orderInfo.id}/approve" class="btn btn-block btn-primary font-weight-bold">Xác nhận</a>
+                    </c:if>
+                    <a href="${_ctx}/profile/order/${orderInfo.id}/cancel" class="btn btn-block btn-danger font-weight-bold d-none">Hủy đơn</a>
+                </c:if>
                 </div>
             </div>
         </div>

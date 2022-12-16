@@ -67,9 +67,11 @@
                     </div>
                     <h3 class="font-weight-semi-bold mb-4">${productData.priceVerify}</h3>
                     <p class="mb-4">${postData.content}</p>
+                    <c:if test="${_userInfo != null}">
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <a href="${_ctx}/product/${productData.id}/checkout" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Mua hàng</a>
                     </div>
+                    </c:if>
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Chia sẻ:</strong>
                         <div class="d-inline-flex">
@@ -113,16 +115,19 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4 class="mb-4">${commentData.size()} review for "${productData.name}"</h4>
-                                    <c:forEach items="${commentData}" var="item" varStatus="loop">
-                                    <div class="media mb-4">
-                                        <img src="${_ctx}/static/dist/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                        <div class="media-body">
-                                            <h6>${item.name}<small> - <i>${item.createdDate}</i></small></h6>
-                                            <p>${item.content}</p>
+                                    <div style="max-height: 400px;overflow-y: scroll;">
+                                        <c:forEach items="${commentData}" var="item" varStatus="loop">
+                                        <div class="media mb-4">
+                                            <img src="${_ctx}/static/dist/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                            <div class="media-body">
+                                                <h6>${item.name}<small> - <i>${item.createdDate}</i></small></h6>
+                                                <p>${item.content}</p>
+                                            </div>
                                         </div>
+                                        </c:forEach>
                                     </div>
-                                    </c:forEach>
                                 </div>
+                                <c:if test="${_userInfo != null}">
                                 <div class="col-md-6">
                                     <h4 class="mb-4">Để lại câu hỏi</h4>
                                     <form:form modelAttribute="commentForm" method="POST" action="${_ctx}/post/${postData.id}/comment">
@@ -135,6 +140,7 @@
                                         </div>
                                     </form:form>
                                 </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -143,7 +149,6 @@
         </div>
     </div>
     <!-- Shop Detail End -->
-
 
     <!-- Products Start -->
     <div class="container-fluid py-2">
@@ -154,11 +159,27 @@
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="${_ctx}/static/${item.thumb}" style="min-height: 200px; max-height: 200px">
+                        <c:if test="${_userInfo != null}">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-bookmark"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="${_ctx}/post/${item.idPost}/follow">
+                                <c:if test="${item.hadFollow == 1}">
+                                    <i class="fas fa-bookmark"></i>
+                                </c:if>
+                                <c:if test="${item.hadFollow == null || item.hadFollow == 0}">
+                                    <i class="far fa-bookmark"></i>
+                                </c:if>
+                            </a>
+                            <a class="btn btn-outline-dark btn-square" href="${_ctx}/post/${item.idPost}/like">
+                                <c:if test="${item.hadLike == 1}">
+                                    <i class="fas fa-heart"></i>
+                                </c:if>
+                                <c:if test="${item.hadLike == null || item.hadLike == 0}">
+                                    <i class="far fa-heart"></i>
+                                </c:if>
+                            </a>
+                            <a class="btn btn-outline-dark btn-square" href="${_ctx}/product/${item.id}/checkout"><i class="fa fa-shopping-cart"></i></a>
                         </div>
+                        </c:if>
                     </div>
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">${item.name}</a>
@@ -166,8 +187,14 @@
                             <h5>${item.priceVerify}</h5><h6 class="text-muted ml-2"><del>${item.price}</del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <small class="fa fa-eye text-primary mr-1"></small>
+                            <small>(${item.totalView})</small>
+                            <small class="fa fa-bookmark text-primary mr-1 ml-3"></small>
+                            <small>(${item.totalFollow})</small>
+                            <small class="fa fa-heart text-primary mr-1 ml-3"></small>
+                            <small>(${item.totalLike})</small>
+                            <small class="fa fa-comment-alt text-primary mr-1 ml-3"></small>
+                            <small>(${item.totalComment})</small>
                         </div>
                     </div>
                 </div>

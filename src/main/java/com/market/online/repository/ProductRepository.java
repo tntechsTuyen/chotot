@@ -36,6 +36,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             ", p.name AS name" +
             ", p.price AS price " +
             ", p.priceVerify AS priceVerify " +
+            ", pt.id AS idPost " +
             ", pt.totalView AS totalView " +
             ", pt.totalLike AS totalLike " +
             ", pt.totalFollow AS totalFollow " +
@@ -59,6 +60,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             ", p.name AS name" +
             ", p.price AS price " +
             ", p.priceVerify AS priceVerify " +
+            ", pt.id AS idPost " +
             ", pt.totalView AS totalView " +
             ", pt.totalLike AS totalLike " +
             ", pt.totalFollow AS totalFollow " +
@@ -83,6 +85,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             ", p.name AS name" +
             ", p.price AS price " +
             ", p.priceVerify AS priceVerify " +
+            ", pt.id AS idPost " +
             ", pt.totalView AS totalView " +
             ", pt.totalLike AS totalLike " +
             ", pt.totalFollow AS totalFollow " +
@@ -108,6 +111,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             ", p.price AS price " +
             ", p.priceVerify AS priceVerify " +
             ", p.idStatus AS idStatus " +
+            ", pt.id AS idPost " +
             ", pt.totalView AS totalView " +
             ", pt.totalLike AS totalLike " +
             ", pt.totalFollow AS totalFollow " +
@@ -127,6 +131,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             ", p.name AS name" +
             ", p.price AS price " +
             ", p.priceVerify AS priceVerify " +
+            ", pt.id AS idPost " +
             ", pt.totalView AS totalView " +
             ", pt.totalLike AS totalLike " +
             ", pt.totalFollow AS totalFollow " +
@@ -142,6 +147,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :#{#search.idUser} " +
             " WHERE p.idStatus = 6 " +
             " AND (:#{#search.idUser} = 0 OR p.idUser != :#{#search.idUser}) " +
+            " AND (:#{#search.idCategory} = 0 OR p.idCategory != :#{#search.idCategory}) " +
             " ORDER BY p.id DESC ")
     List<Map<String, Object>> getList(@Param("search") ProductDTO search);
 }
