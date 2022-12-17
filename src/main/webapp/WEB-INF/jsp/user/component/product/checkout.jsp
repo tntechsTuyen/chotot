@@ -100,15 +100,17 @@
                     </div>
                 </div>
 
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Sản phẩm trao đổi</span></h5>
-                <div class="bg-light p-30 mb-3">
-                    <div class="border-bottom">
-                        <h6 class="mb-3">Sản phẩm</h6>
-                        <div class="d-flex justify-content-between">
-                            <p>${productInfo.name}</p>
-                            <p>${productInfo.priceVerify} đ</p>
+                <div class="product-swap d-none">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Sản phẩm trao đổi</span></h5>
+                    <div class="bg-light p-30 mb-3">
+                        <div class="border-bottom">
+                            <h6 class="mb-3">Sản phẩm</h6>
+                            <div class="d-flex justify-content-between">
+                                <p class="product-name">${productInfo.name}</p>
+                                <p class="product-price">${productInfo.priceVerify} đ</p>
+                            </div>
                         </div>
-                    </div>
+                    </div>    
                 </div>
 
                 <div class="mb-5">
@@ -151,12 +153,12 @@
                         <c:if test="${myProductData.size() == 0}">Không có dữ liệu</c:if>
                         <c:forEach items="${myProductData}" var="item">
                         <div class="col-lg-3 col-md-3 col-sm-6 pb-1">
-                            <div class="product-item bg-light mb-4">
+                            <div class="product-item bg-light mb-4" data-name="${item.name}" data-price="${item.priceVerify}" data-id="${item.id}">
                                 <div class="product-img position-relative overflow-hidden">
                                     <img class="img-fluid w-100" src="${_ctx}/static/${item.thumb}" style="min-height: 200px; max-height: 200px">
                                 </div>
                                 <div class="text-center py-4">
-                                    <a class="h6 text-decoration-none text-truncate" href="">${item.name}</a>
+                                    <div class="h6 text-decoration-none text-truncate">${item.name}</div>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
                                         <h5>${item.priceVerify}</h5><h6 class="text-muted ml-2"><del>${item.price}</del></h6>
                                     </div>
@@ -170,5 +172,26 @@
         </div>
     </div>
 	<%@ include file="/WEB-INF/jsp/user/common/footer.jsp" %>
+    <script>
+        
+        $(".product-item").click(function(){
+            var name = $(this).data("name")
+            var price = $(this).data("price")
+            var id = $(this).data("id")
+            $(".product-name").html(name)
+            $(".product-price").html(price)
+            $(".idProductSwap").val(id)
+            $(".product-swap").removeClass("d-none")
+            $(`#modal-product`).modal("hide")
+        })
+
+        $(`[name="idType"]`).change(function(){
+            var val = $(this).val()
+            if(val == 1){
+                $(".product-swap").addClass("d-none")
+            }
+        })
+
+    </script>
 </body>
 </html>

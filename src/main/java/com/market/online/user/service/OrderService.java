@@ -60,6 +60,10 @@ public class OrderService {
             orderHistory.setIdUser(order.getIdBuyer());
             orderHistory.setIdStatus(order.getIdStatus());
             orderHistoryRepository.save(orderHistory);
+
+            if(orderDTO.getIdType() == 2){
+                Order orderSwap = new Order();
+            }
         }
         return false;
     }

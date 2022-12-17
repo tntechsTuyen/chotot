@@ -51,6 +51,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :id_user " +
             " INNER JOIN Media m ON pm.idMedia = m.id " +
             " WHERE p.idStatus = 6 " +
+            " AND (:id_user = 0 OR p.idUser != :id_user) " +
             " ORDER BY pt.totalLike DESC ")
     List<Map<String, Object>> getDataFeaturedProducts(@Param("id_user") Integer idUser);
 
