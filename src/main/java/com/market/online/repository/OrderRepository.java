@@ -29,4 +29,5 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             " ORDER BY o.updatedDate DESC ")
     List<Map<String, Object>> getMyList(@Param("search") OrderDTO orderDTO);
 
+    Optional<Order> findByIdRedirect(Integer idRedirect);
 }

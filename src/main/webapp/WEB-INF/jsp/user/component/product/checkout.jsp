@@ -180,7 +180,7 @@
             var id = $(this).data("id")
             $(".product-name").html(name)
             $(".product-price").html(price)
-            $(".idProductSwap").val(id)
+            $(`[name="idProductSwap"]`).val(id)
             $(".product-swap").removeClass("d-none")
             $(`#modal-product`).modal("hide")
         })

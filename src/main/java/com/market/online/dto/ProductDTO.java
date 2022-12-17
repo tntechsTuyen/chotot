@@ -1,5 +1,7 @@
 package com.market.online.dto;
 
+import com.market.online.entity.Post;
+import com.market.online.entity.Product;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,5 +40,12 @@ public class ProductDTO extends PageDTO {
         this.id = id;
         this.name = name;
         this.idStatus = idStatus;
+    }
+
+    public ProductDTO(Product product, Post post){
+        this.idCategory = product.getIdCategory();
+        this.name = product.getName();
+        this.price = product.getPrice();
+        this.content = post.getContent();
     }
 }

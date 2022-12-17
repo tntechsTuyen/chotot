@@ -16,8 +16,8 @@
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="${_ctx}/">Trang chủ</a>
                     <a class="breadcrumb-item text-dark" href="${_ctx}/profile">Hồ sơ</a>
-                    <a class="breadcrumb-item text-dark" href="${_ctx}/profile/order">Đơn hàng</a>
-                    <span class="breadcrumb-item active">Chi tiết</span>
+                    <a class="breadcrumb-item text-dark" href="${_ctx}/profile/product">Sản phẩm</a>
+                    <span class="breadcrumb-item active">Cập nhật</span>
                 </nav>
             </div>
         </div>
@@ -26,161 +26,124 @@
 
     <!-- Checkout Start -->
     <div class="container-fluid">
+        <form:form modelAttribute="productForm" method="POST" enctype="multipart/form-data">
         <div class="row px-xl-5">
             <div class="col-lg-8">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Thông tin người bán</span></h5>
-                <div class="bg-light p-30 mb-5">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="John">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="example@email.com">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="+123 456 789">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 1</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 2</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Country</label>
-                            <select class="custom-select">
-                                <option selected>United States</option>
-                                <option>Afghanistan</option>
-                                <option>Albania</option>
-                                <option>Algeria</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>City</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>State</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="123">
-                        </div>
-                    </div>
-                </div>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Thông tin sản phẩm</span></h5>
                 <div class="mb-5">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Thông tin người mua</span></h5>
-                    <div class="bg-light p-30">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>First Name</label>
-                                <input class="form-control" type="text" placeholder="John">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="bg-light p-30">
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <label>Loại sản phẩm</label>
+                                        <form:select path="idCategory" cssClass="custom-select">
+                                            <form:option value="0">----------------</form:option>
+                                            <c:forEach items="${categoryData}" var="item">
+                                                <form:option value="${item.id}">${item.name}</form:option>
+                                            </c:forEach>
+                                        </form:select>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label>Tên SP</label>
+                                        <form:input path="name" cssClass="form-control" />
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label>Giá</label>
+                                        <form:input path="price" type="number" cssClass="form-control" min="0" />
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label>Mô tả</label>
+                                        <form:input path="content" cssClass="form-control"/>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label>Last Name</label>
-                                <input class="form-control" type="text" placeholder="Doe">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>E-mail</label>
-                                <input class="form-control" type="text" placeholder="example@email.com">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Mobile No</label>
-                                <input class="form-control" type="text" placeholder="+123 456 789">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Address Line 1</label>
-                                <input class="form-control" type="text" placeholder="123 Street">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Address Line 2</label>
-                                <input class="form-control" type="text" placeholder="123 Street">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Country</label>
-                                <select class="custom-select">
-                                    <option selected>United States</option>
-                                    <option>Afghanistan</option>
-                                    <option>Albania</option>
-                                    <option>Algeria</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>City</label>
-                                <input class="form-control" type="text" placeholder="New York">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>State</label>
-                                <input class="form-control" type="text" placeholder="New York">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>ZIP Code</label>
-                                <input class="form-control" type="text" placeholder="123">
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="bg-light p-30">
+                                <div class="row">
+                                    <c:forEach items="${productMetaData}" var="item">
+                                    <div class="col-md-12 form-group">
+                                        <label>${item.name}</label>
+                                        <form:hidden path="metaId" value="${item.id}"/>
+                                        <form:hidden path="metaKey" value="${item.key}"/>
+                                        <form:hidden path="metaName" value="${item.name}"/>
+                                        <form:input path="metaValue" cssClass="form-control" value="${item.value}" />
+                                    </div>
+                                    </c:forEach>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Thông tin đơn hàng</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Hình ảnh</span></h5>
                 <div class="bg-light p-30 mb-5">
-                    <div class="border-bottom">
-                        <h6 class="mb-3">Sản phẩm</h6>
-                        <div class="d-flex justify-content-between">
-                            <p>Product Name 1</p>
-                            <p>150.000 đ</p>
-                        </div>
-                    </div>
-                    <div class="border-bottom pt-3 pb-2">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h6>Subtotal</h6>
-                            <h6>150.000 đ</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">0 đ</h6>
-                        </div>
-                    </div>
-                    <div class="pt-2">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5>Total</h5>
-                            <h5>150.000 đ</h5>
-                        </div>
-                    </div>
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <td rowspan="2">
+                                <c:if test="${not empty mediaData.get(0)}">
+                                    <img src="${_ctx}/static/${mediaData.get(0).url}" class="img-fluid product-image" style="max-height: 300px;">
+                                </c:if>
+                                <c:if test="${empty mediaData.get(0)}">
+                                    <img src="${_ctx}/static/dist/no-image.jpg" class="img-fluid product-image" style="max-height: 300px;">
+                                </c:if>
+                                <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
+                            </td>
+                            <td>
+                                <c:if test="${not empty mediaData.get(1)}">
+                                    <img src="${_ctx}/static/${mediaData.get(1).url}" class="img-fluid product-image" style="max-height: 150px;">
+                                </c:if>
+                                <c:if test="${empty mediaData.get(1)}">
+                                    <img src="${_ctx}/static/dist/no-image.jpg" class="img-fluid product-image" style="max-height: 150px;">
+                                </c:if>
+                                <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <c:if test="${not empty mediaData.get(2)}">
+                                    <img src="${_ctx}/static/${mediaData.get(2).url}" class="img-fluid product-image" style="max-height: 150px;">
+                                </c:if>
+                                <c:if test="${empty mediaData.get(2)}">
+                                    <img src="${_ctx}/static/dist/no-image.jpg" class="img-fluid product-image" style="max-height: 150px;">
+                                </c:if>
+                                <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="mb-5">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Thanh toán</span></h5>
-                    <div class="bg-light p-30">
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Tiền mặt</label>
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                                <label class="custom-control-label" for="banktransfer">Sản phẩm</label>
-                            </div>
-                        </div>
-                        <button class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                <div class="mb-2">
+                    <div class="bg-light">
+                        <button type="submit" class="btn btn-block btn-primary font-weight-bold py-3">Cập nhật</button>
                     </div>
                 </div>
             </div>
         </div>
+        </form:form>
     </div>
     <!-- Checkout End -->
 
     <%@ include file="/WEB-INF/jsp/user/common/footer.jsp" %>
+
+    <script>
+        var map;
+        function changeCategory(obj){
+            location.href = changeSearchParam({idCategory: obj.value})
+        }
+        
+        $(".product-image").click(function(){
+            $(this).parent().find("[name='media']").click()
+        })
+
+        $("[name='media']").change(function(){
+            var file = $(this).prop("files")[0];
+            var index = $(this).index("[name='media']")
+            image.render(`.product-image:eq(`+index+`)`, file);
+        })
+
+    </script>
 </body>
 </html>

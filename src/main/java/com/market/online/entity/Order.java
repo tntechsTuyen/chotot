@@ -46,4 +46,7 @@ public class Order {
     @Column(name = "updated_date")
     private Date updatedDate;
 
+    public void setPrice(Integer price){
+        this.price = (price > 0) ? price : 0;
+    }
 }

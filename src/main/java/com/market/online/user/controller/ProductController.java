@@ -75,6 +75,6 @@ public class ProductController {
     public String doCheckOut(Model model, HttpServletRequest request, @PathVariable("id") Integer id, OrderDTO orderDTO){
         orderDTO.setIdProduct(id);
         orderService.create(request, orderDTO);
-        return "redirect: ";
+        return "redirect: /";
     }
 }

@@ -36,6 +36,10 @@ public class OrderService {
         return orderRepository.findById(id).get();
     }
 
+    public Order getByIdRedirect(Integer idRedirect){
+        return orderRepository.findByIdRedirect(idRedirect).get();
+    }
+
     public List<Map<String, Object>> getMyOrder(OrderDTO search){
         return orderRepository.getMyList(search);
     }
@@ -62,7 +66,23 @@ public class OrderService {
             orderHistoryRepository.save(orderHistory);
 
             if(orderDTO.getIdType() == 2){
+                Product productSwapInfo = productService.getOne(orderDTO.getIdProductSwap());
                 Order orderSwap = new Order();
+                orderSwap.setIdSeller(order.getIdBuyer());
+                orderSwap.setIdBuyer(order.getIdSeller());
+                orderSwap.setIdProduct(orderDTO.getIdProductSwap());
+                orderSwap.setPrice(productSwapInfo.getPrice() - productInfo.getPrice());
+                orderSwap.setIdRedirect(order.getId());
+                orderSwap.setIdType(orderDTO.getIdType());
+                orderRepository.save(orderSwap);
+                order.setPrice(productInfo.getPrice() - productSwapInfo.getPrice());
+                orderRepository.save(order);
+
+                OrderHistory orderSwapHistory = new OrderHistory();
+                orderSwapHistory.setIdOrder(orderSwap.getId());
+                orderSwapHistory.setIdUser(orderSwap.getIdBuyer());
+                orderSwapHistory.setIdStatus(orderSwap.getIdStatus());
+                orderHistoryRepository.save(orderSwapHistory);
             }
         }
         return false;
@@ -90,4 +110,31 @@ public class OrderService {
         return true;
     }
 
+    public boolean cancel(HttpServletRequest request, OrderDTO orderDTO){
+        User userInfo = userService.getUserLogin(request);
+        Order orderInfo = getOne(orderDTO.getId());
+        if(userInfo.getId().equals(orderInfo.getIdSeller()) && orderInfo.getIdStatus() == 1){
+            if(orderInfo.getIdType() == 2){
+                Order orderSwapInfo = getByIdRedirect(orderInfo.getIdRedirect());
+                Product productSwapInfo = productService.getOne(orderSwapInfo.getId());
+                productSwapInfo.setIdStatus(6);
+                productRepository.save(productSwapInfo);
+                orderSwapInfo.setIdStatus(10);
+                orderRepository.save(orderSwapInfo);
+            }
+            Product productInfo = productService.getOne(orderInfo.getIdProduct());
+            productInfo.setIdStatus(6);
+            productRepository.save(productInfo);
+            orderInfo.setIdStatus(10);
+            orderRepository.save(orderInfo);
+
+            //Add Order history
+            OrderHistory orderHistory = new OrderHistory();
+            orderHistory.setIdOrder(orderInfo.getId());
+            orderHistory.setIdUser(userInfo.getId());
+            orderHistory.setIdStatus(orderInfo.getIdStatus());
+            orderHistoryRepository.save(orderHistory);
+        }
+        return true;
+    }
 }

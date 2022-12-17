@@ -6,6 +6,7 @@ import com.market.online.dto.OrderDTO;
 import com.market.online.dto.PostMetaDTO;
 import com.market.online.dto.ProductDTO;
 import com.market.online.entity.Order;
+import com.market.online.entity.Post;
 import com.market.online.entity.Product;
 import com.market.online.entity.User;
 import com.market.online.user.service.*;
@@ -40,6 +41,9 @@ public class ProfileController {
     @Autowired
     private OrderHistoryService orderHistoryService;
 
+    @Autowired
+    private PostService postService;
+
     @GetMapping({"", "/info"})
     public String goInfo(HttpServletRequest request, Model model){
         model.addAttribute("profileForm", userService.getUserLogin(request));
@@ -66,6 +70,12 @@ public class ProfileController {
     public String goOrderDetail(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
         Order orderInfo = orderService.getOne(id);
         model.addAttribute("orderInfo", orderInfo);
+        if(orderInfo.getIdType() == 2){
+            Order orderSwapInfo = orderService.getByIdRedirect(orderInfo.getId());
+            Product productSwapInfo = productService.getOne(orderSwapInfo.getIdProduct());
+            model.addAttribute("orderSwapInfo", orderSwapInfo);
+            model.addAttribute("productSwapInfo", productSwapInfo);
+        }
         model.addAttribute("orderHistoryInfo", orderHistoryService.getListByIdOrder(id));
         model.addAttribute("buyerInfo", userService.getOne(orderInfo.getIdBuyer()));
         model.addAttribute("sellerInfo", userService.getOne(orderInfo.getIdSeller()));
@@ -81,7 +91,8 @@ public class ProfileController {
 
     @GetMapping("/order/{id}/cancel")
     public String goOrderCancel(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
-        return "user/component/profile/order_detail";
+        orderService.cancel(request, new OrderDTO(id));
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 
     @GetMapping("/product")
@@ -105,7 +116,20 @@ public class ProfileController {
     }
 
     @GetMapping("/product/{id}")
-    public String goMyProductUpdate(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
+    public String goMyProductUpdate(Model model, @PathVariable("id") Integer id){
+        Product productInfo = productService.getOne(id);
+        Post postInfo = postService.getByProduct(id);
+        model.addAttribute("productForm", new ProductDTO(productInfo, postInfo));
+        model.addAttribute("categoryData", categoryService.getAll());
+        model.addAttribute("mediaData", postService.getMediaByIdPost(postInfo.getId()));
+        model.addAttribute("productMetaData", postService.getMetaByIdPost(postInfo.getId()));
         return "user/component/profile/product_update";
+    }
+
+    @PostMapping("/product/{id}")
+    public String doMyProductUpdate(Model model, HttpServletRequest request, @ModelAttribute("productForm") ProductDTO productForm){
+
+
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 }
