@@ -42,12 +42,6 @@ public class IndexController {
         return "user/component/contact";
     }
 
-    @GetMapping("/chat")
-    public String goChat(){
-
-        return "user/component/chat";
-    }
-
     @GetMapping("/login")
     public String goLogin(Model model){
         model.addAttribute("loginForm", new User());

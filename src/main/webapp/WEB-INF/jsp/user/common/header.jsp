@@ -16,6 +16,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <c:if test="${_userInfo != null}">
                             <a href="${_ctx}/profile" class="dropdown-item">Hồ sơ</a>
+                            <a href="${_ctx}/message" class="dropdown-item">Nhắn tin</a>
                             <a href="${_ctx}/logout" class="dropdown-item">Đăng xuất</a>
                         </c:if>
 
