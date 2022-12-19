@@ -2,10 +2,11 @@ package com.market.online.dto;
 
 import lombok.Data;
 
+import java.security.Principal;
 import java.util.Date;
 
 @Data
-public class UserDTO extends PageDTO {
+public class UserDTO extends PageDTO implements Principal {
     private Integer id = 0;
     private String username = "";
     private String password;
@@ -21,6 +22,10 @@ public class UserDTO extends PageDTO {
         super();
     }
 
+    public UserDTO(String username){
+        this.username = username;
+    }
+
     public UserDTO(Integer id){
         super();
         this.id = id;
@@ -30,5 +35,10 @@ public class UserDTO extends PageDTO {
         super();
         this.id = id;
         this.username = username;
+    }
+
+    @Override
+    public String getName() {
+        return this.username;
     }
 }
