@@ -44,12 +44,12 @@
 
       <!-- POS -->
       <div class="menu-item">
-        <a href="/admin" class="menu-link">
+        <a href="${_ctx}/" class="menu-link">
           <div class="menu-icon">
-            <i class="fa fa-globe"></i>
+            <i class="fa fa-home"></i>
           </div>
           <div class="menu-text">
-            Dashboard
+            Trang chủ
           </div>
         </a>
       </div>
@@ -66,10 +66,10 @@
         </a>
         <div class="menu-submenu">
           <div class="menu-item">
-            <a href="/admin/category" class="menu-link"><div class="menu-text">Danh sách</div></a>
+            <a href="${_ctx}/admin/category" class="menu-link"><div class="menu-text">Danh sách</div></a>
           </div>
           <div class="menu-item">
-            <a href="/admin/category/add" class="menu-link"><div class="menu-text">Thêm mới</div></a>
+            <a href="${_ctx}/admin/category/add" class="menu-link"><div class="menu-text">Thêm mới</div></a>
           </div>
         </div>
       </div>
@@ -86,7 +86,7 @@
         </a>
         <div class="menu-submenu">
           <div class="menu-item">
-            <a href="/admin/user" class="menu-link"><div class="menu-text">Danh sách</div></a>
+            <a href="${_ctx}/admin/user" class="menu-link"><div class="menu-text">Danh sách</div></a>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@
         </a>
         <div class="menu-submenu">
           <div class="menu-item">
-            <a href="/admin/product" class="menu-link"><div class="menu-text">Danh sách</div></a>
+            <a href="${_ctx}/admin/product" class="menu-link"><div class="menu-text">Danh sách</div></a>
           </div>
         </div>
       </div>

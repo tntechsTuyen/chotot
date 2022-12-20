@@ -27,7 +27,7 @@
 			<!-- Panel search -->
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
-			    	<h4 class="panel-title">Search</h4>
+			    	<h4 class="panel-title">Tìm kiếm</h4>
 				    <div class="panel-heading-btn">
 				    	<a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand" ><i class="fa fa-expand"></i></a>
 				    	<a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse" ><i class="fa fa-minus"></i></a>
@@ -43,6 +43,30 @@
 									<form:input path="name" cssClass="form-control"/>
 								</div>
 							</div>
+							<div class="col-2">
+								<div class="input-group mb-3">
+									<span class="input-group-text">Danh mục</span>
+									<form:select path="idCategory" cssClass="form-select">
+										<form:option value="0">---------------</form:option>
+										<c:forEach items="${categoryData}" var="item">
+										<form:option value="${item.id}">${item.name}</form:option>
+										</c:forEach>
+									</form:select>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="input-group mb-3">
+									<span class="input-group-text">Trạng thái</span>
+									<form:select path="idStatus" cssClass="form-select">
+										<form:option value="0">---------------</form:option>
+										<form:option value="5">Chờ xác nhận</form:option>
+										<form:option value="6">Thông qua</form:option>
+										<form:option value="7">Trả về</form:option>
+										<form:option value="8">Đang giao dịch</form:option>
+										<form:option value="9">Hết hàng</form:option>
+									</form:select>
+								</div>
+							</div>
 							<div class="col-5">
 								<button type="submit" class="btn btn-primary"><i class="fa fa-search me-2"></i>Tìm kiếm</button>
 							</div>
@@ -55,7 +79,7 @@
 			<!-- Panel list -->
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
-			    	<h4 class="panel-title">List</h4>
+			    	<h4 class="panel-title">Danh sách</h4>
 				    <div class="panel-heading-btn">
 				    	<a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand" ><i class="fa fa-expand"></i></a>
 				    	<a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload" ><i class="fa fa-redo"></i></a>
@@ -68,14 +92,14 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>User</th>
-								<th>Confirmer</th>
-								<th>Category</th>
-								<th>Name</th>
-								<th>Price</th>
-								<th>PriceVerify</th>
-								<th>Status</th>
-								<th>CreatedDate</th>
+								<th>Chủ sở hữu</th>
+								<th>Người xác nhận</th>
+								<th>Danh mục</th>
+								<th>Tên sản phẩm</th>
+								<th>Giá</th>
+								<th>Giá đã kiểm duyệt</th>
+								<th>Trạng thái</th>
+								<th>Ngày đăng ký</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -92,7 +116,7 @@
 										<td>${item.priceVerify}</td>
 										<td>${item.statusName}</td>
 										<td>${item.createdDate}</td>
-										<td><a href="${_ctx}/admin/product/update/${item.id}"><i class="fa fa-cog"></i> Edit</a></td>
+										<td><a href="${_ctx}/admin/product/update/${item.id}"><i class="fa fa-cog"></i> Cập nhật</a></td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -105,7 +129,10 @@
 						</tbody>
 					</table>
 					<div class="text-end">
-						
+						<div class="btn-group paging" onload="generalPage('.paging');"
+						 data-page="${search.getPage()}"
+						 data-count="${data.getTotalElements()}"
+						 data-limit="${search.getRow()}"></div>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 package com.market.online.admin.controller;
 
+import com.market.online.admin.service.AdminCategoryService;
 import com.market.online.admin.service.AdminPostService;
 import com.market.online.admin.service.AdminProductService;
 import com.market.online.common.utils.UrlUtils;
@@ -23,9 +24,13 @@ public class AdminProductController {
     @Autowired
     private AdminPostService adminPostService;
 
+    @Autowired
+    private AdminCategoryService adminCategoryService;
+
     @GetMapping({"", "/list"})
     public String goList(Model model, ProductDTO search){
         model.addAttribute("search", search);
+        model.addAttribute("categoryData", adminCategoryService.getAll());
         model.addAttribute("data", adminProductService.getDataPage(search));
         return "admin/component/product/list";
     }

@@ -29,8 +29,8 @@ public class MessageService {
     @Autowired
     private UserService userService;
 
-    public Message create(HttpServletRequest request, Message message){
-        User userInfo = userService.getUserLogin(request);
+    public Message create(Message message){
+        User userInfo = userService.getOne(message.getIdUser());
         messageRepository.save(message);
         message.setName(userInfo.getFullName());
         List<GroupMember> members = groupMemberRepository.findByIdGroup(message.getIdGroup());

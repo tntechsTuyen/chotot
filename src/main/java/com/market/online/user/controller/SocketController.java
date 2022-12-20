@@ -1,5 +1,6 @@
 package com.market.online.user.controller;
 
+import com.google.gson.Gson;
 import com.market.online.entity.Message;
 import com.market.online.user.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ public class SocketController {
     private MessageService messageService;
 
     @MessageMapping("/chat")
-    public void chat(HttpServletRequest request, @Payload Message message){
-        messageService.create(request, message);
+    public void chat(@Payload String message){
+        Message m = new Gson().fromJson(message, Message.class);
+        messageService.create(m);
     }
 }

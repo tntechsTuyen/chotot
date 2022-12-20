@@ -43,6 +43,18 @@
 									<form:input path="username" cssClass="form-control"/>
 								</div>
 							</div>
+							<div class="col-2">
+								<div class="input-group mb-3">
+									<span class="input-group-text">Số điện thoại</span>
+									<form:input path="phone" cssClass="form-control"/>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="input-group mb-3">
+									<span class="input-group-text">Mail</span>
+									<form:input path="email" cssClass="form-control"/>
+								</div>
+							</div>
 							<div class="col-5">
 								<button type="submit" class="btn btn-primary"><i class="fa fa-search me-2"></i>Tìm kiếm</button>
 							</div>
@@ -103,7 +115,10 @@
 						</tbody>
 					</table>
 					<div class="text-end">
-						
+						<div class="btn-group paging" onload="generalPage('.paging');"
+						 data-page="${search.getPage()}"
+						 data-count="${data.getTotalElements()}"
+						 data-limit="${search.getRow()}"></div>
 					</div>
 				</div>
 			</div>

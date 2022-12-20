@@ -6,10 +6,18 @@ import org.springframework.data.domain.Pageable;
 
 @Data
 public class PageDTO {
-    private Integer p = 0; //Page
-    private Integer r = 10; //Row
+    private Integer page = 1; //Page
+    private Integer row = 10; //Row
 
     public Pageable pageable(){
-        return PageRequest.of(p, r);
+        return PageRequest.of(page-1, row);
+    }
+
+    public Integer getRow(){
+        return this.row;
+    }
+
+    public Integer getPage(){
+        return this.page;
     }
 }

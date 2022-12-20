@@ -13,11 +13,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUsername(String username);
 
     @Query(value = " SELECT u " +
-            " FROM User u" +
+            " FROM User u " +
             " WHERE (:#{#search.username} = '' OR u.username = :#{#search.username}) " +
             " AND (:#{#search.phone} = '' OR u.phone = :#{#search.phone}) "+
             " AND (:#{#search.email} = '' OR u.email = :#{#search.email}) "
-            , countQuery = "SELECT COUNT (u.id) FROM User u" +
+            , countQuery = "SELECT COUNT (u.id) FROM User u " +
             " WHERE (:#{#search.username} = '' OR u.username = :#{#search.username}) " +
             " AND (:#{#search.phone} = '' OR u.phone = :#{#search.phone}) "+
             " AND (:#{#search.email} = '' OR u.email = :#{#search.email}) ")

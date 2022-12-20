@@ -29,7 +29,7 @@ public class Message {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "read")
+    @Column(name = "readed")
     private Integer read = 0;
 
     @CreationTimestamp

@@ -27,7 +27,7 @@
 			<!-- Panel search -->
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
-			    	<h4 class="panel-title">Search</h4>
+			    	<h4 class="panel-title">Tìm kiếm</h4>
 				    <div class="panel-heading-btn">
 				    	<a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand" ><i class="fa fa-expand"></i></a>
 				    	<a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse" ><i class="fa fa-minus"></i></a>
@@ -55,7 +55,7 @@
 			<!-- Panel list -->
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
-			    	<h4 class="panel-title">List</h4>
+			    	<h4 class="panel-title">Danh sách</h4>
 				    <div class="panel-heading-btn">
 				    	<a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand" ><i class="fa fa-expand"></i></a>
 				    	<a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload" ><i class="fa fa-redo"></i></a>
@@ -68,9 +68,9 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Icon</th>
-								<th>Name</th>
-								<th>Content</th>
+								<th>Biểu tượng</th>
+								<th>Tên</th>
+								<th>Mô tả</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -95,7 +95,10 @@
 						</tbody>
 					</table>
 					<div class="text-end">
-						
+						<div class="btn-group paging" onload="generalPage('.paging');"
+						 data-page="${search.getPage()}"
+						 data-count="${data.getTotalElements()}"
+						 data-limit="${search.getRow()}"></div>
 					</div>
 				</div>
 			</div>

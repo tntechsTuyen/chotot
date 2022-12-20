@@ -78,12 +78,22 @@ public class OrderService {
                 order.setPrice(productInfo.getPrice() - productSwapInfo.getPrice());
                 orderRepository.save(order);
 
-                OrderHistory orderSwapHistory = new OrderHistory();
-                orderSwapHistory.setIdOrder(orderSwap.getId());
-                orderSwapHistory.setIdUser(orderSwap.getIdBuyer());
-                orderSwapHistory.setIdStatus(orderSwap.getIdStatus());
-                orderHistoryRepository.save(orderSwapHistory);
+                orderHistory.setId(0);
+                orderHistory.setIdOrder(orderSwap.getId());
+                orderHistory.setIdUser(orderSwap.getIdBuyer());
+                orderHistory.setIdStatus(orderSwap.getIdStatus());
+                orderHistoryRepository.save(orderHistory);
+            }else{
+                order.setIdStatus(2);
+                orderRepository.save(order);
+
+                orderHistory.setId(0);
+                orderHistory.setIdOrder(order.getId());
+                orderHistory.setIdUser(order.getIdBuyer());
+                orderHistory.setIdStatus(order.getIdStatus());
+                orderHistoryRepository.save(orderHistory);
             }
+            return true;
         }
         return false;
     }
@@ -97,6 +107,11 @@ public class OrderService {
         Order orderInfo = getOne(orderDTO.getId());
         if(orderDTO.getValue() == 1){
             orderInfo.setIdStatus(orderInfo.getIdStatus()+1);
+            if(orderInfo.getIdStatus()+1 == 4){
+                Product productInfo = productService.getOne(orderInfo.getIdProduct());
+                productInfo.setIdStatus(9);
+                productRepository.save(productInfo);
+            }
         }else{
             orderInfo.setIdStatus(10);
         }

@@ -16,6 +16,9 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <c:if test="${_userInfo != null}">
                             <a href="${_ctx}/profile" class="dropdown-item">Hồ sơ</a>
+                            <c:if test="${_userInfo.idRole == 1}">
+                                <a href="${_ctx}/admin" class="dropdown-item">CMS</a>
+                            </c:if>
                             <a href="${_ctx}/message" class="dropdown-item">Nhắn tin</a>
                             <a href="${_ctx}/logout" class="dropdown-item">Đăng xuất</a>
                         </c:if>

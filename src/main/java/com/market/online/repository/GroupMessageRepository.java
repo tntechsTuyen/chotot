@@ -13,6 +13,7 @@ public interface GroupMessageRepository extends JpaRepository<GroupMessage, Inte
 
     @Query("SELECT gms.id AS id " +
             " , u.fullName AS name " +
+            " , m.idUser AS idUser " +
             " , m.createdDate AS createdDate " +
             " , m.content AS content " +
             " , m.read AS read " +
