@@ -113,7 +113,7 @@
 										<td>${item.categoryName}</td>
 										<td>${item.name}</td>
 										<td>${item.price}</td>
-										<td>${item.priceVerify}</td>
+										<td><fmt:formatNumber value="${productData.priceVerify}"/> đ</td>
 										<td>${item.statusName}</td>
 										<td>${item.createdDate}</td>
 										<td><a href="${_ctx}/admin/product/update/${item.id}"><i class="fa fa-cog"></i> Cập nhật</a></td>

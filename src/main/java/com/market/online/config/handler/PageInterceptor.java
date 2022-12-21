@@ -16,11 +16,10 @@ public class PageInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        request.setAttribute("test", "asdasdasdasdas");
         request.setAttribute("categoryList", categoryService.getAll());
-        //Load total message
-        //Load total like
-        //Load total bookmark
+        System.out.println("Path: "+request.getPathInfo());
+        System.out.println("ContextPath: "+request.getContextPath());
+        System.out.println("RequestURI: "+request.getRequestURI());
         return super.preHandle(request, response, handler);
     }
 }

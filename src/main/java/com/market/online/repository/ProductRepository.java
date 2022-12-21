@@ -123,10 +123,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
             " INNER JOIN Media m ON pm.idMedia = m.id " +
             " WHERE p.idUser = :id_user " +
+            " AND (:id_status = 0 OR p.idStatus = :id_status) " +
             " ORDER BY p.id DESC ")
-    List<Map<String, Object>> getMyData(@Param("id_user") Integer idUser);
+    List<Map<String, Object>> getMyData(@Param("id_user") Integer idUser, @Param("id_status") Integer idStatus);
 
-    @Query("SELECT p.id AS id " +
+    @Query(" SELECT p.id AS id " +
             ", p.idCategory AS idCategory " +
             ", p.idUser AS idUser " +
             ", p.name AS name" +
@@ -151,4 +152,44 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " AND (:#{#search.idCategory} = 0 OR p.idCategory != :#{#search.idCategory}) " +
             " ORDER BY p.id DESC ")
     List<Map<String, Object>> getList(@Param("search") ProductDTO search);
+
+    @Query(value = " SELECT p.id AS id " +
+            ", p.idCategory AS idCategory " +
+            ", p.idUser AS idUser " +
+            ", p.name AS name" +
+            ", p.price AS price " +
+            ", p.priceVerify AS priceVerify " +
+            ", pt.id AS idPost " +
+            ", pt.totalView AS totalView " +
+            ", pt.totalLike AS totalLike " +
+            ", pt.totalFollow AS totalFollow " +
+            ", pt.totalComment AS totalComment " +
+            ", m.url AS thumb " +
+            ", pu.hadView AS hadView " +
+            ", pu.hadLike AS hadLike " +
+            ", pu.hadFollow AS hadFollow " +
+            " FROM Product p " +
+            " INNER JOIN Post pt ON p.id = pt.idProduct " +
+            " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
+            " INNER JOIN Media m ON pm.idMedia = m.id " +
+            " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :#{#search.idUser} " +
+            " WHERE p.idStatus = 6 " +
+            " AND (:#{#search.name} = '' OR p.name LIKE %:#{#search.name}%) " +
+            " AND (:#{#search.idUser} = 0 OR p.idUser != :#{#search.idUser}) " +
+            " AND (:#{#search.idCategory} = 0 OR p.idCategory != :#{#search.idCategory}) " +
+            " AND (:#{#search.hadLike} = 0 OR pu.hadLike = :#{#search.hadLike}) " +
+            " AND (:#{#search.hadFollow} = 0 OR pu.hadFollow = :#{#search.hadFollow}) " +
+            " ORDER BY p.id DESC "
+            , countQuery = " SELECT COUNT(p.id) " +
+            " FROM Product p " +
+            " INNER JOIN Post pt ON p.id = pt.idProduct " +
+            " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
+            " INNER JOIN Media m ON pm.idMedia = m.id " +
+            " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :#{#search.idUser} " +
+            " WHERE p.idStatus = 6 " +
+            " AND (:#{#search.idUser} = 0 OR p.idUser != :#{#search.idUser}) " +
+            " AND (:#{#search.idCategory} = 0 OR p.idCategory != :#{#search.idCategory}) " +
+            " AND (:#{#search.hadLike} = 0 OR pu.hadLike = :#{#search.hadLike}) " +
+            " AND (:#{#search.hadFollow} = 0 OR pu.hadFollow = :#{#search.hadFollow}) ")
+    Page<Map<String, Object>> getPage(@Param("search") ProductDTO search, Pageable pageable);
 }

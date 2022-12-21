@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,30 +47,33 @@
 
             <div class="col-lg-7 h-auto mb-30">
                 <div class="h-100 bg-light p-30">
-                    <h3>${productData.name}</h3>
+                    <div>
+                        <label class="h3">${productData.name}</label>
+                        <div class="float-right"><i class="fas fa-user-shield mr-1"></i>${userData.fullName}</div>
+                    </div>
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-1">
                             <small class="fas fa-eye"></small>
                         </div>
-                        <small class="pt-1">(${postData.totalView})</small>
+                        <small class="pt-1">(<fmt:formatNumber value="${postData.totalView}"/>)</small>
                         <div class="text-primary mr-1 ml-3">
                             <small class="fas fa-heart"></small>
                         </div>
-                        <small class="pt-1">(${postData.totalLike})</small>
+                        <small class="pt-1">(<fmt:formatNumber value="${postData.totalLike}"/>)</small>
                         <div class="text-primary mr-1 ml-3">
                             <small class="fas fa-bookmark"></small>
                         </div>
-                        <small class="pt-1">(${postData.totalFollow})</small>
+                        <small class="pt-1">(<fmt:formatNumber value="${postData.totalFollow}"/>)</small>
                         <div class="text-primary mr-1 ml-3">
                             <small class="fas fa-comment-alt"></small>
                         </div>
-                        <small class="pt-1">(${postData.totalComment})</small>
+                        <small class="pt-1">(<fmt:formatNumber value="${postData.totalComment}"/>)</small>
                     </div>
-                    <h3 class="font-weight-semi-bold mb-4">${productData.priceVerify}</h3>
-                    <p class="mb-4">${postData.content}</p>
+                    <h3 class="font-weight-semi-bold mb-4"><fmt:formatNumber value="${productData.priceVerify}"/> đ</h3>
                     <c:if test="${_userInfo != null}">
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <a href="${_ctx}/product/${productData.id}/checkout" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Mua hàng</a>
+                        <a href="${_ctx}/message/create/${userData.id}" class="btn btn-info px-3 ml-1"><i class="fa fa-comment-alt mr-1"></i> Liên hệ với người bán</a>
                     </div>
                     </c:if>
                     <div class="d-flex pt-2">
@@ -184,7 +188,7 @@
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">${item.name}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>${item.priceVerify}</h5><h6 class="text-muted ml-2"><del>${item.price}</del></h6>
+                            <h5><fmt:formatNumber value="${productData.priceVerify}"/> đ</h5><h6 class="text-muted ml-2"><del>${item.price}</del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-eye text-primary mr-1"></small>

@@ -62,7 +62,7 @@
                                 </c:if>
                                 <c:if test="${item.idStatus != 5}">
                                     <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5>${item.priceVerify}</h5>
+                                        <h5><fmt:formatNumber value="${productData.priceVerify}"/> đ</h5>
                                         <h6 class="text-muted ml-2"><del>${item.price}</del></h6>
                                     </div>
                                 </c:if>

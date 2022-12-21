@@ -5,6 +5,7 @@ import com.market.online.dto.ProductDTO;
 import com.market.online.entity.Comment;
 import com.market.online.entity.Post;
 import com.market.online.entity.Product;
+import com.market.online.entity.User;
 import com.market.online.user.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,7 @@ public class ProductController {
     @GetMapping({"", "/list"})
     public String goProducts(Model model, HttpServletRequest request, ProductDTO search){
         model.addAttribute("search", search);
-        model.addAttribute("productData", productService.getList(request, search));
+        model.addAttribute("productData", productService.getPage(request, search));
         return "user/component/product/list";
     }
 
@@ -50,9 +51,11 @@ public class ProductController {
     public String goProductDetail(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
         Post post = postService.getByProduct(id);
         Product product = productService.getOne(id);
+        User userInfo = userService.getOne(product.getIdUser());
         postUserService.viewPost(request, post.getId());
         model.addAttribute("productData", product);
         model.addAttribute("postData", post);
+        model.addAttribute("userData", userInfo);
         model.addAttribute("mediaData", postService.getMediaByIdPost(post.getId()));
         model.addAttribute("metaData", postService.getMetaByIdPost(post.getId()));
         model.addAttribute("commentData", postService.getCommentPost(post.getId()));

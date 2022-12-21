@@ -33,6 +33,6 @@ public class MessageController {
     @GetMapping("/create/{idUser}")
     public String doCreate(HttpServletRequest request, @PathVariable("idUser") Integer idUser){
         Integer idGroup = groupMessageService.create(request, idUser);
-        return "redirect: ?id="+idGroup;
+        return "redirect:/message?id="+idGroup;
     }
 }

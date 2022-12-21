@@ -30,27 +30,42 @@
                     </div>
                 </div>
             </div>
-            <div class="d-inline-flex align-items-center d-block d-lg-none">
-                <a href="" class="btn px-0 ml-2">
+            <c:if test="${_userInfo != null}">
+            <div class="d-inline-flex align-items-center d-block">
+                <a href="${_ctx}/product?hadFollow=1&hadLike=0" class="btn px-0 ml-2">
+                    <i class="fas fa-bookmark text-dark"></i>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                </a>
+                <a href="${_ctx}/product?hadFollow=0&hadLike=1" class="btn px-0 ml-2">
                     <i class="fas fa-heart text-dark"></i>
                     <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
                 </a>
                 <a href="" class="btn px-0 ml-2">
-                    <i class="fas fa-shopping-cart text-dark"></i>
+                    <i class="fas fa-comment-alt text-dark"></i>
                     <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
                 </a>
             </div>
+            </c:if>
         </div>
     </div>
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-4">
-            <a href="/" class="text-decoration-none">
+            <a href="${_ctx}/" class="text-decoration-none">
                 <span class="h1 text-uppercase text-primary bg-dark px-2">Chợ</span>
                 <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Tốt</span>
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left">
-            
+            <form class="d-none" id="search-product" action="${_ctx}/product">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="name" placeholder="Tìm kiếm theo tên sản phẩm">
+                    <div class="input-group-append" onclick="$('#search-product').submit()">
+                        <span class="input-group-text bg-transparent text-primary">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="col-lg-4 col-6 text-right">
             <p class="m-0">Customer Service</p>

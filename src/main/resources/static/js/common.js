@@ -54,23 +54,23 @@ function generalPage(viewName){
     var limit = obj.data("limit") * 1;
     if(count < limit){
         //first page
-        obj.append(`<button type="button" class="btn btn-white active" index="1">1</button>`)
+        obj.append(`<li class="page-item"><button type="button" class="btn btn-white page-link active" index="1">1</button></li>`)
     }else{
         var tmp = Math.ceil(count/limit);
         if(page != 1){
-            obj.append(`<button type="button" class="btn btn-white" index="before"><</button>`)
+            obj.append(`<li class="page-item"><button type="button" class="btn btn-white page-link" index="before"><</button></li>`)
             obj.find(`[index="before"]`).attr("onclick", `goPage(${page-1})`)
         }
 
-        obj.append(`<button type="button" class="btn btn-white" index="1" onclick="goPage(1)">1</button>`)
+        obj.append(`<li class="page-item"><button type="button" class="btn btn-white page-link" index="1" onclick="goPage(1)">1</button></li>`)
 
         for(var i = 2; i <= tmp; i++){
-            var html = `<button type="button" class="btn btn-white" onclick="goPage(${i})" index="${i}">${i}</button>`
+            var html = `<li class="page-item"><button type="button" class="btn btn-white page-link" onclick="goPage(${i})" index="${i}">${i}</button></li>`
             obj.append(html)
         }
 
         if(page != tmp){
-            obj.append(`<button type="button" class="btn btn-white" index="after">></button>`)
+            obj.append(`<li class="page-item"><button type="button" class="btn btn-white page-link" index="after">></button></li>`)
             obj.find(`[index="after"]`).attr("onclick", `goPage(${page+1})`)
         }
 
@@ -78,8 +78,7 @@ function generalPage(viewName){
         obj.find(`[index="${page}"]`).removeAttr("onclick");
     }
 }
+
 $(document).ready(function(){
-
-    $('div[onload]').trigger('onload');
-
+    $('ul[onload]').trigger('onload');
 })

@@ -19,6 +19,8 @@ public class ProductDTO extends PageDTO {
     private Integer price = 0;
     private Integer priceVerify = 0;
     private Integer idStatus = 0;
+    private Integer hadLike = 0;
+    private Integer hadFollow = 0;
     private List<Integer> metaId;
 
     private List<String> metaKey;

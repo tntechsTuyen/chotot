@@ -4,6 +4,7 @@ import com.market.online.dto.ProductDTO;
 import com.market.online.entity.*;
 import com.market.online.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -100,7 +101,7 @@ public class ProductService {
     public List<Map<String, Object>> getMyData(HttpServletRequest request){
         User userInfo = userService.getUserLogin(request);
         Integer idUser = (userInfo != null) ? userInfo.getId() : 0;
-        return productRepository.getMyData(idUser);
+        return productRepository.getMyData(idUser, 6);
     }
 
     public List<Map<String, Object>> getList(HttpServletRequest request, ProductDTO productDTO){
@@ -109,5 +110,13 @@ public class ProductService {
             productDTO.setIdUser(userInfo.getId());
         }
         return productRepository.getList(productDTO);
+    }
+
+    public Page<Map<String, Object>> getPage(HttpServletRequest request, ProductDTO productDTO){
+        User userInfo = userService.getUserLogin(request);
+        if(userInfo != null){
+            productDTO.setIdUser(userInfo.getId());
+        }
+        return productRepository.getPage(productDTO, productDTO.pageable());
     }
 }
