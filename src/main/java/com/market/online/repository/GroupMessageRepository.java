@@ -17,6 +17,7 @@ public interface GroupMessageRepository extends JpaRepository<GroupMessage, Inte
             " , m.createdDate AS createdDate " +
             " , m.content AS content " +
             " , m.read AS read " +
+            " , 0 AS totalUnRead " +
             " FROM GroupMember gm " +
             " INNER JOIN User u ON gm.idUser = u.id " +
             " INNER JOIN GroupMessage gms ON gm.idGroup = gms.id " +

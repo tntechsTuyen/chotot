@@ -34,15 +34,24 @@
             <div class="d-inline-flex align-items-center d-block">
                 <a href="${_ctx}/product?hadFollow=1&hadLike=0" class="btn px-0 ml-2">
                     <i class="fas fa-bookmark text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">
+                        <c:if test="${userPostInfo.like > 99}">99+</c:if>
+                        <c:if test="${userPostInfo.like < 99}">${userPostInfo.like}</c:if>
+                    </span>
                 </a>
                 <a href="${_ctx}/product?hadFollow=0&hadLike=1" class="btn px-0 ml-2">
                     <i class="fas fa-heart text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">
+                        <c:if test="${userPostInfo.follow > 99}">99+</c:if>
+                        <c:if test="${userPostInfo.follow < 99}">${userPostInfo.follow}</c:if>
+                    </span>
                 </a>
-                <a href="" class="btn px-0 ml-2">
+                <a href="${_ctx}/message" class="btn px-0 ml-2">
                     <i class="fas fa-comment-alt text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">
+                        <c:if test="${messageCount > 99}">99+</c:if>
+                        <c:if test="${messageCount < 99}">${messageCount}</c:if>
+                    </span>
                 </a>
             </div>
             </c:if>

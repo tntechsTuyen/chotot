@@ -35,16 +35,18 @@
 
 				<div class="login-content">
 					<form:form modelAttribute="loginForm" method="POST" cssClass="fs-13px">
-						<div class="form-floating mb-15px">
-							<form:input path="username" cssClass="form-control h-45px fs-13px" placeholder="Tên đăng nhập" />
-							<label for="username" class="d-flex align-items-center fs-13px text-gray-300">Tên đăng nhập</label>
+						<div class="mb-3">
+							<label class="mb-2">Tên đăng nhập <span class="text-danger">*</span></label>
+							<form:input path="username" cssClass="form-control fs-13px" placeholder="Tên đăng nhập" />
+							<div class="invalid-feedback" for="username">Tên đăng nhập không hợp lệ</div>
 						</div>
-						<div class="form-floating mb-15px">
-							<form:password path="password" cssClass="form-control h-45px fs-13px" placeholder="Mật khẩu" />
-							<label for="password" class="d-flex align-items-center fs-13px text-gray-300">Mật khẩu</label>
+						<div class="mb-3">
+							<label class="mb-2">Mật khẩu <span class="text-danger">*</span></label>
+							<form:input path="password" type="password" cssClass="form-control fs-13px" placeholder="Mật khẩu" />
+							<div class="invalid-feedback" for="password">Mật khẩu không hợp lệ</div>
 						</div>
-						<div class="mb-15px">
-							<button type="submit" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px">Đăng nhập</button>
+						<div class="mb-3">
+							<button type="button" class="btn btn-primary d-block w-100 btn-lg fs-13px btn-submit">Đăng nhập</button>
 						</div>
 						<div class="mb-40px pb-40px text-white">Bạn chưa có tài khoản? Ấn vào <a href="${_ctx}/register" class="text-primary">đây</a> để đăng ký.</div>
 					</form:form>
@@ -52,7 +54,24 @@
 			</div>
 		</div>
 	</div>
+
+	<c:if test="${not empty mess}">
+	<script>
+	    alert("${mess}")
+	</script>
+	</c:if>
+
 	<script src="${_ctx}/static/js/admin/vendor.min.js" ></script>
 	<script src="${_ctx}/static/js/admin/app.min.js" ></script>
+	<script src="${_ctx}/static/js/common.js" ></script>
+	<script>
+		$(".btn-submit").click(function(){
+			var checkUsername = isNullInput("username")
+			var checkPassword = isNullInput("password")
+			if(!checkUsername && !checkPassword){
+				$("#loginForm").submit()
+			}
+		})
+	</script>
 </body>
 </html>

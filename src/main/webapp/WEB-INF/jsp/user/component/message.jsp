@@ -54,7 +54,7 @@
 		    <div class="col-3 px-0">
 		      <div class="bg-white">
 		        <div class="bg-gray px-4 py-2 bg-light">
-		          <p class="h5 mb-0 py-1">Tin nhắn</p>
+		          <p class="h5 mb-0 py-1"><a href="${_ctx}/" class="fas fa-arrow-alt-circle-left mr-2"></a>Tin nhắn</p>
 		        </div>
 		        <div class="messages-box">
 		          <div class="list-group rounded-0">
@@ -70,7 +70,10 @@
 		              	<div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
 			                <div class="media-body ml-4">
 			                  	<div class="d-flex align-items-center justify-content-between mb-1">
-				                    <h6 class="mb-0">${item.name}</h6>
+				                    <h6 class="mb-0">
+				                    	${item.name}
+				                    	<small class="badge badge-pill rounded-circle bg-danger text-white txt-total-un-read" data-total="${item.totalUnRead}"><c:if test="${item.totalUnRead > 0}">${item.totalUnRead}</c:if></small>
+				                    </h6>
 				                    <small class="small font-weight-bold text-muted lasted-time">
 				                    	${item.createdDate}
 				                	</small>
@@ -202,8 +205,16 @@
         	}
         	$(`#group-`+data.idGroup).find(".lasted-message").html(nameUserMess+data.content)
         	$(`#group-`+data.idGroup).find(".lasted-time").html(new Date(data.createdDate).format("yyyy/MM/dd HH:mm:ss"))
-        	$("#chat-box").append(itemHtml)
-        	$('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+        	if(data.idGroup == ${idGroup}){
+	        	$("#chat-box").append(itemHtml)
+	        	$('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+        	}else{
+        		//txt-total-un-read
+        		var totalUnread = $(`#group-`+data.idGroup).find(".txt-total-un-read").data("total") * 1
+        		totalUnread++
+        		$(`#group-`+data.idGroup).find(".txt-total-un-read").data("total", totalUnread)
+        		$(`#group-`+data.idGroup).find(".txt-total-un-read").html(totalUnread)
+        	}
         }
 
         function sendMessage() {

@@ -27,6 +27,7 @@
     <div class="container-fluid">
         <div class="row px-xl-5">
             <!-- Shop Sidebar Start -->
+            <c:if test="${search.hadLike == 0 && search.hadFollow == 0}">
             <form:form modelAttribute="search" method="GET" cssClass="col-lg-3 col-md-4">
                 <!-- Category Filter Start -->
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Lọc theo danh mục</span></h5>
@@ -72,10 +73,16 @@
                 <!-- Row Filter End -->
                 <button type="submit" class="btn btn-primary w-100">Áp dụng</button>
             </form:form>
+            </c:if>
             <!-- Shop Sidebar End -->
 
             <!-- Shop Product Start -->
+            <c:if test="${search.hadLike == 0 && search.hadFollow == 0}">
             <div class="col-lg-9 col-md-8">
+            </c:if>
+            <c:if test="${search.hadLike != 0 || search.hadFollow != 0}">
+            <div class="col-lg-12">
+            </c:if>
                 <div class="row pb-3">
                     <c:forEach items="${productData.getContent()}" var="item">
                     <div class="col-lg-3 col-md-4 col-sm-6 pb-1">

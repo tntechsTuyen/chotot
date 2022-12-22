@@ -52,8 +52,7 @@ public class IndexController {
     public String doLogin(HttpServletRequest request, RedirectAttributes attributes, @ModelAttribute("loginForm") User user) throws Exception {
         boolean checkLogin = userService.login(request, user);
         attributes.addFlashAttribute("mess", checkLogin ? "Đăng nhập thành công" : "Đăng nhập thất bại");
-        System.out.println("Message login: "+checkLogin);
-        return "redirect:home";
+        return checkLogin ? "redirect:home" : UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 
     @GetMapping("/register")
@@ -65,8 +64,8 @@ public class IndexController {
     @PostMapping("/register")
     public String doRegister(HttpServletRequest request, RedirectAttributes redirect, @ModelAttribute("registerForm") User user) throws Exception {
         user = userService.register(user);
-        if(user == null) redirect.addFlashAttribute("mess", "Tạo tài khoản thất bại");
-        else redirect.addFlashAttribute("mess", "Tạo tài khoản thành công");
+        if(user == null) redirect.addFlashAttribute("mess", "Đăng ký tài khoản thất bại");
+        else redirect.addFlashAttribute("mess", "Đăng ký tài khoản thành công");
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 

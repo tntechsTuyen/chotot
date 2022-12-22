@@ -15,5 +15,5 @@ public interface PostUserRepository extends JpaRepository<PostUser, Integer> {
             " , SUM(hadFollow) AS follow " +
             " FROM PostUser " +
             " WHERE idUser = :id_user ")
-    Map<String, Object> getDataByUser(@Param("id_user") Integer idUser);
+    Map<String, Object> countLikeAndFollow(@Param("id_user") Integer idUser);
 }

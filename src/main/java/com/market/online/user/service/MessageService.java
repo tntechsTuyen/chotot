@@ -44,4 +44,23 @@ public class MessageService {
         if(idGroup == null) return new ArrayList<>();
         return messageRepository.getByGroup(idGroup);
     }
+
+    public Integer countMessageNotRead(HttpServletRequest request){
+        User userInfo = userService.getUserLogin(request);
+        if(userInfo == null) return 0;
+        return messageRepository.countMessageNotRead(userInfo.getId());
+    }
+
+    public List<Map<String, Object>> countMessageNotReadByGroup(HttpServletRequest request){
+        User userInfo = userService.getUserLogin(request);
+        if(userInfo == null) return new ArrayList<>();
+        return messageRepository.countMessageNotReadByGroup(userInfo.getId());
+    }
+
+    public boolean updateReadMessage(HttpServletRequest request, Integer idGroup){
+        User userInfo = userService.getUserLogin(request);
+        if(userInfo == null) return false;
+        messageRepository.updateReadMessage(idGroup, userInfo.getId());
+        return true;
+    }
 }

@@ -24,6 +24,7 @@ public class MessageController {
 
     @GetMapping({"", "/index"})
     public String goIndex(Model model, HttpServletRequest request, Integer id){
+        messageService.updateReadMessage(request, id);
         model.addAttribute("messageData", messageService.getByGroup(id));
         model.addAttribute("groupData", groupMessageService.getMyList(request));
         model.addAttribute("idGroup", id);

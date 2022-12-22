@@ -1,14 +1,12 @@
 package com.market.online.user.service;
 
-import com.market.online.common.DataStatic;
+import com.market.online.common.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -22,11 +20,11 @@ public class FileService {
 
     public List<String> updloadFiles(MultipartFile[] files) {
         List<String> resultUrl = new ArrayList<>();
-        String subFolder = DataStatic.DATE.FORMAT("yyyy/mm/dd");
+        String subFolder = DateUtils.format("yyyy/mm/dd");
         int i = 0;
         for (MultipartFile uploadedFile : files) {
             checkSubFolder(subFolder);
-            String nameFile = DataStatic.DATE.FORMAT("yyyymmddHHMMss"+i);
+            String nameFile = DateUtils.format("yyyymmddHHMMss"+i);
             File file = new File(dataPath + subFolder + "/" + nameFile);
             try {
                 uploadedFile.transferTo(file);

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Service
 public class PostUserService {
@@ -65,4 +66,9 @@ public class PostUserService {
         return true;
     }
 
+    public Map<String, Object> countLikeAndFollow(HttpServletRequest request){
+        User userInfo = userService.getUserLogin(request);
+        if(userInfo == null) return null;
+        return postUserRepository.countLikeAndFollow(userInfo.getId());
+    }
 }

@@ -1,21 +1,34 @@
 package com.market.online.common.utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils {
 
     /**
-     * @type: yyyy-> year
-     * @type: MM-> month
-     * @type: dd-> day
-     * @type: hh-> hours
-     * @type: mm-> minutes
-     * @type: ss-> seconds
-     * @type: SSS-> milliseconds
+     * yyyy: year
+     * mm: month
+     * dd: day
+     * HH: hour
+     * MM: minutes
+     * ss: second
+     * yyyy/mm/dd
+     * yyyymmddHHMMss
      * */
-    public static String format(String patten){
-        SimpleDateFormat formatter = new SimpleDateFormat(patten);
-        return formatter.format(new Date());
+    public static String format(String format){
+        Calendar time = Calendar.getInstance();
+        Integer year = time.get(Calendar.YEAR);
+        Integer month = time.get(Calendar.MONTH) + 1;
+        Integer day = time.get(Calendar.DAY_OF_MONTH);
+        Integer hour = time.get(Calendar.HOUR_OF_DAY);
+        Integer minute = time.get(Calendar.MINUTE);
+        Integer second = time.get(Calendar.SECOND);
+        return format.replaceAll("yyyy", year.toString())
+                .replaceAll("mm", month.toString())
+                .replaceAll("dd", day.toString())
+                .replaceAll("HH", hour.toString())
+                .replaceAll("MM", minute.toString())
+                .replaceAll("ss", second.toString());
     }
 }
