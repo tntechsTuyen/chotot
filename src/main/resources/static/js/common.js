@@ -79,6 +79,17 @@ function generalPage(viewName){
     }
 }
 
+function isNullInput(name){
+  var ip = $(`[name="${name}"]`).val().trim()
+  if(ip.length == 0){
+    $(`.invalid-feedback[for="${name}"]`).addClass("d-block")
+    return true
+  }else{
+    $(`.invalid-feedback[for="${name}"]`).removeClass("d-block")
+  }
+  return false
+}
+
 $(document).ready(function(){
     $('ul[onload]').trigger('onload');
 })

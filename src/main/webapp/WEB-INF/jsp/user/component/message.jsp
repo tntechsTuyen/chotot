@@ -41,6 +41,10 @@
 	  font-size: 0.9rem;
 	  color: #999;
 	}
+
+	.btn-back:hover{
+		cursor: pointer;
+	}
 </style>
 <body>
 	<body onload="disconnect()">
@@ -167,7 +171,7 @@
                 stompClient.disconnect();
             }
         }
-        
+
         function showMessage(data){
         	var itemHtml = "";
         	var nameUserMess = "Tôi: "

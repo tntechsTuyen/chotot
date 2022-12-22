@@ -63,10 +63,10 @@ public class IndexController {
     }
 
     @PostMapping("/register")
-    public String doRegister(HttpServletRequest request, BindingResult errors, @ModelAttribute("registerForm") User user){
-        if(errors.hasErrors()){
-
-        }
+    public String doRegister(HttpServletRequest request, RedirectAttributes redirect, @ModelAttribute("registerForm") User user) throws Exception {
+        user = userService.register(user);
+        if(user == null) redirect.addFlashAttribute("mess", "Tạo tài khoản thất bại");
+        else redirect.addFlashAttribute("mess", "Tạo tài khoản thành công");
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 

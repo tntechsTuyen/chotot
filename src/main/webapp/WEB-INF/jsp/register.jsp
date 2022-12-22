@@ -33,17 +33,17 @@
 						<div class="mb-3">
 							<label class="mb-2">Tên đăng nhập <span class="text-danger">*</span></label>
 							<form:input path="username" cssClass="form-control fs-13px" placeholder="Tên đăng nhập" />
-    						<div class="invalid-feedback">Tên đăng nhập không hợp lệ</div>
+    						<div class="invalid-feedback" for="username">Tên đăng nhập không hợp lệ</div>
 						</div>
 						<div class="mb-3">
 							<label class="mb-2">Mật khẩu <span class="text-danger">*</span></label>
 							<form:input path="password" type="password" cssClass="form-control fs-13px" placeholder="Mật khẩu" />
-							<div class="invalid-feedback">Mật khẩu không hợp lệ</div>
+							<div class="invalid-feedback" for="password">Mật khẩu không hợp lệ</div>
 						</div>
 						<div class="mb-3">
 							<label class="mb-2">Họ tên <span class="text-danger">*</span></label>
 							<form:input path="fullName" cssClass="form-control fs-13px" placeholder="Họ tên" />
-							<div class="invalid-feedback">Họ tên không hợp lệ</div>
+							<div class="invalid-feedback" for="fullName">Họ tên không hợp lệ</div>
 						</div>
 						<div class="mb-3">
 							<label class="mb-2">Địa chỉ</label>
@@ -77,11 +77,22 @@
 			</div>
 		</div>
 	</div>
+	
+	<c:if test="${not empty mess}">
+	<script>
+	    alert("${mess}")
+	</script>
+	</c:if>
+
 	<script src="${_ctx}/static/js/admin/vendor.min.js" ></script>
 	<script src="${_ctx}/static/js/admin/app.min.js" ></script>
+	<script src="${_ctx}/static/js/common.js" ></script>
 	<script>
 		$(".btn-submit").click(function(){
-			if(false){
+			var checkUsername = isNullInput("username")
+			var checkPassword = isNullInput("password")
+			var checkFullName = isNullInput("fullName")
+			if(!checkUsername && !checkPassword && !checkFullName){
 				$("#registerForm").submit()
 			}
 		})
