@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ include file="/WEB-INF/jsp/admin/common/tags.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -112,8 +111,8 @@
 										<td>${item.confirmerName}</td>
 										<td>${item.categoryName}</td>
 										<td>${item.name}</td>
-										<td>${item.price}</td>
-										<td><fmt:formatNumber value="${productData.priceVerify}"/> đ</td>
+										<td><fmt:formatNumber value="${item.price}"/> đ</td>
+										<td><fmt:formatNumber value="${item.priceVerify}"/> đ</td>
 										<td>${item.statusName}</td>
 										<td>${item.createdDate}</td>
 										<td><a href="${_ctx}/admin/product/update/${item.id}"><i class="fa fa-cog"></i> Cập nhật</a></td>

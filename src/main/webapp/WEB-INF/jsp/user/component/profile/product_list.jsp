@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,8 +63,7 @@
                                 </c:if>
                                 <c:if test="${item.idStatus != 5}">
                                     <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5><fmt:formatNumber value="${productData.priceVerify}"/> đ</h5>
-                                        <h6 class="text-muted ml-2"><del>${item.price}</del></h6>
+                                        <c:if test="${item.priceVerify != null}"><h5><fmt:formatNumber value="${item.priceVerify}"/> đ</h5></c:if>
                                     </div>
                                 </c:if>
                             </div>

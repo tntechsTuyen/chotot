@@ -98,10 +98,10 @@ public class ProductService {
         return new ArrayList<>();
     }
 
-    public List<Map<String, Object>> getMyData(HttpServletRequest request){
+    public List<Map<String, Object>> getMyData(HttpServletRequest request, Integer idStatus){
         User userInfo = userService.getUserLogin(request);
         Integer idUser = (userInfo != null) ? userInfo.getId() : 0;
-        return productRepository.getMyData(idUser, 6);
+        return productRepository.getMyData(idUser, idStatus);
     }
 
     public List<Map<String, Object>> getList(HttpServletRequest request, ProductDTO productDTO){

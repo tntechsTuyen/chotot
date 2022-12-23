@@ -97,7 +97,7 @@ public class ProfileController {
 
     @GetMapping("/product")
     public String goMyProducts(Model model, HttpServletRequest request){
-        model.addAttribute("productData", productService.getMyData(request));
+        model.addAttribute("productData", productService.getMyData(request, 0));
         return "user/component/profile/product_list";
     }
 
