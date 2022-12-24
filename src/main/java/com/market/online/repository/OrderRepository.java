@@ -26,6 +26,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             " INNER JOIN Media m ON pm.idMedia = m.id " +
             " WHERE (:#{#search.idSeller} = 0 OR o.idSeller = :#{#search.idSeller}) " +
             " AND (:#{#search.idBuyer} = 0 OR o.idBuyer = :#{#search.idBuyer}) " +
+            " AND o.idRedirect = 0 " +
             " ORDER BY o.updatedDate DESC ")
     List<Map<String, Object>> getMyList(@Param("search") OrderDTO orderDTO);
 

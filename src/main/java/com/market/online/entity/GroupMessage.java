@@ -15,7 +15,7 @@ public class GroupMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Integer id = 0;
 
     @Column(name = "id_type")
     private Integer idType;

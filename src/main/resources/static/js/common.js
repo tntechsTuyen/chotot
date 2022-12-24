@@ -54,7 +54,6 @@ function generalPage(viewName){
     var limit = obj.data("limit") * 1;
     if(count < limit){
         //first page
-        obj.append(`<li class="page-item"><button type="button" class="btn btn-white page-link active" index="1">1</button></li>`)
     }else{
         var tmp = Math.ceil(count/limit);
         if(page != 1){

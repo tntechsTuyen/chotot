@@ -36,14 +36,14 @@
                     <i class="fas fa-bookmark text-dark"></i>
                     <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">
                         <c:if test="${userPostInfo.like > 99}">99+</c:if>
-                        <c:if test="${userPostInfo.like < 99}">${userPostInfo.like}</c:if>
+                        <c:if test="${userPostInfo.like < 99}">${userPostInfo.follow}</c:if>
                     </span>
                 </a>
                 <a href="${_ctx}/product?hadFollow=0&hadLike=1" class="btn px-0 ml-2">
                     <i class="fas fa-heart text-dark"></i>
                     <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">
                         <c:if test="${userPostInfo.follow > 99}">99+</c:if>
-                        <c:if test="${userPostInfo.follow < 99}">${userPostInfo.follow}</c:if>
+                        <c:if test="${userPostInfo.follow < 99}">${userPostInfo.like}</c:if>
                     </span>
                 </a>
                 <a href="${_ctx}/message" class="btn px-0 ml-2">
@@ -103,8 +103,8 @@
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                 <a href="" class="text-decoration-none d-block d-lg-none">
-                    <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                    <span class="h1 text-uppercase text-dark bg-light px-2">Chợ</span>
+                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Tốt</span>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>

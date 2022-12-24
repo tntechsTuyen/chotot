@@ -29,11 +29,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
         registry.addInterceptor(interceptor);
-//        registry.addInterceptor(authInterceptor())
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/static/**", "",
-//                        "/product/list", "/product/{id}", "/home"
-//                        , "/login", "/register", "/logout");
+        registry.addInterceptor(authInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/static/**", "",
+                        "/product/list", "/product/{id}", "/home"
+                        , "/login", "/register", "/logout");
     }
 
     @Bean

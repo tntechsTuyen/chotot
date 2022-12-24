@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +57,7 @@
                         <c:forEach items="${orderData}" var="item">
                         <tr>
                             <td class="align-middle"><img src="${_ctx}/static/${item.thumb}" alt="" style="width: 50px;">${item.name}</td>
-                            <td class="align-middle">${item.price}</td>
+                            <td class="align-middle"><fmt:formatNumber value="${item.price}"/> đ</td>
                             <td class="align-middle">${item.type}</td>
                             <td class="align-middle">${item.status}</td>
                             <td class="align-middle">${item.updatedDate}</td>

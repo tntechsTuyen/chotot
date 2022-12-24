@@ -1,5 +1,6 @@
 package com.market.online.user.controller;
 
+import com.market.online.entity.GroupMessage;
 import com.market.online.user.service.GroupMemberService;
 import com.market.online.user.service.GroupMessageService;
 import com.market.online.user.service.MessageService;
@@ -23,11 +24,11 @@ public class MessageController {
     private MessageService messageService;
 
     @GetMapping({"", "/index"})
-    public String goIndex(Model model, HttpServletRequest request, Integer id){
-        messageService.updateReadMessage(request, id);
-        model.addAttribute("messageData", messageService.getByGroup(id));
+    public String goIndex(Model model, HttpServletRequest request, GroupMessage groupMessage){
+        messageService.updateReadMessage(request, groupMessage.getId());
+        model.addAttribute("messageData", messageService.getByGroup(groupMessage.getId()));
         model.addAttribute("groupData", groupMessageService.getMyList(request));
-        model.addAttribute("idGroup", id);
+        model.addAttribute("idGroup", groupMessage.getId());
         return "user/component/message";
     }
 

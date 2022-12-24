@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +15,9 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="${_ctx}/">Trang chủ</a>
-                    <a class="breadcrumb-item text-dark" href="${_ctx}/profile">Hồ sơ</a>
-                    <a class="breadcrumb-item text-dark" href="${_ctx}/profile/order">Đơn hàng</a>
+                    <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
+                    <a class="breadcrumb-item text-dark" href="#">Hồ sơ</a>
+                    <a class="breadcrumb-item text-dark" href="#">Đơn hàng</a>
                     <span class="breadcrumb-item active">Chi tiết</span>
                 </nav>
             </div>
@@ -80,7 +81,7 @@
                         <h6 class="mb-3">Sản phẩm</h6>
                         <div class="d-flex justify-content-between">
                             <p>${productInfo.name}</p>
-                            <p>${productInfo.priceVerify} đ</p>
+                            <p><fmt:formatNumber value="${productInfo.priceVerify}"/> đ</p>
                         </div>
                     </div>
                     <c:if test="${not empty orderSwapInfo}">
@@ -88,7 +89,7 @@
                             <h6 class="mb-3">Sản phẩm trao đổi</h6>
                             <div class="d-flex justify-content-between">
                                 <p>${productSwapInfo.name}</p>
-                                <p>${productSwapInfo.priceVerify} đ</p>
+                                <p><fmt:formatNumber value="${productSwapInfo.priceVerify}"/> đ</p>
                             </div>
                         </div>
                     </c:if>
@@ -96,7 +97,7 @@
                     <div class="border-bottom pt-3 pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Tạm tính</h6>
-                            <h6>${orderInfo.price} đ</h6>
+                            <h6><fmt:formatNumber value="${orderInfo.price}"/> đ</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Phí giao hàng</h6>
@@ -106,7 +107,7 @@
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Tổng tiền cần thanh toán</h5>
-                            <h5>${orderInfo.price} đ</h5>
+                            <h5><fmt:formatNumber value="${orderInfo.price}"/> đ</h5>
                         </div>
                     </div>
                 </div>
