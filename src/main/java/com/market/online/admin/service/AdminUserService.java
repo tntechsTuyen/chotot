@@ -1,6 +1,5 @@
 package com.market.online.admin.service;
 
-import com.market.online.common.utils.CryptoUtils;
 import com.market.online.dto.UserDTO;
 import com.market.online.entity.User;
 import com.market.online.repository.UserRepository;
@@ -30,8 +29,9 @@ public class AdminUserService {
         userInfo.setEmail(user.getEmail());
         userInfo.setGender(user.getGender());
         userInfo.setIdRole(user.getIdRole());
+
         if(user.getPassword() != null && user.getPassword().length() > 0){
-            userInfo.setPassword(CryptoUtils.AES.encrypt(user.getPassword()));
+            userInfo.setPassword(user.getPassword());
         }
         userRepository.save(userInfo);
     }

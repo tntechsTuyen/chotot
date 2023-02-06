@@ -23,6 +23,7 @@ public class FileService {
         String subFolder = DateUtils.format("yyyy/mm/dd");
         int i = 0;
         for (MultipartFile uploadedFile : files) {
+            if(uploadedFile.isEmpty()) break;
             checkSubFolder(subFolder);
             String nameFile = DateUtils.format("yyyymmddHHMMss"+i);
             File file = new File(dataPath + subFolder + "/" + nameFile);

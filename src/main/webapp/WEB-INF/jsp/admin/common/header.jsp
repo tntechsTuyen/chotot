@@ -19,15 +19,15 @@
         </span>
       </a>
       <div class="dropdown-menu dropdown-menu-end me-1">
-        <a href="extra_profile.html" class="dropdown-item">Edit Profile</a>
-        <a href="email_inbox.html" class="dropdown-item d-flex align-items-center">
+        <a href="#" class="dropdown-item">Edit Profile</a>
+        <a href="#" class="dropdown-item d-flex align-items-center">
           Inbox
           <span class="badge bg-danger rounded-pill ms-auto pb-4px">2</span>
         </a>
-        <a href="calendar.html" class="dropdown-item">Calendar</a>
-        <a href="settings.html" class="dropdown-item">Settings</a>
+        <a href="#" class="dropdown-item">Calendar</a>
+        <a href="#" class="dropdown-item">Settings</a>
         <div class="dropdown-divider"></div>
-        <a href="login.html" class="dropdown-item">Log Out</a>
+        <a href="${_ctx}/logout" class="dropdown-item">Log Out</a>
       </div>
     </div>
   </div>

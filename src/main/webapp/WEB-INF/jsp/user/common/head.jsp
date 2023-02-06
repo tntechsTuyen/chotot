@@ -3,7 +3,7 @@
 <c:set var="_userInfo" value="${sessionScope.USER_LOGIN}" scope="session"/>
 
 <meta charset="utf-8">
-<title>Chợ tốt</title>
+<title>Trao đổi sản phẩm</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="Free HTML Templates" name="keywords">
 <meta content="Free HTML Templates" name="description">

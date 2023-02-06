@@ -1,6 +1,6 @@
 # port
 server:
-  port: 1996
+  port: 8888
   servlet:
     context-path: /
 # db
@@ -9,7 +9,7 @@ spring:
     url:
     username:
     password:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     open-in-view: false
     properties:
@@ -23,13 +23,10 @@ spring:
 
 # uploading
 data:
-  path: F:/res/travel/
+  path: F:/res/market/
 
 # logging
 logging:
   level:
     org.hibernate.SQL: DEBUG
     org.springframework.web.client.RestTemplate: DEBUG
-
-jwt:
-  secret: travel-blog

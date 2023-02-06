@@ -20,9 +20,6 @@ public class Post {
     @Column(name = "id_product")
     private Integer idProduct;
 
-    @Column(name = "id_location")
-    private Integer idLocation;
-
     @Column(name = "id_user")
     private Integer idUser;
 

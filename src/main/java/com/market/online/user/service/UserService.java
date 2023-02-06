@@ -1,6 +1,5 @@
 package com.market.online.user.service;
 
-import com.market.online.common.utils.CryptoUtils;
 import com.market.online.entity.User;
 import com.market.online.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +19,15 @@ public class UserService {
 
     public boolean login(HttpServletRequest request, User user) throws Exception {
         User userInfo = userRepository.findByUsername(user.getUsername());
-        String passEncode = CryptoUtils.AES.encrypt(user.getPassword());
-        if(userInfo.getPassword().equals(passEncode)){
+        if(userInfo.getPassword().equals(user.getPassword())){
             request.getSession().setAttribute(SESSION_LOGIN, userInfo);
         }
-        return userInfo.getPassword().equals(passEncode);
+        return userInfo.getPassword().equals(user.getPassword());
     }
 
     public User register(User user) throws Exception {
         User tmpUser = userRepository.findByUsername(user.getUsername());
         if(tmpUser != null) return null;
-        user.setPassword(CryptoUtils.AES.encrypt(user.getPassword()));
         userRepository.save(user);
         return user;
     }
