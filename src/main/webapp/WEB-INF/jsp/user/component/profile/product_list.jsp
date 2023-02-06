@@ -55,17 +55,20 @@
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
                                 <img class="img-fluid" style="max-height: 170px; min-height: 170px" src="${_ctx}/static/${item.thumb}" alt="">
+                                <div class="product-action">
+                                    <c:if test="${item.idStatus == 5}">
+                                        <a class="btn btn-outline-dark btn-square" href="${_ctx}/profile/product/${item.id}"><i class="far fa-edit"></i></a>
+                                    </c:if>
+                                    <c:if test="${item.idStatus != 8}">
+                                        <a class="btn btn-danger btn-square" href="${_ctx}/profile/product/${item.id}/delete"><i class="far fa-trash-alt"></i></a>
+                                    </c:if>
+                                </div>
                             </div>
-                            <div class="text-center pt-4">
+                            <div class="text-center pt-4" style="min-height: 84px;">
                                 <div class="h6 text-decoration-none text-truncate">${item.name}</div>
-                                <c:if test="${item.idStatus == 5}">
-                                    <a href="${_ctx}/profile/product/${item.id}" class="btn btn-info w-100" style="color: #000;">Update</a>
-                                </c:if>
-                                <c:if test="${item.idStatus != 5}">
-                                    <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <c:if test="${item.priceVerify != null}"><h5><fmt:formatNumber value="${item.priceVerify}"/> đ</h5></c:if>
-                                    </div>
-                                </c:if>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <c:if test="${item.priceVerify != null}"><h5><fmt:formatNumber value="${item.priceVerify}"/> đ</h5></c:if>
+                                </div>
                             </div>
                         </div>
                     </div>

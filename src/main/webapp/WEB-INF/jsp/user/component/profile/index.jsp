@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Mật khẩu</label>
-                                <form:password path="password" cssClass="form-control" />
+                                <form:input path="password" cssClass="form-control" type="password"/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Họ tên</label>

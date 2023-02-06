@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -48,6 +49,13 @@ public class ProfileController {
     public String goInfo(HttpServletRequest request, Model model){
         model.addAttribute("profileForm", userService.getUserLogin(request));
         return "user/component/profile/index";
+    }
+
+    @PostMapping({"", "/info"})
+    public String doUpdateInfo(RedirectAttributes redirectAttributes, HttpServletRequest request, @ModelAttribute("profileForm") User userForm){
+        userService.update(request, userForm);
+        redirectAttributes.addFlashAttribute("mess", "Cập nhật thông tin thành công");
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 
     @GetMapping("/order/buy")
@@ -106,12 +114,14 @@ public class ProfileController {
         model.addAttribute("productForm", productForm);
         model.addAttribute("categoryData", categoryService.getAll());
         model.addAttribute("categoryMetaData", categoryMetaService.getByIdCategory(new CategoryMetaDTO(productForm.getIdCategory())));
+
         return "user/component/profile/product_add";
     }
 
     @PostMapping("/product/add")
-    public String doMyProductAdd(Model model, HttpServletRequest request, @ModelAttribute("productForm") ProductDTO productForm){
+    public String doMyProductAdd(RedirectAttributes redirectAttributes, HttpServletRequest request, @ModelAttribute("productForm") ProductDTO productForm){
         productService.create(request, productForm);
+        redirectAttributes.addFlashAttribute("mess", "Thêm sản phẩm thành công");
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 
@@ -127,9 +137,17 @@ public class ProfileController {
     }
 
     @PostMapping("/product/{id}")
-    public String doMyProductUpdate(Model model, HttpServletRequest request, @ModelAttribute("productForm") ProductDTO productForm){
+    public String doMyProductUpdate(RedirectAttributes redirectAttributes, HttpServletRequest request, @PathVariable("id") Integer id, @ModelAttribute("productForm") ProductDTO productForm){
+        productForm.setId(id);
+        productService.update(productForm);
+        redirectAttributes.addFlashAttribute("mess", "Cập nhật sản phẩm thành công");
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+    }
 
-
+    @GetMapping("/product/{id}/delete")
+    public String doMyProductDelete(RedirectAttributes redirectAttributes, HttpServletRequest request, @PathVariable("id") Integer id){
+        productService.delete(id);
+        redirectAttributes.addFlashAttribute("mess", "Xóa sản phẩm thành công");
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 }

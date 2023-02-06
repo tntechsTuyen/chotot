@@ -37,12 +37,13 @@
                                 <div class="row">
                                     <div class="col-md-12 form-group">
                                         <label>Loại sản phẩm</label>
-                                        <form:select path="idCategory" cssClass="custom-select">
-                                            <form:option value="0">----------------</form:option>
+                                        <div class="custom-select">
                                             <c:forEach items="${categoryData}" var="item">
-                                                <form:option value="${item.id}">${item.name}</form:option>
+                                                <c:if test="${item.id eq productForm.idCategory}">
+                                                    ${item.name}
+                                                </c:if>
                                             </c:forEach>
-                                        </form:select>
+                                        </div>
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label>Tên SP</label>
@@ -82,37 +83,27 @@
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Hình ảnh</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <table class="table table-bordered text-center">
-                        <tr>
-                            <td rowspan="2">
-                                <c:if test="${not empty mediaData.get(0)}">
-                                    <img src="${_ctx}/static/${mediaData.get(0).url}" class="img-fluid product-image" style="max-height: 300px;">
-                                </c:if>
-                                <c:if test="${empty mediaData.get(0)}">
-                                    <img src="${_ctx}/static/dist/no-image.jpg" class="img-fluid product-image" style="max-height: 300px;">
-                                </c:if>
-                                <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
-                            </td>
-                            <td>
-                                <c:if test="${not empty mediaData.get(1)}">
-                                    <img src="${_ctx}/static/${mediaData.get(1).url}" class="img-fluid product-image" style="max-height: 150px;">
-                                </c:if>
-                                <c:if test="${empty mediaData.get(1)}">
-                                    <img src="${_ctx}/static/dist/no-image.jpg" class="img-fluid product-image" style="max-height: 150px;">
-                                </c:if>
-                                <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <c:if test="${not empty mediaData.get(2)}">
-                                    <img src="${_ctx}/static/${mediaData.get(2).url}" class="img-fluid product-image" style="max-height: 150px;">
-                                </c:if>
-                                <c:if test="${empty mediaData.get(2)}">
-                                    <img src="${_ctx}/static/dist/no-image.jpg" class="img-fluid product-image" style="max-height: 150px;">
-                                </c:if>
-                                <form:input path="media" type="file" cssClass="d-none" accept="image/*" />
-                            </td>
-                        </tr>
+                        <c:if test="${mediaData.size() > 0}">
+                            <tr>
+                                <td>
+                                   <img src="${_ctx}/static/${mediaData.get(0).url}" class="img-fluid product-image" style="max-height: 150px;"> 
+                                </td>
+                            </tr>
+                        </c:if>
+                        <c:if test="${mediaData.size() > 1}">
+                            <tr>
+                                <td>
+                                   <img src="${_ctx}/static/${mediaData.get(1).url}" class="img-fluid product-image" style="max-height: 150px;"> 
+                                </td>
+                            </tr>
+                        </c:if>
+                        <c:if test="${mediaData.size() > 2}">
+                            <tr>
+                                <td>
+                                   <img src="${_ctx}/static/${mediaData.get(2).url}" class="img-fluid product-image" style="max-height: 150px;"> 
+                                </td>
+                            </tr>
+                        </c:if>
                     </table>
                 </div>
                 <div class="mb-2">

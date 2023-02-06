@@ -50,8 +50,9 @@
 							<form:input path="address" cssClass="form-control fs-13px" placeholder="Địa chỉ" />
 						</div>
 						<div class="mb-3">
-							<label class="mb-2">Số điện thoại</label>
-							<form:input path="phone" cssClass="form-control fs-13px" placeholder="Số điện thoại" />
+							<label class="mb-2">Số điện thoại <span class="text-danger">*</span></label>
+							<form:input path="phone" cssClass="form-control fs-13px" maxlength="14" minlength="14" data-mask="(000) 000-0000"/>
+							<div class="invalid-feedback" for="phone">Số điện thoại không hợp lệ</div>
 						</div>
 						<div class="mb-3">
 							<label class="mb-2">Email</label>
@@ -87,12 +88,19 @@
 	<script src="${_ctx}/static/js/admin/vendor.min.js" ></script>
 	<script src="${_ctx}/static/js/admin/app.min.js" ></script>
 	<script src="${_ctx}/static/js/common.js" ></script>
+    
+	<script src="${_ctx}/static/plugins/jquery.masked/jquery.mask.js"></script>      
 	<script>
+		$(document).ready(function(){
+			$("#phone").mask('(000) 000-0000')
+		})
+
 		$(".btn-submit").click(function(){
 			var checkUsername = isNullInput("username")
 			var checkPassword = isNullInput("password")
 			var checkFullName = isNullInput("fullName")
-			if(!checkUsername && !checkPassword && !checkFullName){
+			var checkPhone = isNullInput("phone")
+			if(!checkUsername && !checkPassword && !checkFullName && !checkPhone){
 				$("#registerForm").submit()
 			}
 		})

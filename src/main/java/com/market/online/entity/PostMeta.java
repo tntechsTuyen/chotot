@@ -38,4 +38,11 @@ public class PostMeta {
         this.name = name;
         this.value = value;
     }
+
+    public PostMeta(Integer id, Integer idPost, String key, String name, String value) {
+        this.idPost = idPost;
+        this.key = key;
+        this.name = name;
+        this.value = value;
+    }
 }

@@ -68,10 +68,52 @@ public class ProductService {
         //Create Post Meta
         if(productDTO.getMetaKey().size() > 0){
             for(int i = 0; i < productDTO.getMetaKey().size(); i++){
+
                 postMetaRepository.save(new PostMeta(post.getId(), productDTO.getMetaKey().get(i), productDTO.getMetaName().get(i), productDTO.getMetaValue().get(i)));
             }
         }
         return product;
+    }
+
+    public void update(ProductDTO productDTO){
+        //Update product
+        Product productRaw = getOne(productDTO.getId());
+        productRaw.setName(productDTO.getName());
+        productRaw.setPrice(productDTO.getPrice());
+        productRepository.save(productRaw);
+
+        //Update post
+        Post postRaw = postService.getByProduct(productDTO.getId());
+        postRaw.setContent(productDTO.getContent());
+        postRepository.save(postRaw);
+
+        //Update post meta
+        if(productDTO.getMetaId().size() > 0){
+            for(int i = 0; i < productDTO.getMetaId().size(); i++){
+                PostMeta metaRaw = postMetaRepository.findById(productDTO.getMetaId().get(i)).get();
+                metaRaw.setValue(productDTO.getMetaValue().get(i));
+                postMetaRepository.save(metaRaw);
+            }
+        }
+    }
+
+    public void delete(Integer idProduct){
+        Product productRaw = getOne(idProduct);
+
+        Post postRaw = postService.getByProduct(idProduct);
+
+        List<PostMeta> metas = postMetaRepository.findByIdPost(postRaw.getId());
+        metas.forEach((el) -> {
+            postMetaRepository.delete(el);
+        });
+
+        List<PostMedia> medias = postMediaRepository.selectByIdPost(postRaw.getId());
+        medias.forEach((el) -> {
+            postMediaRepository.delete(el);
+        });
+
+        postRepository.delete(postRaw);
+        productRepository.delete(productRaw);
     }
 
     public List<Map<String, Object>> getFeaturedProducts(HttpServletRequest request){

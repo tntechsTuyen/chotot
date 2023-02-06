@@ -40,8 +40,18 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public boolean logout(HttpServletRequest request){
+    public void update(HttpServletRequest request, User userForm){
+        User userInfo = (User) request.getSession().getAttribute(SESSION_LOGIN);
+        userInfo.setFullName(userForm.getFullName());
+        userInfo.setEmail(userForm.getEmail());
+        userInfo.setGender(userForm.getGender());
+        userInfo.setPassword(userForm.getPassword());
+        userInfo.setAddress(userForm.getAddress());
+        userInfo.setPhone(userForm.getPhone());
+        userRepository.save(userInfo);
+    }
+
+    public void logout(HttpServletRequest request){
         request.getSession().removeAttribute(SESSION_LOGIN);
-        return true;
     }
 }

@@ -22,7 +22,6 @@ public class ProductDTO extends PageDTO {
     private Integer hadLike = 0;
     private Integer hadFollow = 0;
     private List<Integer> metaId;
-
     private List<String> metaKey;
     private List<String> metaName;
     private List<String> metaValue;
