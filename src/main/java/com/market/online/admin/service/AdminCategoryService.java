@@ -53,7 +53,7 @@ public class AdminCategoryService {
         List<Category> cateTmp = categoryRepository.verifyInfo(new CategoryDTO(category.getId(), category.getName()));
         if(category.getName().isEmpty()) return null;
         if(cateTmp != null && cateTmp.size() > 0) return null;
-        if(category.getFileMedia() != null){
+        if(category.getFileMedia().isEmpty()){
             Media media = adminMediaService.uploadFile(category.getFileMedia());
             category.setIdMedia(media.getId());
         }
