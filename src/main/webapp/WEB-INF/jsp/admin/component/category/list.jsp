@@ -68,7 +68,6 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Biểu tượng</th>
 								<th>Tên</th>
 								<th>Mô tả</th>
 								<th></th>
@@ -79,7 +78,6 @@
 								<c:forEach items="${data.getContent()}" var="item">
 									<tr>
 										<td>${item.id}</td>
-										<td>${item.icon}</td>
 										<td>${item.name}</td>
 										<td>${item.content}</td>
 										<td><a href="${_ctx}/admin/category/update/${item.id}"><i class="fa fa-cog"></i> Edit</a></td>

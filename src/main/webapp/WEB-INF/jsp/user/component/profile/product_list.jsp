@@ -65,7 +65,12 @@
                                 </div>
                             </div>
                             <div class="text-center pt-4" style="min-height: 84px;">
-                                <div class="h6 text-decoration-none text-truncate">${item.name}</div>
+                                <c:if test="${item.idStatus == 5}">
+                                    <div class="h6 text-decoration-none text-truncate">${item.name}</div>
+                                </c:if>
+                                <c:if test="${item.idStatus != 5}">
+                                    <div class="h6 text-decoration-none text-truncate"><a href="${_ctx}/product/${item.id}">${item.name}</a></div>
+                                </c:if>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
                                     <c:if test="${item.priceVerify != null}"><h5><fmt:formatNumber value="${item.priceVerify}"/> đ</h5></c:if>
                                 </div>

@@ -70,7 +70,7 @@
                         <small class="pt-1">(<fmt:formatNumber value="${postData.totalComment}"/>)</small>
                     </div>
                     <h3 class="font-weight-semi-bold mb-4"><fmt:formatNumber value="${productData.priceVerify}"/> đ</h3>
-                    <c:if test="${_userInfo != null}">
+                    <c:if test="${_userInfo != null && _userInfo.id != productData.idUser}">
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <a href="${_ctx}/product/${productData.id}/checkout" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Mua hàng</a>
                         <a href="${_ctx}/message/create/${userData.id}" class="btn btn-info px-3 ml-1"><i class="fa fa-comment-alt mr-1"></i> Liên hệ với người bán</a>

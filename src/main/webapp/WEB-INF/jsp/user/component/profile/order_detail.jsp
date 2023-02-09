@@ -15,9 +15,9 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
-                    <a class="breadcrumb-item text-dark" href="#">Hồ sơ</a>
-                    <a class="breadcrumb-item text-dark" href="#">Đơn hàng</a>
+                    <a class="breadcrumb-item text-dark" href="${_ctx}/">Trang chủ</a>
+                    <a class="breadcrumb-item text-dark" href="${_ctx}/profile">Hồ sơ</a>
+                    <a class="breadcrumb-item text-dark" href="${_ctx}/profile/order/${typeOrder}">Đơn hàng</a>
                     <span class="breadcrumb-item active">Chi tiết</span>
                 </nav>
             </div>

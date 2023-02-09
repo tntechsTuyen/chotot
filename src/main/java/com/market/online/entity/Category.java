@@ -1,6 +1,7 @@
 package com.market.online.entity;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -14,14 +15,17 @@ public class Category {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "icon")
-    private String icon;
+    @Column(name = "id_media")
+    private Integer idMedia;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "content")
     private String content;
+
+    @Transient
+    private MultipartFile fileMedia;
 
     public Category() {
     }

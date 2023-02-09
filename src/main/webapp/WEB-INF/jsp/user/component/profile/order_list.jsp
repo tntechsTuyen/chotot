@@ -61,7 +61,7 @@
                             <td class="align-middle">${item.type}</td>
                             <td class="align-middle">${item.status}</td>
                             <td class="align-middle">${item.updatedDate}</td>
-                            <td class="align-middle"><a href="${_ctx}/profile/order/${item.id}" class="btn btn-sm btn-info"><i class="fa fa-info-circle"></i></a></td>
+                            <td class="align-middle"><a href="${_ctx}/profile/order/${typeOrder}/${item.id}" class="btn btn-sm btn-info"><i class="fa fa-info-circle"></i></a></td>
                         </tr>
                         </c:forEach>
                     </tbody>

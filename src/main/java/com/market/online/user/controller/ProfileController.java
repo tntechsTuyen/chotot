@@ -63,6 +63,7 @@ public class ProfileController {
         User userInfo = userService.getUserLogin(request);
         orderDTO.setIdBuyer(userInfo.getId());
         model.addAttribute("orderData", orderService.getMyOrder(orderDTO));
+        model.addAttribute("typeOrder", "buy");
         return "user/component/profile/order_list";
     }
 
@@ -71,11 +72,12 @@ public class ProfileController {
         User userInfo = userService.getUserLogin(request);
         orderDTO.setIdSeller(userInfo.getId());
         model.addAttribute("orderData", orderService.getMyOrder(orderDTO));
+        model.addAttribute("typeOrder", "sell");
         return "user/component/profile/order_list";
     }
 
-    @GetMapping("/order/{id}")
-    public String goOrderDetail(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
+    @GetMapping("/order/{type}/{id}")
+    public String goOrderDetail(Model model, HttpServletRequest request, @PathVariable("id") Integer id, @PathVariable("type") String type){
         Order orderInfo = orderService.getOne(id);
         model.addAttribute("orderInfo", orderInfo);
         if(orderInfo.getIdType() == 2){
@@ -88,6 +90,7 @@ public class ProfileController {
         model.addAttribute("buyerInfo", userService.getOne(orderInfo.getIdBuyer()));
         model.addAttribute("sellerInfo", userService.getOne(orderInfo.getIdSeller()));
         model.addAttribute("productInfo", productService.getOne(orderInfo.getIdProduct()));
+        model.addAttribute("typeOrder", type);
         return "user/component/profile/order_detail";
     }
 

@@ -37,7 +37,7 @@
 						    </div>
 						</div>
 						<div class="panel-body">
-							<form:form modelAttribute="categoryForm" method="POST">
+							<form:form modelAttribute="categoryForm" method="POST" enctype="multipart/form-data">
 							<!-- Field Name -->
 							<div class="form-floating">
 							  	<form:input path="name" cssClass="form-control fs-15px"/>
@@ -52,13 +52,13 @@
 							</div>
 							<!-- * Field Content -->
 
-							<!-- Field Icon -->
-							<div class="form-floating input-group mt-3" href="#modal-choose-icon" data-bs-toggle="modal">
-							  	<form:input path="icon" cssClass="form-control fs-15px" readonly="true" />
-							  	<label for="icon" class="d-flex align-items-center fs-13px">Icon</label>
-							  	<div class="input-group-text"><i for="icon"></i></div>
+							<!-- Field Media -->
+							<div class="form-floating mt-3">
+								<img src="${_ctx}/static/${mediaData.url}" class="w-50 mb-3" /><br>
+								<form:hidden path="idMedia"/>
+							  	<input type="file" name="fileMedia">
 							</div>
-							<!-- * Field Icon -->
+							<!-- * Field Media -->
 
 							<button type="submit" class="btn btn-primary mt-3">Cập nhật</button>
 							<a class="btn btn-danger mt-3" onclick="history.back()">Quay lại</a>
@@ -85,7 +85,7 @@
 										<th>Key</th>
 										<th>Value</th>
 										<th>Description</th>
-										<th width="80px" class="text-center"><a class="btn-link cursor-pointer" onclick="addMeta()"><i class="fa fa-plus-circle"></i></a></th>
+										<th width="125px" class="text-center"><a class="btn-link cursor-pointer" onclick="addMeta()"><i class="fa fa-plus-circle"></i></a></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -99,7 +99,7 @@
 													<a class="btn btn-primary btn-sm" onclick="editMeta(this)" 
 													data-id="${item.id}" data-key="${item.key}" data-value="${item.value}" data-description="${item.description}">
 														<i class="fa fa-cog"></i>
-														Edit
+														Chỉnh sửa
 													</button>
 												</td>
 											</tr>
@@ -119,28 +119,6 @@
 			</div>
 		</div>
 		<!-- * Content -->
-
-		<!-- Modal Choose Icon -->
-		<div class="modal fade" id="modal-choose-icon">
-		  	<div class="modal-dialog modal-dialog-scrollable modal-xl">
-		    	<div class="modal-content">
-			      	<div class="modal-header">
-			        	<h4 class="modal-title">Please choose ICON</h4>
-			        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-			      	</div>
-			      	<div class="modal-body">
-			        	<div class="row" id="list-icon">
-			        		
-			        	</div>
-			      	</div>
-			      	<div class="modal-footer">
-			        	<a href="javascript:;" class="btn btn-white" data-bs-dismiss="modal">Close</a>
-			        	<a href="javascript:;" class="btn btn-success">Save</a>
-			      	</div>
-		    	</div>
-		  	</div>
-		</div>
-		<!-- * Modal Choose Icon -->
 
 		<!-- Modal Meta -->
 
@@ -184,27 +162,6 @@
     <!-- * App -->
 	<%@ include file="/WEB-INF/jsp/admin/common/js.jsp" %>
 	<script>
-		var icons = ["fa fa-people-arrows-left-right","fa fa-people-carry-box","fa fa-pepper-hot","fa fa-percent","fa fa-person","fa fa-person-biking","fa fa-person-booth","fa fa-person-dots-from-line","fa fa-person-dress","fa fa-person-hiking","fa fa-person-praying","fa fa-person-running","fa fa-person-skating","fa fa-person-skiing","fa fa-person-skiing-nordic","fa fa-person-snowboarding","fa fa-person-swimming","fa fa-person-walking","fa fa-person-walking-with-cane"];
-
-		initIcon();
-		function initIcon(){
-			for(var i = 0; i < icons.length; i++){
-				const html = `<div class="col-1">
-			        			<div class="item text-center" data-icon="`+icons[i]+`">
-			        				<i class="`+icons[i]+` h1"></i>
-			        				<p>`+icons[i].replace("fa ", "")+`</p>
-			        			</div>
-			        		</div>`;
-				$("#list-icon").append(html);
-			}
-
-			$("#list-icon .item").click(function(){
-				$("#icon").val($(this).data("icon"));
-				$(`i[for="icon"]`).attr("class", $(this).data("icon")+" h2");
-				$("#modal-choose-icon").modal("hide")
-			})
-		}
-
 		function addMeta(){
 			$(`#metaForm input`).val("")
 			$("#modal-meta").modal("show")

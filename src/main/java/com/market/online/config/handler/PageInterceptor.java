@@ -25,7 +25,7 @@ public class PageInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        request.setAttribute("categoryList", categoryService.getAll());
+        request.setAttribute("categoryList", categoryService.getAllData());
         request.setAttribute("userPostInfo", postUserService.countLikeAndFollow(request));
         request.setAttribute("messageCount", messageService.countMessageNotRead(request));
         return super.preHandle(request, response, handler);

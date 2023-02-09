@@ -1,4 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
+<c:if test="${not empty mess}">
+<script>
+    alert("${mess}")
+</script>
+</c:if>
+
 <div id="header" class="app-header">
   <div class="navbar-header">
     <a href="${_ctx}/admin" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-1">CMS</b></a>

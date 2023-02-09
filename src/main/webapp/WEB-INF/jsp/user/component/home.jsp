@@ -116,7 +116,7 @@
                 <a class="text-decoration-none" href="${_ctx}/product/list?idCategory=${item.id}">
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="static/dist/cat-1.jpg" alt="">
+                            <img class="img-fluid" src="${_ctx}/static/${item.thumb}" alt="">
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>${item.name}</h6>
