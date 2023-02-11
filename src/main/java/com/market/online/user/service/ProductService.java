@@ -98,6 +98,16 @@ public class ProductService {
     }
 
     public void delete(Integer idProduct){
+        /*
+        * Post_Media
+        * Post_User
+        * Comment
+        * Post_Meta
+        * Post
+        * Product
+        * */
+
+
         Product productRaw = getOne(idProduct);
 
         Post postRaw = postService.getByProduct(idProduct);
