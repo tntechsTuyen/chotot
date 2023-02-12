@@ -30,5 +30,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             " ORDER BY o.updatedDate DESC ")
     List<Map<String, Object>> getMyList(@Param("search") OrderDTO orderDTO);
 
+    List<Order> findByIdProduct(Integer idProduct);
+
     Optional<Order> findByIdRedirect(Integer idRedirect);
 }
