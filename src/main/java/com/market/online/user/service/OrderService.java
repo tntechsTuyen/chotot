@@ -152,4 +152,14 @@ public class OrderService {
         }
         return true;
     }
+
+    public boolean deleteByIdProduct(Integer idProduct){
+        List<Order> orderInfo = orderRepository.findByIdProduct(idProduct);
+        if(orderInfo.size() == 0) return false;
+        orderInfo.forEach((el) -> {
+            orderHistoryRepository.deleteByIdOrder(el.getId());
+            orderRepository.deleteById(el.getId());
+        });
+        return true;
+    }
 }

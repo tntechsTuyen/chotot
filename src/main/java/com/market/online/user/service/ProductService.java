@@ -42,6 +42,10 @@ public class ProductService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OrderService orderService;
+
+
     public Product create(HttpServletRequest request, ProductDTO productDTO){
         User userInfo = userService.getUserLogin(request);
         Integer idUser = (userInfo != null) ? userInfo.getId() : 0;
@@ -104,26 +108,12 @@ public class ProductService {
         * Comment
         * Post_Meta
         * Post
+        * OrderHistory
+        * Order
         * Product
         * */
-
-
-        Product productRaw = getOne(idProduct);
-
-        Post postRaw = postService.getByProduct(idProduct);
-
-        List<PostMeta> metas = postMetaRepository.findByIdPost(postRaw.getId());
-        metas.forEach((el) -> {
-            postMetaRepository.delete(el);
-        });
-
-        List<PostMedia> medias = postMediaRepository.selectByIdPost(postRaw.getId());
-        medias.forEach((el) -> {
-            postMediaRepository.delete(el);
-        });
-
-        postRepository.delete(postRaw);
-        productRepository.delete(productRaw);
+        postService.deletePostByIdProduct(idProduct);
+        orderService.deleteByIdProduct(idProduct);
     }
 
     public List<Map<String, Object>> getFeaturedProducts(HttpServletRequest request){

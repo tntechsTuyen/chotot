@@ -25,6 +25,12 @@ public class PostService {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private PostMediaRepository postMediaRepository;
+
+    @Autowired
+    private PostUserRepository postUserRepository;
+
     public Post getByProduct(Integer idProduct){
         return postRepository.findByIdProduct(idProduct).get();
     }
@@ -39,5 +45,21 @@ public class PostService {
 
     public List<Map<String, Object>> getCommentPost(Integer idPost){
         return commentRepository.getDataByIdPost(idPost);
+    }
+
+    public void deletePostByIdProduct(Integer idProduct){
+        /*
+         * Post_Media
+         * Post_User
+         * Comment
+         * Post_Meta
+         * Post
+         * */
+        Post postInfo = getByProduct(idProduct);
+        postMediaRepository.deleteByIdPost(postInfo.getId());
+        postUserRepository.deleteByIdPost(postInfo.getId());
+        commentRepository.deleteByIdPost(postInfo.getId());
+        postMetaRepository.deleteByIdPost(postInfo.getId());
+        postRepository.deleteById(postInfo.getId());
     }
 }
