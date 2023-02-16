@@ -21,7 +21,7 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
             " AND (:#{#search.id} = 0 OR c.id != :#{#search.id}) ")
     List<Category> verifyInfo(@Param("search") CategoryDTO categoryDTO);
 
-    @Query(" SELECT c.name AS name, c.content AS content, m.id AS idMedia, m.url AS thumb " +
+    @Query(" SELECT c.id AS id, c.name AS name, c.content AS content, m.id AS idMedia, m.url AS thumb " +
             " FROM Category c " +
             " LEFT JOIN Media m ON c.idMedia = m.id ")
     List<Map<String, Object>> getAllData();

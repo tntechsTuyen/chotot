@@ -84,6 +84,7 @@
             <div class="col-lg-12">
             </c:if>
                 <div class="row pb-3">
+                    <c:if test="${productData.getContent().size() > 0}">
                     <c:forEach items="${productData.getContent()}" var="item">
                     <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
@@ -130,6 +131,10 @@
                         </div>
                     </div>
                     </c:forEach>
+                    </c:if>
+                    <c:if test="${productData.getContent().size() == 0}">
+                    <div class="col-12 text-center p-4">Không có dữ liệu</div>
+                    </c:if>
 
                     <div class="col-12">
                       	<ul class="pagination justify-content-center" onload="generalPage('.pagination');"
@@ -143,10 +148,5 @@
         </div>
     </div>
 	<%@ include file="/WEB-INF/jsp/user/common/footer.jsp" %>
-    <script>
-        $(`[name="idCategory"]`).change(function(){
-            console.log($(this).val)
-        })
-    </script>
 </body>
 </html>

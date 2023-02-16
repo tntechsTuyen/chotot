@@ -27,6 +27,14 @@
 
     <!-- Checkout Start -->
     <div class="container-fluid">
+        <c:if test="${orderInfo.idStatus == 4}">
+        <div class="row px-xl-5">
+            <div class="col-lg-12">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Đánh giá</span></h5>
+
+            </div>
+        </div>
+        </c:if>
         <div class="row px-xl-5">
             <div class="col-lg-4">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Thông tin người bán</span></h5>
@@ -80,7 +88,7 @@
                     <div class="border-bottom">
                         <h6 class="mb-3">Sản phẩm</h6>
                         <div class="d-flex justify-content-between">
-                            <p>${productInfo.name}</p>
+                            <p><a href="${_ctx}/product/${productInfo.id}">${productInfo.name}</a></p>
                             <p><fmt:formatNumber value="${productInfo.priceVerify}"/> đ</p>
                         </div>
                     </div>
@@ -88,7 +96,7 @@
                         <div class="border-bottom pt-3">
                             <h6 class="mb-3">Sản phẩm trao đổi</h6>
                             <div class="d-flex justify-content-between">
-                                <p>${productSwapInfo.name}</p>
+                                <p><a href="${_ctx}/product/${productSwapInfo.id}">${productSwapInfo.name}</a></p>
                                 <p><fmt:formatNumber value="${productSwapInfo.priceVerify}"/> đ</p>
                             </div>
                         </div>

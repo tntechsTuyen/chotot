@@ -176,7 +176,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " WHERE p.idStatus = 6 " +
             " AND (:#{#search.name} = '' OR p.name LIKE %:#{#search.name}%) " +
             " AND (:#{#search.idUser} = 0 OR p.idUser != :#{#search.idUser}) " +
-            " AND (:#{#search.idCategory} = 0 OR p.idCategory != :#{#search.idCategory}) " +
+            " AND (:#{#search.idCategory} = 0 OR p.idCategory = :#{#search.idCategory}) " +
             " AND (:#{#search.hadLike} = 0 OR pu.hadLike = :#{#search.hadLike}) " +
             " AND (:#{#search.hadFollow} = 0 OR pu.hadFollow = :#{#search.hadFollow}) " +
             " ORDER BY p.id DESC "
@@ -188,7 +188,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :#{#search.idUser} " +
             " WHERE p.idStatus = 6 " +
             " AND (:#{#search.idUser} = 0 OR p.idUser != :#{#search.idUser}) " +
-            " AND (:#{#search.idCategory} = 0 OR p.idCategory != :#{#search.idCategory}) " +
+            " AND (:#{#search.idCategory} = 0 OR p.idCategory = :#{#search.idCategory}) " +
             " AND (:#{#search.hadLike} = 0 OR pu.hadLike = :#{#search.hadLike}) " +
             " AND (:#{#search.hadFollow} = 0 OR pu.hadFollow = :#{#search.hadFollow}) ")
     Page<Map<String, Object>> getPage(@Param("search") ProductDTO search, Pageable pageable);
