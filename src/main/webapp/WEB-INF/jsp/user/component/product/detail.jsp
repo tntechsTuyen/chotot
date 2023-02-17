@@ -51,8 +51,10 @@
                         <label class="h3">${productData.name}</label>
                         <div class="float-right">
                             <i class="fas fa-user-shield mr-1"></i>
-                            ${userData.fullName}<br>
-                            ${userData.rate}
+                            <a href="${_ctx}/profile/${userData.id}">${userData.fullName}</a><br>
+                            <c:forEach begin="1" end="${userData.rate}">
+                                <i class="fas fa-star"></i>
+                            </c:forEach>
                         </div>
                     </div>
                     <div class="d-flex mb-3">

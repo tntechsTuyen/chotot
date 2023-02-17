@@ -45,6 +45,14 @@ public class ProfileController {
     @Autowired
     private PostService postService;
 
+    @GetMapping("/{id}")
+    public String goUserInfo(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
+        User u1 = userService.getOne(id);
+        model.addAttribute("userInfo", u1);
+        model.addAttribute("orderData", orderService.getMyOrder(new OrderDTO(0, u1.getId())));
+        return "user/component/profile/info";
+    }
+
     @GetMapping({"", "/info"})
     public String goInfo(HttpServletRequest request, Model model){
         model.addAttribute("profileForm", userService.getUserLogin(request));
