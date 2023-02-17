@@ -38,6 +38,9 @@ public class Order {
     @Column(name = "price")
     private Integer price;
 
+    @Column(name = "rate")
+    private Integer rate;
+
     @CreationTimestamp
     @Column(name = "created_date", nullable = false)
     private Date createdDate;

@@ -19,7 +19,8 @@ public interface OrderHistoryRepository extends JpaRepository<OrderHistory, Inte
             " FROM OrderHistory oh " +
             " INNER JOIN User u ON oh.idUser = u.id " +
             " INNER JOIN Status s ON oh.idStatus = s.id " +
-            " WHERE oh.idOrder = :id_order ")
+            " WHERE oh.idOrder = :id_order " +
+            " ORDER BY oh.id DESC")
     List<Map<String, Object>> getListByIdOrder(@Param("id_order") Integer idOrder);
 
     @Modifying

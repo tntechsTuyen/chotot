@@ -45,4 +45,6 @@ public class User {
     @Column(name = "created_date", updatable = false)
     private Date createdDate;
 
+    @Transient
+    private Double rate = .0;
 }

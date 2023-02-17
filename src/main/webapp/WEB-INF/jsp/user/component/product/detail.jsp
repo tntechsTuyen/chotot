@@ -49,7 +49,11 @@
                 <div class="h-100 bg-light p-30">
                     <div>
                         <label class="h3">${productData.name}</label>
-                        <div class="float-right"><i class="fas fa-user-shield mr-1"></i>${userData.fullName}</div>
+                        <div class="float-right">
+                            <i class="fas fa-user-shield mr-1"></i>
+                            ${userData.fullName}<br>
+                            ${userData.rate}
+                        </div>
                     </div>
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-1">

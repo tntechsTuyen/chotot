@@ -12,7 +12,10 @@
         <div class="offset-lg-6 col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+                        <c:if test="${_userInfo == null}">Menu</c:if>
+                        <c:if test="${_userInfo != null}">${_userInfo.fullName}</c:if>
+                    </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <c:if test="${_userInfo != null}">
                             <a href="${_ctx}/profile" class="dropdown-item">Hồ sơ</a>

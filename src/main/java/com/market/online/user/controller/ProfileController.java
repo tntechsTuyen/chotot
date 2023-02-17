@@ -95,14 +95,24 @@ public class ProfileController {
     }
 
     @GetMapping("/order/{id}/approve")
-    public String goOrderApprove(HttpServletRequest request, @PathVariable("id") Integer id){
+    public String goOrderApprove(HttpServletRequest request, RedirectAttributes attributes, @PathVariable("id") Integer id){
         orderService.update(request, new OrderDTO(id));
+        attributes.addFlashAttribute("mess", "Cập nhật trạng thái đơn hàng thành công");
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 
     @GetMapping("/order/{id}/cancel")
-    public String goOrderCancel(Model model, HttpServletRequest request, @PathVariable("id") Integer id){
+    public String goOrderCancel(RedirectAttributes attributes, HttpServletRequest request, @PathVariable("id") Integer id){
         orderService.cancel(request, new OrderDTO(id));
+        attributes.addFlashAttribute("mess", "Hủy đơn hàng thành công");
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+    }
+
+    @PostMapping("/order/{id}/rate")
+    public String doOrderRate(HttpServletRequest request, RedirectAttributes attributes, @PathVariable("id") Integer id, OrderDTO orderDTO){
+        orderDTO.setId(id);
+        orderService.rateOrder(orderDTO);
+        attributes.addFlashAttribute("mess", "Đánh giá thành công");
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 

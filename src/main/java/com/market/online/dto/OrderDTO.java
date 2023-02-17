@@ -11,6 +11,7 @@ public class OrderDTO {
     private Integer idSeller = 0;
     private Integer idType;
     private Integer value = 1; //1: next, 0: cancel
+    private Integer valueRate = 0;
 
     public OrderDTO(){}
 

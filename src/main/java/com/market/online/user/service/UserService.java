@@ -37,7 +37,9 @@ public class UserService {
     }
 
     public User getOne(Integer id){
-        return userRepository.findById(id).get();
+        User userInfo = userRepository.findById(id).get();
+        userInfo.setRate(userRepository.getUserRate(userInfo.getId()));
+        return userInfo;
     }
 
     public void update(HttpServletRequest request, User userForm){

@@ -22,4 +22,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             " AND (:#{#search.phone} = '' OR u.phone = :#{#search.phone}) "+
             " AND (:#{#search.email} = '' OR u.email = :#{#search.email}) ")
     Page<User> getDataPage(@Param("search") UserDTO search, Pageable pageable);
+
+    @Query("SELECT AVG(rate) " +
+            " FROM Order" +
+            " WHERE idSeller = :id_seller " +
+            " AND rate > 0 ")
+    Double getUserRate(@Param("id_seller") Integer idSeller);
 }

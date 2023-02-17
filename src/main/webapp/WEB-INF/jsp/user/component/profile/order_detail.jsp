@@ -27,13 +27,37 @@
 
     <!-- Checkout Start -->
     <div class="container-fluid">
-        <c:if test="${orderInfo.idStatus == 4}">
+        <c:if test="${orderInfo.idStatus == 4 && _userInfo.id == orderInfo.idBuyer && orderInfo.rate == 0}">
+        <form action="${_ctx}/profile/order/${orderInfo.id}/rate" method="POST">
         <div class="row px-xl-5">
-            <div class="col-lg-12">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Đánh giá</span></h5>
-
+            <div class="col-lg-12 mb-4">
+                <h5 class="section-title position-relative text-uppercase"><span class="bg-secondary pr-3">Đánh giá</span></h5>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="valueRate" id="valueRate1" value="1">
+                    <label class="form-check-label" for="valueRate1">1 <i class="far fa-star"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="valueRate" id="valueRate2" value="2">
+                    <label class="form-check-label" for="valueRate2">2 <i class="far fa-star"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="valueRate" id="valueRate3" value="3" checked>
+                    <label class="form-check-label" for="valueRate3">3 <i class="far fa-star"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="valueRate" id="valueRate4" value="4">
+                    <label class="form-check-label" for="valueRate4">4 <i class="far fa-star"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="valueRate" id="valueRate5" value="5">
+                    <label class="form-check-label" for="valueRate5">5 <i class="far fa-star"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <button type="submit" class="btn btn-primary">Đồng ý</button>
+                </div>
             </div>
         </div>
+        </form>
         </c:if>
         <div class="row px-xl-5">
             <div class="col-lg-4">

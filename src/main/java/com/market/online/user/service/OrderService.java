@@ -74,6 +74,8 @@ public class OrderService {
                 orderSwap.setPrice(productSwapInfo.getPrice() - productInfo.getPrice());
                 orderSwap.setIdRedirect(order.getId());
                 orderSwap.setIdType(orderDTO.getIdType());
+                productSwapInfo.setIdStatus(8);
+                productRepository.save(productSwapInfo);
                 orderRepository.save(orderSwap);
                 order.setPrice(productInfo.getPrice() - productSwapInfo.getPrice());
                 orderRepository.save(order);
@@ -131,7 +133,7 @@ public class OrderService {
         if(userInfo.getId().equals(orderInfo.getIdSeller()) && orderInfo.getIdStatus() == 1){
             if(orderInfo.getIdType() == 2){
                 Order orderSwapInfo = getByIdRedirect(orderInfo.getIdRedirect());
-                Product productSwapInfo = productService.getOne(orderSwapInfo.getId());
+                Product productSwapInfo = productService.getOne(orderSwapInfo.getIdProduct());
                 productSwapInfo.setIdStatus(6);
                 productRepository.save(productSwapInfo);
                 orderSwapInfo.setIdStatus(10);
@@ -151,6 +153,12 @@ public class OrderService {
             orderHistoryRepository.save(orderHistory);
         }
         return true;
+    }
+
+    public void rateOrder(OrderDTO orderDTO){
+        Order orderInfo = getOne(orderDTO.getId());
+        orderInfo.setRate(orderDTO.getValueRate());
+        orderRepository.save(orderInfo);
     }
 
     public boolean deleteByIdProduct(Integer idProduct){

@@ -69,7 +69,7 @@
 							</div>
 							
 							<button type="submit" class="btn btn-primary mt-3">Cập nhật</button>
-							<a class="btn btn-danger mt-3" onclick="history.back()">Quay lại</a>
+							<a class="btn btn-danger mt-3" href="${_ctx}/admin/product">Quay lại</a>
 							</form:form>
 						</div>
 					</div>

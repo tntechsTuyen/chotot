@@ -120,8 +120,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             ", m.url AS thumb " +
             " FROM Product p " +
             " INNER JOIN Post pt ON p.id = pt.idProduct " +
-            " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
-            " INNER JOIN Media m ON pm.idMedia = m.id " +
+            " LEFT JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
+            " LEFT JOIN Media m ON pm.idMedia = m.id " +
             " WHERE p.idUser = :id_user " +
             " AND (:id_status = 0 OR p.idStatus = :id_status) " +
             " ORDER BY p.id DESC ")
