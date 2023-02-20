@@ -22,6 +22,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             if(permission){
                 return true;
             }else{
+                System.out.println("Error session");
                 response.sendRedirect("/home");
             }
         }catch (Exception e){

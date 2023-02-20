@@ -106,7 +106,12 @@
 							<c:if test="${data.getContent().size() > 0}">
 								<c:forEach items="${data.getContent()}" var="item">
 									<tr>
-										<td>${item.id}</td>
+										<td>
+										    ${item.id}
+										    <c:if test="${item.statusId == 5}">
+										        <input type="checkbox" name="productSelect" value="${item.id}">
+										    </c:if>
+                                        </td>
 										<td>${item.userName}</td>
 										<td>${item.confirmerName}</td>
 										<td>${item.categoryName}</td>
@@ -119,7 +124,6 @@
 									</tr>
 								</c:forEach>
 							</c:if>
-
 							<c:if test="${data.getContent().size() == 0}">
 								<tr>
 									<td class="text-center" colspan="10"><i class="fa fa-inbox"></i> Không có dữ liệu</td>

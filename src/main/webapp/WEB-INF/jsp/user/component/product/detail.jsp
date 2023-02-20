@@ -194,7 +194,7 @@
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">${item.name}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5><fmt:formatNumber value="${productData.priceVerify}"/> đ</h5><h6 class="text-muted ml-2"><del>${item.price}</del></h6>
+                            <h5><fmt:formatNumber value="${productData.priceVerify}"/> đ</h5><h6 class="text-muted ml-2"><del></del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-eye text-primary mr-1"></small>

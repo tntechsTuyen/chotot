@@ -32,7 +32,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(authInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/static/**", "",
-                        "/product/list", "/product/{id}", "/home"
+                        "/product/list", "/product/{id}", "/profile/{id}", "/home"
                         , "/login", "/register", "/logout");
     }
 
