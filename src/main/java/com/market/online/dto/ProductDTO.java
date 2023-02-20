@@ -26,6 +26,7 @@ public class ProductDTO extends PageDTO {
     private List<String> metaName;
     private List<String> metaValue;
     private MultipartFile[] media;
+    private List<Integer> productSelect;
 
     public ProductDTO() {
         super();

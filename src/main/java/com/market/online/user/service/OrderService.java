@@ -113,6 +113,12 @@ public class OrderService {
                 Product productInfo = productService.getOne(orderInfo.getIdProduct());
                 productInfo.setIdStatus(9);
                 productRepository.save(productInfo);
+                if(orderInfo.getIdType() == 2){
+                    Order orderSwapInfo = getByIdRedirect(orderInfo.getIdRedirect());
+                    Product productSwapInfo = productService.getOne(orderSwapInfo.getIdProduct());
+                    productSwapInfo.setIdStatus(9);
+                    productRepository.save(productSwapInfo);
+                }
             }
         }else{
             orderInfo.setIdStatus(10);

@@ -7,10 +7,12 @@ import com.market.online.common.utils.UrlUtils;
 import com.market.online.dto.ProductDTO;
 import com.market.online.entity.Post;
 import com.market.online.entity.Product;
+import org.apache.jasper.tagplugins.jstl.core.Url;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,6 +51,13 @@ public class AdminProductController {
     public String doUpdate(HttpServletRequest request, @PathVariable("id") Integer id, @ModelAttribute("productForm") Product product){
         product.setId(id);
         adminProductService.update(product);
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+    }
+
+    @PostMapping("/status/update")
+    public String doStatusUpdate(RedirectAttributes attributes, HttpServletRequest request, ProductDTO productDTO){
+        adminProductService.updateProductStatus(request, productDTO);
+        attributes.addFlashAttribute("mess", "Cập nhật trạng thái thành công");
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 }

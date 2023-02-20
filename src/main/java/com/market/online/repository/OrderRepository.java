@@ -35,4 +35,10 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByIdProduct(Integer idProduct);
 
     Optional<Order> findByIdRedirect(Integer idRedirect);
+
+    @Query("SELECT o " +
+            " FROM Order o " +
+            " WHERE o.createdDate >= :time_check " +
+            " AND o.idStatus = 1")
+    List<Order> findListCancel(@Param("time_check") Date timeCheck);
 }

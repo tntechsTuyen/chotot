@@ -87,10 +87,12 @@
 				    </div>
 				</div>
 				<div class="panel-body">
+					<button class="btn btn-success mb-2 btn-approval">Thông qua</button>
+					<form id="form-product-update" action="${_ctx}/admin/product/status/update" method="POST">
 					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th class="text-center"><input type="checkbox" name="productSelects"></th>
 								<th>Chủ sở hữu</th>
 								<th>Người xác nhận</th>
 								<th>Danh mục</th>
@@ -106,11 +108,11 @@
 							<c:if test="${data.getContent().size() > 0}">
 								<c:forEach items="${data.getContent()}" var="item">
 									<tr>
-										<td>
-										    ${item.id}
+										<td class="text-center">
 										    <c:if test="${item.statusId == 5}">
 										        <input type="checkbox" name="productSelect" value="${item.id}">
 										    </c:if>
+										    ${item.id}
                                         </td>
 										<td>${item.userName}</td>
 										<td>${item.confirmerName}</td>
@@ -131,6 +133,7 @@
 							</c:if>
 						</tbody>
 					</table>
+					</form>
 					<div class="text-end">
 						<div class="btn-group paging" onload="generalPage('.paging');"
 						 data-page="${search.getPage()}"
@@ -142,7 +145,17 @@
 			<!-- * Panel list -->
 		</div>
     </div>
-
 	<%@ include file="/WEB-INF/jsp/admin/common/js.jsp" %>
+	<script>
+		$(`[name="productSelects"]`).change(function(){
+			const isChecked = $(this).is(":checked")
+			if(isChecked) $(`[name="productSelect"]`).attr("checked", "")
+			else $(`[name="productSelect"]`).removeAttr("checked")
+		})
+
+		$(".btn-approval").click(function(){
+			$("#form-product-update").submit()
+		})
+	</script>
 </body>
 </html>

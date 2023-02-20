@@ -7,8 +7,10 @@ import com.market.online.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -192,4 +194,13 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " AND (:#{#search.hadLike} = 0 OR pu.hadLike = :#{#search.hadLike}) " +
             " AND (:#{#search.hadFollow} = 0 OR pu.hadFollow = :#{#search.hadFollow}) ")
     Page<Map<String, Object>> getPage(@Param("search") ProductDTO search, Pageable pageable);
+
+    @Modifying
+    @Transactional
+    @Query(" UPDATE Product " +
+            " SET idStatus = :id_status" +
+            " , priceVerify = price" +
+            " , idConfirmer = :id_confirmer " +
+            " WHERE id IN :id_products ")
+    void updateStatusForProducts(@Param("id_products") List<Integer> idProducts, @Param("id_confirmer") Integer idConfirmer, @Param("id_status") Integer idStatus);
 }

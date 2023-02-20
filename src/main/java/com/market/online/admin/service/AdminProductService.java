@@ -2,11 +2,14 @@ package com.market.online.admin.service;
 
 import com.market.online.dto.ProductDTO;
 import com.market.online.entity.Product;
+import com.market.online.entity.User;
 import com.market.online.repository.ProductRepository;
+import com.market.online.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Service
@@ -14,6 +17,9 @@ public class AdminProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private UserService userService;
 
     public Page<Map<String, Object>> getDataPage(ProductDTO search){
         return productRepository.getDataPage(search, search.pageable());
@@ -29,5 +35,12 @@ public class AdminProductService {
         productTmp.setPriceVerify(product.getPriceVerify());
         productTmp.setIdConfirmer(1);
         productRepository.save(productTmp);
+    }
+
+    public void updateProductStatus(HttpServletRequest request, ProductDTO productDTO){
+        if(productDTO.getProductSelect() != null && productDTO.getProductSelect().size() > 0){
+            User userInfo = userService.getUserLogin(request);
+            productRepository.updateStatusForProducts(productDTO.getProductSelect(), userInfo.getId(), 6);
+        }
     }
 }
