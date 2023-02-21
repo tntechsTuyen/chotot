@@ -38,7 +38,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     @Query("SELECT o " +
             " FROM Order o " +
-            " WHERE o.createdDate >= :time_check " +
+            " WHERE o.createdDate <= :time_check " +
             " AND o.idStatus = 1")
     List<Order> findListCancel(@Param("time_check") Date timeCheck);
 }
