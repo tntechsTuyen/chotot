@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,4 +38,19 @@ public class AdminUserController {
         userService.update(user);
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
+
+    @GetMapping("/{id}/locked")
+    public String doLocked(HttpServletRequest request, RedirectAttributes redirectAttributes, @PathVariable("id") Integer id){
+        User userInfo = userService.locked(id);
+        redirectAttributes.addFlashAttribute("mess", String.format("Tài khoản [%s] đã khóa", userInfo.getUsername()));
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+    }
+
+    @GetMapping("/{id}/unlocked")
+    public String doUnLocked(HttpServletRequest request, RedirectAttributes redirectAttributes, @PathVariable("id") Integer id){
+        User userInfo = userService.unlocked(id);
+        redirectAttributes.addFlashAttribute("mess", String.format("Tài khoản [%s] đã được mở khóa", userInfo.getUsername()));
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+    }
+
 }

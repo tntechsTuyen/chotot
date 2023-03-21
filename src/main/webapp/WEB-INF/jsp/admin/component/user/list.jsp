@@ -93,20 +93,30 @@
 						<tbody>
 							<c:if test="${data.getContent().size() > 0}">
 								<c:forEach items="${data.getContent()}" var="item">
-									<tr>
-										<td>${item.id}</td>
-										<td>${item.username}</td>
-										<td>${item.fullName}</td>
-										<td>${item.phone}</td>
-										<td>${item.address}</td>
-										<td>${item.email}</td>
-										<td>${item.gender}</td>
-										<td>${item.idRole}</td>
-										<td><a href="${_ctx}/admin/user/update/${item.id}"><i class="fa fa-cog"></i> Edit</a></td>
-									</tr>
+                                        <tr>
+                                            <td>${item.id}</td>
+                                            <td>${item.username}</td>
+                                            <td>${item.fullName}</td>
+                                            <td>${item.phone}</td>
+                                            <td>${item.address}</td>
+                                            <td>${item.email}</td>
+                                            <td>${item.gender}</td>
+                                            <td>${item.idRole}</td>
+                                            <td>
+                                                <a href="${_ctx}/admin/user/update/${item.id}"><i class="fa fa-cog"></i></a>
+                                                <c:if test="${item.idRole != 1}">
+                                                    <c:if test="${item.isLocked == 1}">
+                                                        <a class="text-success" href="${_ctx}/admin/user/${item.id}/locked"><i class="fa fa-lock-open"></i></a>
+                                                    </c:if>
+                                                    <c:if test="${item.isLocked == 2}">
+                                                        <a class="text-danger" href="${_ctx}/admin/user/${item.id}/unlocked"><i class="fa fa-lock"></i></a>
+                                                    </c:if>
+                                                </c:if>
+                                            </td>
+                                        </tr>
+
 								</c:forEach>
 							</c:if>
-
 							<c:if test="${data.getContent().size() == 0}">
 								<tr>
 									<td class="text-center" colspan="9"><i class="fa fa-inbox"></i> Không có dữ liệu</td>

@@ -35,4 +35,20 @@ public class AdminUserService {
         }
         userRepository.save(userInfo);
     }
+
+    public User locked(Integer id){
+        User userInfo = this.getOne(id);
+        if(userInfo.getIsLocked() == 2) return null;
+        userInfo.setIsLocked(2);
+        userRepository.save(userInfo);
+        return userInfo;
+    }
+
+    public User unlocked(Integer id){
+        User userInfo = this.getOne(id);
+        if(userInfo.getIsLocked() == 1) return null;
+        userInfo.setIsLocked(1);
+        userRepository.save(userInfo);
+        return userInfo;
+    }
 }

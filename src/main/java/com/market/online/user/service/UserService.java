@@ -19,6 +19,7 @@ public class UserService {
 
     public boolean login(HttpServletRequest request, User user) throws Exception {
         User userInfo = userRepository.findByUsername(user.getUsername());
+        if(userInfo.getIsLocked() == 2) return false;
         if(userInfo.getPassword().equals(user.getPassword())){
             request.getSession().setAttribute(SESSION_LOGIN, userInfo);
         }

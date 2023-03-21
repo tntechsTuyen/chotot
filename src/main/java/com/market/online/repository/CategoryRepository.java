@@ -23,6 +23,7 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     @Query(" SELECT c.id AS id, c.name AS name, c.content AS content, m.id AS idMedia, m.url AS thumb " +
             " FROM Category c " +
-            " LEFT JOIN Media m ON c.idMedia = m.id ")
+            " LEFT JOIN Media m ON c.idMedia = m.id " +
+            " WHERE c.isLocked = 1 ")
     List<Map<String, Object>> getAllData();
 }

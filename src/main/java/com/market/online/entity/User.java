@@ -41,6 +41,9 @@ public class User {
     @Column(name = "id_role")
     private String idRole;
 
+    @Column(name = "is_locked")
+    private Integer isLocked;
+
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)
     private Date createdDate;

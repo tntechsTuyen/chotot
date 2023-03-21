@@ -24,6 +24,9 @@ public class Category {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "is_locked")
+    private Integer isLocked;
+
     @Transient
     private MultipartFile fileMedia;
 

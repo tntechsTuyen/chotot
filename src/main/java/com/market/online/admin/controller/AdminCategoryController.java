@@ -9,6 +9,7 @@ import com.market.online.dto.CategoryMetaDTO;
 import com.market.online.entity.Category;
 import com.market.online.entity.CategoryMeta;
 import com.market.online.entity.Media;
+import com.market.online.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,6 +81,20 @@ public class AdminCategoryController {
         meta.setIdCategory(idCate);
         categoryMetaService.save(meta);
         redirectAttributes.addFlashAttribute("mess", "Cập nhật thành công");
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+    }
+
+    @GetMapping("/{id}/locked")
+    public String doLocked(HttpServletRequest request, RedirectAttributes redirectAttributes, @PathVariable("id") Integer id){
+        Category cateInfo = categoryService.locked(id);
+        redirectAttributes.addFlashAttribute("mess", String.format("Danh mục [%s] đã khóa", cateInfo.getName()));
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+    }
+
+    @GetMapping("/{id}/unlocked")
+    public String doUnLocked(HttpServletRequest request, RedirectAttributes redirectAttributes, @PathVariable("id") Integer id){
+        Category cateInfo = categoryService.unlocked(id);
+        redirectAttributes.addFlashAttribute("mess", String.format("Danh mục [%s] đã được mở khóa", cateInfo.getName()));
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 }

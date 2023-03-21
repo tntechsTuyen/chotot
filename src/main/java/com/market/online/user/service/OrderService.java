@@ -33,11 +33,11 @@ public class OrderService {
     private UserService userService;
 
     public Order getOne(Integer id){
-        return orderRepository.findById(id).get();
+        return orderRepository.findById(id).orElse(null);
     }
 
     public Order getByIdRedirect(Integer idRedirect){
-        return orderRepository.findByIdRedirect(idRedirect).get();
+        return orderRepository.findByIdRedirect(idRedirect).orElse(null);
     }
 
     public List<Map<String, Object>> getMyOrder(OrderDTO search){

@@ -60,4 +60,20 @@ public class AdminCategoryService {
         categoryRepository.save(category);
         return category;
     }
+
+    public Category locked(Integer id){
+        Category cateInfo = this.getOne(id);
+        if(cateInfo.getIsLocked() == 2) return null;
+        cateInfo.setIsLocked(2);
+        categoryRepository.save(cateInfo);
+        return cateInfo;
+    }
+
+    public Category unlocked(Integer id){
+        Category cateInfo = this.getOne(id);
+        if(cateInfo.getIsLocked() == 1) return null;
+        cateInfo.setIsLocked(1);
+        categoryRepository.save(cateInfo);
+        return cateInfo;
+    }
 }

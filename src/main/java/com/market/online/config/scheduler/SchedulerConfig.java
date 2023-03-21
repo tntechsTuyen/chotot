@@ -16,8 +16,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.util.Calendar;
 import java.util.List;
 
-@Configuration
-@EnableScheduling
+//@Configuration
+//@EnableScheduling
 public class SchedulerConfig {
 
     @Autowired
@@ -50,6 +50,7 @@ public class SchedulerConfig {
 
     private void cancelOrder(Integer idOrder){
         Order orderInfo = orderService.getOne(idOrder);
+        if(orderInfo == null) return;
         if(orderInfo.getIdType() == 2){
             Order orderSwapInfo = orderService.getByIdRedirect(orderInfo.getIdRedirect());
             Product productSwapInfo = productService.getOne(orderSwapInfo.getIdProduct());

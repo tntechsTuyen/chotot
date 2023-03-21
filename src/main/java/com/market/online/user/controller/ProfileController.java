@@ -133,7 +133,7 @@ public class ProfileController {
     @GetMapping("/product/add")
     public String goMyProductAdd(Model model, ProductDTO productForm){
         model.addAttribute("productForm", productForm);
-        model.addAttribute("categoryData", categoryService.getAll());
+        model.addAttribute("categoryData", categoryService.getAllData());
         model.addAttribute("categoryMetaData", categoryMetaService.getByIdCategory(new CategoryMetaDTO(productForm.getIdCategory())));
 
         return "user/component/profile/product_add";
@@ -151,7 +151,7 @@ public class ProfileController {
         Product productInfo = productService.getOne(id);
         Post postInfo = postService.getByProduct(id);
         model.addAttribute("productForm", new ProductDTO(productInfo, postInfo));
-        model.addAttribute("categoryData", categoryService.getAll());
+        model.addAttribute("categoryData", categoryService.getAllData());
         model.addAttribute("mediaData", postService.getMediaByIdPost(postInfo.getId()));
         model.addAttribute("productMetaData", postService.getMetaByIdPost(postInfo.getId()));
         return "user/component/profile/product_update";
