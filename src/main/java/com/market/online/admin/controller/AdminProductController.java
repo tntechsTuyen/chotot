@@ -65,14 +65,14 @@ public class AdminProductController {
     @GetMapping("/{id}/locked")
     public String doLocked(HttpServletRequest request, RedirectAttributes redirectAttributes, @PathVariable("id") Integer id){
         Product productInfo = adminProductService.locked(id);
-        redirectAttributes.addFlashAttribute("mess", String.format("Danh mục [%s] đã khóa", productInfo.getName()));
+        redirectAttributes.addFlashAttribute("mess", String.format("Sản phẩm [%s] đã khóa", productInfo.getName()));
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 
     @GetMapping("/{id}/unlocked")
     public String doUnLocked(HttpServletRequest request, RedirectAttributes redirectAttributes, @PathVariable("id") Integer id){
         Product productInfo = adminProductService.unlocked(id);
-        redirectAttributes.addFlashAttribute("mess", String.format("Danh mục [%s] đã được mở khóa", productInfo.getName()));
+        redirectAttributes.addFlashAttribute("mess", String.format("Sản phẩm [%s] đã được mở khóa", productInfo.getName()));
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 }

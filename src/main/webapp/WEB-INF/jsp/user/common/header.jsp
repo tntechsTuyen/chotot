@@ -20,7 +20,7 @@
                         <c:if test="${_userInfo != null}">
                             <a href="${_ctx}/profile" class="dropdown-item">Hồ sơ</a>
                             <c:if test="${_userInfo.idRole == 1}">
-                                <a href="${_ctx}/admin" class="dropdown-item">CMS</a>
+                                <a href="${_ctx}/admin" class="dropdown-item">Quản Trị Viên</a>
                             </c:if>
                             <a href="${_ctx}/message" class="dropdown-item">Nhắn tin</a>
                             <a href="${_ctx}/logout" class="dropdown-item">Đăng xuất</a>
@@ -83,7 +83,7 @@
             </form>
         </div>
         <div class="col-lg-4 col-6 text-right">
-            <p class="m-0">Customer Service</p>
+            <p class="m-0">Điện thoại hỗ trợ</p>
             <h5 class="m-0">+012 345 6789</h5>
         </div>
     </div>

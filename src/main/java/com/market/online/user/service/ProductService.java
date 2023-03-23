@@ -62,7 +62,7 @@ public class ProductService {
         //Create Media + Post Media
         List<String> urls = new ArrayList<>();
         if(productDTO.getMedia().length > 0){
-            urls = fileService.updloadFiles(productDTO.getMedia());
+            urls = fileService.uploadFiles(productDTO.getMedia());
             for(int i = 0; i < urls.size(); i++){
                 Media m = new Media(urls.get(i), "IMG");
                 mediaRepository.save(m);

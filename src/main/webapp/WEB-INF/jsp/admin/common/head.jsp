@@ -3,7 +3,7 @@
 <c:set var="_userInfo" value="${sessionScope.USER_LOGIN}" scope="session"/>
 <head>
     <meta charset="utf-8" />
-    <title>CMS</title>
+    <title>Quản Trị Viên</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <meta content="" name="description" />
     <meta content="" name="author" />

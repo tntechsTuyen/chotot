@@ -8,9 +8,9 @@ server:
 # db
 spring:
   datasource:
-    url: jdbc:mariadb://localhost:3307/webtraodoisp
+    url: jdbc:mariadb://localhost:3306/webtraodoisp
     username: root
-    password: 12345678
+    password: manh1422000
     driver-class-name: org.mariadb.jdbc.Driver
   mvc:
     view:
@@ -29,7 +29,7 @@ spring:
 
 # uploading
 data:
-  path: F:/res/market/
+  path: F:/dev/source/res/
 
 # logging
 logging:

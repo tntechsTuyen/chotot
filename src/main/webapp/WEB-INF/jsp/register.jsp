@@ -65,14 +65,14 @@
 								<form:option cssClass="text-black" value="1">Nữ</form:option>
 							</form:select>
 						</div>
-						<div class="form-check mb-4">
+						<!-- <div class="form-check mb-4">
 							<input class="form-check-input" type="checkbox" value="" id="agreementCheckbox">
 							<label class="form-check-label" for="agreementCheckbox">By clicking Sign Up, you agree to our <a href="javascript:;">Terms</a> and that you have read our <a href="javascript:;">Data Policy</a>, including our <a href="javascript:;">Cookie Use</a>.</label>
-						</div>
+						</div> -->
 						<div class="mb-4">
-							<button type="button" class="btn btn-primary d-block w-100 btn-lg h-45px fs-13px btn-submit">Sign Up</button>
+							<button type="button" class="btn btn-primary d-block w-100 btn-lg h-45px fs-13px btn-submit">Đăng kí</button>
 						</div>
-						<div class="mb-4 pb-5">Already a member? Click <a href="${_ctx}/login">here</a> to login.</div>
+						<div class="mb-4 pb-5">Bạn đã có tài khoản? Vui lòng click <a href="${_ctx}/login">vào đây</a> để đăng nhập.</div>
 					</form:form>
 				</div>
 			</div>

@@ -10,7 +10,7 @@
           </div>
           <div class="menu-profile-info">
             <div class="d-flex align-items-center">
-              <div class="flex-grow-1">CMS</div>
+              <div class="flex-grow-1">Quản Trị Viên</div>
               <div class="menu-caret ms-auto"></div>
             </div>
             <small>Administrator</small>

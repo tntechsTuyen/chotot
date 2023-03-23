@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Service
 public class AdminMediaService {
 
@@ -25,7 +22,7 @@ public class AdminMediaService {
 
     public Media uploadFile(MultipartFile file){
         MultipartFile[] files = {file};
-        String url = fileService.updloadFiles(files).get(0);
+        String url = fileService.uploadFiles(files).get(0);
         Media media = new Media(url, "IMG");
         mediaRepository.save(media);
         return media;

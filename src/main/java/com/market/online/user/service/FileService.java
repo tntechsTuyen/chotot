@@ -18,7 +18,7 @@ public class FileService {
     @Value("${data.path}")
     private String dataPath;
 
-    public List<String> updloadFiles(MultipartFile[] files) {
+    public List<String> uploadFiles(MultipartFile[] files) {
         List<String> resultUrl = new ArrayList<>();
         String subFolder = DateUtils.format("yyyy/mm/dd");
         int i = 0;

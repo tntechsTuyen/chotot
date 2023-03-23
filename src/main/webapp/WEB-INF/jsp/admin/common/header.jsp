@@ -8,7 +8,7 @@
 
 <div id="header" class="app-header">
   <div class="navbar-header">
-    <a href="${_ctx}/admin" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-1">CMS</b></a>
+    <a href="${_ctx}/admin" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-1">Quản Trị Viên</b></a>
     <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>

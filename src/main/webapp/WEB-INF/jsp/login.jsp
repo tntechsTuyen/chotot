@@ -48,7 +48,7 @@
 						<div class="mb-3">
 							<button type="button" class="btn btn-primary d-block w-100 btn-lg fs-13px btn-submit">Đăng nhập</button>
 						</div>
-						<div class="mb-40px pb-40px text-white">Bạn chưa có tài khoản? Ấn vào <a href="${_ctx}/register" class="text-primary">đây</a> để đăng ký.</div>
+						<div class="mb-40px pb-40px text-white">Bạn chưa có tài khoản? Ấn <a href="${_ctx}/register" class="text-primary">vào đây</a> để đăng ký.</div>
 					</form:form>
 				</div>
 			</div>
