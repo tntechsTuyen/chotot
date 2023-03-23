@@ -122,7 +122,15 @@
 										<td><fmt:formatNumber value="${item.priceVerify}"/> đ</td>
 										<td>${item.statusName}</td>
 										<td>${item.createdDate}</td>
-										<td><a href="${_ctx}/admin/product/update/${item.id}"><i class="fa fa-cog"></i> Cập nhật</a></td>
+										<td>
+										    <a href="${_ctx}/admin/product/update/${item.id}"><i class="fa fa-cog"></i></a>
+                                            <c:if test="${item.isLocked == 1}">
+                                                <a class="text-success" href="${_ctx}/admin/product/${item.id}/locked"><i class="fa fa-lock-open"></i></a>
+                                            </c:if>
+                                            <c:if test="${item.isLocked == 2}">
+                                                <a class="text-danger" href="${_ctx}/admin/product/${item.id}/unlocked"><i class="fa fa-lock"></i></a>
+                                            </c:if>
+                                        </td>
 									</tr>
 								</c:forEach>
 							</c:if>

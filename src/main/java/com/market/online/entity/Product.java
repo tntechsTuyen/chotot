@@ -37,6 +37,9 @@ public class Product {
     @Column(name = "id_status")
     private Integer idStatus;
 
+    @Column(name = "is_locked")
+    private Integer isLocked;
+
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)
     private Date createdDate;

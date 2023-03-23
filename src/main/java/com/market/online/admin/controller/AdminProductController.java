@@ -5,6 +5,7 @@ import com.market.online.admin.service.AdminPostService;
 import com.market.online.admin.service.AdminProductService;
 import com.market.online.common.utils.UrlUtils;
 import com.market.online.dto.ProductDTO;
+import com.market.online.entity.Category;
 import com.market.online.entity.Post;
 import com.market.online.entity.Product;
 import org.apache.jasper.tagplugins.jstl.core.Url;
@@ -58,6 +59,20 @@ public class AdminProductController {
     public String doStatusUpdate(RedirectAttributes attributes, HttpServletRequest request, ProductDTO productDTO){
         adminProductService.updateProductStatus(request, productDTO);
         attributes.addFlashAttribute("mess", "Cập nhật trạng thái thành công");
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+    }
+
+    @GetMapping("/{id}/locked")
+    public String doLocked(HttpServletRequest request, RedirectAttributes redirectAttributes, @PathVariable("id") Integer id){
+        Product productInfo = adminProductService.locked(id);
+        redirectAttributes.addFlashAttribute("mess", String.format("Danh mục [%s] đã khóa", productInfo.getName()));
+        return UrlUtils.getPreviousPageByRequest(request).orElse("/");
+    }
+
+    @GetMapping("/{id}/unlocked")
+    public String doUnLocked(HttpServletRequest request, RedirectAttributes redirectAttributes, @PathVariable("id") Integer id){
+        Product productInfo = adminProductService.unlocked(id);
+        redirectAttributes.addFlashAttribute("mess", String.format("Danh mục [%s] đã được mở khóa", productInfo.getName()));
         return UrlUtils.getPreviousPageByRequest(request).orElse("/");
     }
 }

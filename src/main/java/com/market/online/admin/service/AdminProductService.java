@@ -1,6 +1,7 @@
 package com.market.online.admin.service;
 
 import com.market.online.dto.ProductDTO;
+import com.market.online.entity.Category;
 import com.market.online.entity.Product;
 import com.market.online.entity.User;
 import com.market.online.repository.ProductRepository;
@@ -42,5 +43,21 @@ public class AdminProductService {
             User userInfo = userService.getUserLogin(request);
             productRepository.updateStatusForProducts(productDTO.getProductSelect(), userInfo.getId(), 6);
         }
+    }
+
+    public Product locked(Integer id){
+        Product productInfo = this.getOne(id);
+        if(productInfo.getIsLocked() == 2) return null;
+        productInfo.setIsLocked(2);
+        productRepository.save(productInfo);
+        return productInfo;
+    }
+
+    public Product unlocked(Integer id){
+        Product productInfo = this.getOne(id);
+        if(productInfo.getIsLocked() == 1) return null;
+        productInfo.setIsLocked(1);
+        productRepository.save(productInfo);
+        return productInfo;
     }
 }

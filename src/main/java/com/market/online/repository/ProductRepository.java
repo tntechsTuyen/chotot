@@ -17,7 +17,7 @@ import java.util.Map;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    @Query(value = " SELECT p.id AS id, p.name AS name, p.price AS price, p.priceVerify AS priceVerify, p.createdDate AS createdDate " +
+    @Query(value = " SELECT p.id AS id, p.name AS name, p.price AS price, p.priceVerify AS priceVerify, p.createdDate AS createdDate, p.isLocked AS isLocked " +
             " , u1.id AS userId, u1.fullName AS userName, u2.id AS confirmerId, u2.fullName AS confirmerName " +
             " , c.id AS categoryId, c.name AS categoryName, s.id AS statusId, s.name AS statusName " +
             " FROM Product p " +
@@ -52,7 +52,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
             " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :id_user " +
             " INNER JOIN Media m ON pm.idMedia = m.id " +
-            " WHERE p.idStatus = 6 " +
+            " WHERE p.idStatus = 6 AND p.isLocked = 1 " +
             " AND (:id_user = 0 OR p.idUser != :id_user) " +
             " ORDER BY pt.totalLike DESC ")
     List<Map<String, Object>> getDataFeaturedProducts(@Param("id_user") Integer idUser);
@@ -77,7 +77,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
             " INNER JOIN Media m ON pm.idMedia = m.id " +
             " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :id_user " +
-            " WHERE p.idStatus = 6 " +
+            " WHERE p.idStatus = 6 AND p.isLocked = 1 " +
             " AND p.idCategory = :id_category " +
             " ORDER BY p.id DESC ")
     List<Map<String, Object>> getDataByIdCategory(@Param("id_category") Integer idCategory, @Param("id_user") Integer idUser);
@@ -102,7 +102,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
             " INNER JOIN Media m ON pm.idMedia = m.id " +
             " INNER JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :id_user " +
-            " WHERE p.idStatus = 6 " +
+            " WHERE p.idStatus = 6 AND p.isLocked = 1 " +
             " AND pu.hadView = 1 " +
             " ORDER BY pu.id DESC ")
     List<Map<String, Object>> getDataViewed(@Param("id_user") Integer idUser);
@@ -149,7 +149,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
             " INNER JOIN Media m ON pm.idMedia = m.id " +
             " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :#{#search.idUser} " +
-            " WHERE p.idStatus = 6 " +
+            " WHERE p.idStatus = 6 AND p.isLocked = 1 " +
             " AND (:#{#search.idUser} = 0 OR p.idUser != :#{#search.idUser}) " +
             " AND (:#{#search.idCategory} = 0 OR p.idCategory != :#{#search.idCategory}) " +
             " ORDER BY p.id DESC ")
@@ -175,7 +175,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
             " INNER JOIN Media m ON pm.idMedia = m.id " +
             " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :#{#search.idUser} " +
-            " WHERE p.idStatus = 6 " +
+            " WHERE p.idStatus = 6 AND p.isLocked = 1 " +
             " AND (:#{#search.name} = '' OR p.name LIKE %:#{#search.name}%) " +
             " AND (:#{#search.idUser} = 0 OR p.idUser != :#{#search.idUser}) " +
             " AND (:#{#search.idCategory} = 0 OR p.idCategory = :#{#search.idCategory}) " +
@@ -188,7 +188,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             " INNER JOIN PostMedia pm ON pt.id = pm.idPost AND pm.idType = 3 " +
             " INNER JOIN Media m ON pm.idMedia = m.id " +
             " LEFT JOIN PostUser pu ON pt.id = pu.idPost AND pu.idUser = :#{#search.idUser} " +
-            " WHERE p.idStatus = 6 " +
+            " WHERE p.idStatus = 6 AND p.isLocked = 1 " +
             " AND (:#{#search.idUser} = 0 OR p.idUser != :#{#search.idUser}) " +
             " AND (:#{#search.idCategory} = 0 OR p.idCategory = :#{#search.idCategory}) " +
             " AND (:#{#search.hadLike} = 0 OR pu.hadLike = :#{#search.hadLike}) " +
